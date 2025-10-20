@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ahmed Qazi - AI Researcher & Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root {
+        --primary: #101010;
+        --secondary: #FFFFFF;
+        --text-light: #666666;
+        --border: #ECECEC;
+        --accent: #B68D40;   /* muted gold */
+      }
+
+    body{font-family:'Inter',sans-serif;color:var(--primary);background:var(--secondary);line-height:1.65;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);
+        z-index:1000;border-bottom:1px solid var(--border);}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.1rem;font-weight:600;letter-spacing:.2px;cursor:pointer;}
+    .nav-menu{display:flex;gap:1.25rem;list-style:none;}
+    .nav-menu a{color:var(--text-light);text-decoration:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:.2s;}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--primary);}
+    .mobile-menu{display:none;background:none;border:none;cursor:pointer;}
+    .mobile-menu span{display:block;width:24px;height:2px;background:var(--primary);margin:5px 0;}
+
+    /* PAGE BASICS */
+    .page{display:none;min-height:100vh;padding-top:70px;}
+    .page.active{display:block;}
+    .page-container{max-width:1200px;margin:0 auto;padding:2rem;}
+
+    /* HOME LAYOUT: fixed left, scrollable right */
+    .home-shell{max-width:1200px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:320px 1fr;gap:3rem;}
+    .left-pane{position:sticky;top:86px;align-self:start;height:fit-content;}
+    .right-pane{height:calc(100vh - 110px);overflow-y:auto;padding-right:.5rem;scrollbar-gutter:stable;}
+    .right-pane::-webkit-scrollbar{width:10px;}
+    .right-pane::-webkit-scrollbar-thumb{background:#d9d9d9;border-radius:8px;}
+    .right-pane::-webkit-scrollbar-track{background:transparent;}
+
+    /* PROFILE CARD */
+    .profile-card{text-align:center}
+    .profile-image{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#f0f0f0,#d0d0d0);
+      margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-light);}
+    .name{font-size:1.6rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.15rem;}
+    .subtitle{color:var(--text-light);font-weight:500;margin-bottom:.5rem;font-size:.98rem;}
+    .affiliation{color:var(--text-light);font-size:.92rem;margin-bottom:1.2rem;}
+    .social-links{display:flex;justify-content:center;gap:.75rem;margin-top:.5rem;flex-wrap:wrap;}
+    .social-links a{width:42px;height:42px;border:1px solid var(--border);border-radius:10px;
+      display:flex;align-items:center;justify-content:center;background:#fff;transition:.2s;}
+    .social-links a:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.06);}
+
+    /* RIGHT PANE SECTIONS */
+    .section{margin-bottom:2rem;}
+    .section-title{font-size:1rem;font-weight:700;letter-spacing:.02em;margin-bottom:.65rem;}
+    .body-text{color:var(--text-light);}
+
+    /* SKILLS INLINE */
+    .skills-inline .tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+    .tag{font-size:.8rem;padding:.4rem .75rem;background:var(--primary);color:#fff;border-radius:6px;white-space:nowrap;}
+
+    /* EDUCATION INLINE */
+    .education-inline{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+    .edu-entry{display:flex;align-items:center;gap:.75rem;border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;background:#fff;}
+    .edu-logo{width:46px;height:46px;object-fit:contain;background:#f9f9f9;border:1px solid var(--border);
+      border-radius:8px;padding:4px;}
+    .edu-text{font-size:.92rem;color:var(--text-light);}
+    .edu-text h4{font-size:1rem;color:var(--primary);font-weight:600;margin-bottom:.15rem;}
+
+    /* EXPERIENCE (same scale as Education) */
+    .timeline{position:relative;padding-left:1.25rem;}
+    .timeline:before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border);}
+    .timeline-item{position:relative;padding:0 0 1.2rem 1.25rem;}
+    .timeline-item:before{content:"";position:absolute;left:-.5px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--primary);}
+    .role{font-size:1rem;font-weight:600;margin-bottom:.15rem;}
+    .place{font-size:.92rem;color:var(--text-light);margin-bottom:.2rem;}
+    .when{font-size:.86rem;color:var(--text-light);margin-bottom:.35rem;}
+    .desc{font-size:.92rem;color:var(--text-light);}
+
+    /* OTHER PAGES */
+    .page-title{font-size:2rem;font-weight:700;margin-bottom:1.5rem;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+    .card{border:1px solid var(--border);border-radius:10px;background:#fff;transition:.2s;}
+    .card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.08);}
+    .card-body{padding:1.25rem;}
+    .card-title{font-weight:600;margin-bottom:.35rem;}
+    .card-text{color:var(--text-light);font-size:.95rem;}
+    /* Make research grid cards uniform */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+        align-items: stretch;   /* ensures all cards align to same row height */
+    }
+    
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* pushes text to fill space evenly */
+        height: 100%;                   /* force full stretch */
+    }
+    
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* keeps title at top */
+    }
+
+    /* Research page specific tweaks */
+    #research .card-title {
+        font-size: 1.15rem;   /* bigger than default */
+        font-weight: 700;
+        margin-bottom: .35rem;
+        color: var(--primary); /* keep premium black */
+    }
+    
+    #research .card-text strong {
+        color: #000;          /* pure black */
+        font-weight: 700;     /* make bolder than surrounding text */
+    }
+
+    /* Side Quests with image */
+    .sq-image{width:100%;aspect-ratio:16/9;border-bottom:1px solid var(--border);background:#f6f7f9;
+      display:grid;place-items:center;font-weight:600;color:#99a3ad;}
+    .sq-image img{width:100%;height:100%;object-fit:cover;border-top-left-radius:10px;border-top-right-radius:10px;}
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .home-shell{grid-template-columns:1fr;gap:1.5rem;padding:1.25rem;}
+      .left-pane{position:static;}
+      .right-pane{height:auto;overflow:visible;}
+      .nav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:1rem;border-bottom:1px solid var(--border);}
+      .nav-menu.active{display:flex;}
+      .mobile-menu{display:block;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a class="nav-logo" onclick="showPage('home')">Ahmed Qazi</a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a class="nav-link active" onclick="showPage('home')">Home</a></li>
+      <li><a class="nav-link" onclick="showPage('engineering')">Engineering</a></li>
+      <li><a class="nav-link" onclick="showPage('research')">Research</a></li>
+      <li><a class="nav-link" onclick="showPage('sidequests')">Side Quests</a></li>
+    </ul>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="home-shell">
+    <!-- LEFT: fixed profile -->
+    <aside class="left-pane">
+      <div class="profile-card">
+        <div class="profile-image" aria-hidden="true">AQ</div>
+        <div class="name">Ahmed Qazi</div>
+        <div class="subtitle">AI Researcher & Engineer</div>
+
+        <div class="social-links" aria-label="Social links">
+          <!-- Colored brand icons -->
+          <a href="mailto:ahmedrashidqazi@gmail.com" title="Email">
+            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" width="22" height="22" loading="lazy">
+          </a>
+          <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" rel="noopener" title="LinkedIn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" 
+                 alt="LinkedIn" width="22" height="22" loading="lazy">
+          </a>
+          <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
+            <img src="https://cdn.simpleicons.org/googlescholar/4285F4" alt="Google Scholar" width="22" height="22" loading="lazy">
+          </a>
+          <a href="https://www.upwork.com/freelancers/~yourprofile" target="_blank" rel="noopener" title="Upwork">
+            <img src="https://cdn.simpleicons.org/upwork/14A800" alt="Upwork" width="22" height="22" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: scrollable content -->
+    <main class="right-pane">
+      <!-- Intro -->
+      <section class="section">
+        <div class="section-title" style="margin-bottom:.25rem;">About</div>
+        <p class="body-text">
+          I am an AI researcher and engineer working at the intersection of artificial intelligence, healthcare, and life sciences.
+          At Tibbling Technologies, I lead end-to-end ML pipelines and an LLM-powered analytics layer, cutting drug discovery cycles
+          by 67% and helping secure strategic B2B partnerships. At the Broad Institute, I contributed to computer vision pipelines
+          analyzing 600+ brain samples, culminating in a Neuron (Cell Press) journal cover. I enjoy translating fundamental research
+          into reliable production systems.
+        </p>
+      </section>
+
+      <!-- Skills -->
+      <section class="section">
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-inline">
+          <div class="tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Python</span>
+            <span class="tag">C++</span>
+            <span class="tag">LLM APIs</span>
+            <span class="tag">React</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education (inline) -->
+      <section class="section">
+        <div class="section-title">Education</div>
+        <div class="education-inline">
+          <div class="edu-entry">
+            <img src="uni-malaya-logo.png" alt="University of Malaya logo" class="edu-logo">
+            <div class="edu-text">
+              <h4>B.S. Computer Science</h4>
+              <div>Lahore University of Management Sciences (LUMS) · 2018 - 2022</div>
+            </div>
+          </div>
+          <div class="edu-entry">
+            <img src="iiui-logo.png" alt="IIUI logo" class="edu-logo">
+            <div class="edu-text">
+              <h4>High School Summer Semester</h4>
+              <div>Stanford University · 2017</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience (same scale as Education) -->
+      <section class="section">
+        <div class="section-title">Experience</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="role">Member of Technical Staff</div>
+            <div class="place">Tibbling Technologies</div>
+            <div class="when">Feb. 2024 – Present</div>
+            <div class="desc">Designed production ML pipelines (−67% cycle time) and built an LLM-powered analytics layer; supported multiple B2B partnerships.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Research Assistant</div>
+            <div class="place">NeurAI, LUMS</div>
+            <div class="when">Apr. 2023 – Dec. 2023</div>
+            <div class="desc">Developed vision pipelines for 600+ brain samples; contributed to work featured on a Neuron journal cover; building Segment AnyNeuron.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Research Assistant</div>
+            <div class="place">World Wide Fund for Nature (WWF) x Centre for Water Informatics & Technology (WIT), LUMS</div>
+            <div class="when">Sep. 2022 – Mar. 2023</div>
+            <div class="desc">GAN-based virtual try-on (+35% engagement) and recommendation systems with collaborative filtering + neural embeddings.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Machine Learning Engineer</div>
+            <div class="place">Wizlabs AI</div>
+            <div class="when">Jan. 2021 – Dec. 2022</div>
+            <div class="desc">Enhanced wildfire prediction by integrating NASA Earth data with the Rothermel Fire Model.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ENGINEERING -->
+<div id="engineering" class="page">
+  <div class="page-container">
+    <h2 class="page-title">Engineering</h2>
+    <div class="grid">
+      <article class="card"><div class="card-body">
+        <div class="card-title">Segment AnyNeuron</div>
+        <div class="card-text">Universal framework for automated neuron segmentation in complex brain imaging datasets. CVPR 2025.</div>
+      </div></article>
+      <article class="card"><div class="card-body">
+        <div class="card-title">NeuRN</div>
+        <div class="card-text">Neuro-inspired domain generalization improving cross-domain robustness. AAAI 2025.</div>
+      </div></article>
+      <article class="card"><div class="card-body">
+        <div class="card-title">ExerAIde</div>
+        <div class="card-text">Multimodal AI system for medical diagnosis combining imaging and clinical data. CVPR 2024.</div>
+      </div></article>
+      <article class="card"><div class="card-body">
+        <div class="card-title">AnimalFormer</div>
+        <div class="card-text">Transformer-based pipeline for animal behavior analysis and tracking. CVPR 2024.</div>
+      </div></article>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div id="research" class="page">
+    <div class="page-container">
+      <h2 class="page-title">Research</h2>
+      <p class="body-text" style="margin-bottom:2rem;">
+        My research explores the intersection of neuroscience and artificial intelligence, with a focus on biologically-inspired architectures, 
+        computer vision for neuroscience, and multimodal AI systems. Below is a selection of my publications and manuscripts. 
+      </p>
+      <div class="grid">
+        
+        <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
+            <div class="card-text"> Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong> <br> Neuron (Cell Press) 113 (10), 1525-1547. e15 <br> Journal Cover</div>
+          </div>
+        </a>
+  
+        <a href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">Segment AnyNeuron</div>
+            <div class="card-text"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal <br> Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025, pp. 4295-4302</div>
+          </div>
+        </a>
+
+        <a href="https://arxiv.org/pdf/2505.06886" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+            <div class="card-body">
+              <div class="card-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
+              <div class="card-text"><strong>Ahmed Qazi</strong>*, Hamd Jalil*, Asim Iqbal <br> Accepted at Unifying Representations in Neural Models (UniReps) @ NeurIPS 2025</div>
+            </div>
+          </a>
+  
+        <a href="#" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance and personalised rehabilitation</div>
+            <div class="card-text"><strong>Ahmed Qazi</strong>, Asim Iqbal <br> Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024, pp. 3430-3438</div>
+          </div>
+        </a>
+  
+        <a href="#" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">AnimalFormer: Multimodal Vision Framework for Behavior-based Precision Livestock Farming</div>
+            <div class="card-text"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal <br> Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024, pp. 7973-7982</div>
+          </div>
+        </a>
+    
+        <a href="https://arxiv.org/pdf/2505.06881" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
+            <div class="card-text">Hamd Jalil*, <strong>Ahmed Qazi</strong>*, Asim Iqbal <br> arXiv</div>
+          </div>
+        </a>
+  
+        <a href="https://arxiv.org/pdf/2505.06894" target="_blank" class="card" style="text-decoration:none; color:inherit;">
+          <div class="card-body">
+            <div class="card-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
+            <div class="card-text"><strong>Ahmed Qazi*</strong>, Abdul Basit*, Asim Iqbal <br> arXiv</div>
+          </div>
+        </a>
+  
+      </div>
+
+      <!-- Footnote -->
+      <p class="body-text" style="margin-top:1.5rem; font-size:0.85rem; color:#777;">
+        * indicates equal contribution
+      </p>
+    </div>
+</div>
+
+<!-- SIDE QUESTS -->
+<div id="sidequests" class="page">
+  <div class="page-container">
+    <h2 class="page-title">Side Quests</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="sq-image">
+          <!-- Placeholder image -->
+          <img src="data:image/svg+xml;utf8,
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
+              <rect width='1200' height='675' fill='%23EEF2F6'/>
+              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Karakoram Trek</text>
+            </svg>" alt="Karakoram Trek placeholder">
+        </div>
+        <div class="card-body">
+          <div class="card-title">Karakoram Peaks</div>
+          <div class="card-text">Summited 6000m+ peaks and crossed 5000m passes. Alpine nerd.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="sq-image">
+          <img src="data:image/svg+xml;utf8,
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
+              <rect width='1200' height='675' fill='%23EEF2F6'/>
+              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Writing & Essays</text>
+            </svg>" alt="Writing placeholder">
+        </div>
+        <div class="card-body">
+          <div class="card-title">Long-form Writing</div>
+          <div class="card-text">Occasional essays on AI, neuro, and global affairs.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="sq-image">
+          <img src="data:image/svg+xml;utf8,
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
+              <rect width='1200' height='675' fill='%23EEF2F6'/>
+              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Music & Mixes</text>
+            </svg>" alt="Music placeholder">
+        </div>
+        <div class="card-body">
+          <div class="card-title">Music</div>
+          <div class="card-text">Perpetual playlist-tinkerer — The Weeknd, LDR, and beyond.</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pages = document.querySelectorAll('.page');
+  function showPage(id){
+    pages.forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    navLinks.forEach(l=>l.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(link=>{
+      if(link.textContent.replace(/\s+/g,'').toLowerCase()===id.replace(/\s+/g,'').toLowerCase()){
+        link.classList.add('active');
+      }
+    });
+    // scroll right pane to top when switching back to Home
+    if(id==='home'){
+      const rp = document.querySelector('.right-pane');
+      if(rp) rp.scrollTo({top:0,behavior:'instant'});
+    }
+  }
+  const mobileMenu=document.getElementById('mobileMenu');
+  const navMenu=document.getElementById('navMenu');
+  mobileMenu.addEventListener('click',()=>{navMenu.classList.toggle('active');});
+</script>
+</body>
+</html>
