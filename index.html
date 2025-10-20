@@ -137,7 +137,38 @@
       .nav-menu.active{display:flex;}
       .mobile-menu{display:block;}
     }
-  </style>
+
+    /* Bigger education logos on desktop */
+@media (min-width: 981px){
+  .edu-logo{
+    width: 72px;          /* was 46px */
+    height: 72px;         /* was 46px */
+    padding: 6px;         /* was 4px */
+    object-fit: contain;  /* keep aspect ratio clean */
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .edu-entry{
+    gap: 1rem;            /* a bit more breathing room */
+    padding: 1rem 1.25rem;/* slightly taller card to match bigger logo */
+  }
+}
+/* --- SIDE QUESTS: uniform card image height --- */
+#sidequests .sq-image {
+  height: 250px;
+  overflow: hidden;
+}
+
+#sidequests .sq-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;  /* centers the crop */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: block;
+}
+
+</style>
 </head>
 <body>
 
@@ -222,17 +253,17 @@
         <div class="section-title">Education</div>
         <div class="education-inline">
           <div class="edu-entry">
-            <img src="uni-malaya-logo.png" alt="University of Malaya logo" class="edu-logo">
+            <img src="assets/lums.png" alt="LUMS logo" class="edu-logo">
             <div class="edu-text">
               <h4>B.S. Computer Science</h4>
               <div>Lahore University of Management Sciences (LUMS) · 2018 - 2022</div>
             </div>
           </div>
           <div class="edu-entry">
-            <img src="iiui-logo.png" alt="IIUI logo" class="edu-logo">
+            <img src="assets/stanford.png" alt="Stanford logo" class="edu-logo">
             <div class="edu-text">
-              <h4>High School Summer Semester</h4>
-              <div>Stanford University · 2017</div>
+              <h4>Pre-Collegiate Scholar</h4>
+              <div>Stanford University · Summer 2017</div>
             </div>
           </div>
         </div>
@@ -246,25 +277,25 @@
             <div class="role">Member of Technical Staff</div>
             <div class="place">Tibbling Technologies</div>
             <div class="when">Feb. 2024 – Present</div>
-            <div class="desc">Designed production ML pipelines (−67% cycle time) and built an LLM-powered analytics layer; supported multiple B2B partnerships.</div>
+            <div class="desc">Building multimodal AI solutions for healthcare.</div>
           </div>
           <div class="timeline-item">
             <div class="role">Research Assistant</div>
             <div class="place">NeurAI, LUMS</div>
             <div class="when">Apr. 2023 – Dec. 2023</div>
-            <div class="desc">Developed vision pipelines for 600+ brain samples; contributed to work featured on a Neuron journal cover; building Segment AnyNeuron.</div>
+            <div class="desc">Researched and published papers on topics at the intersection of neuroscience and AI.</div>
           </div>
           <div class="timeline-item">
             <div class="role">Research Assistant</div>
             <div class="place">World Wide Fund for Nature (WWF) x Centre for Water Informatics & Technology (WIT), LUMS</div>
             <div class="when">Sep. 2022 – Mar. 2023</div>
-            <div class="desc">GAN-based virtual try-on (+35% engagement) and recommendation systems with collaborative filtering + neural embeddings.</div>
+            <div class="desc">Worked on mathematical and ML techniques to predict the spread of natural forest fires.</div>
           </div>
           <div class="timeline-item">
             <div class="role">Machine Learning Engineer</div>
             <div class="place">Wizlabs AI</div>
             <div class="when">Jan. 2021 – Dec. 2022</div>
-            <div class="desc">Enhanced wildfire prediction by integrating NASA Earth data with the Rothermel Fire Model.</div>
+            <div class="desc">Researched and created an MVP for virtual try-on for South Asian fashion.</div>
           </div>
         </div>
       </section>
@@ -369,49 +400,51 @@
 <div id="sidequests" class="page">
   <div class="page-container">
     <h2 class="page-title">Side Quests</h2>
+    <p class="body-text" style="margin-bottom:2rem; max-width:1000px;">
+      Here you can find some of my side quests — moments outside research and code.
+      I’m a bit of an alpine nerd at heart, chasing summits, quiet lakes - basically the occasional trip that reminds me how small (and big) the world can feel.
+    </p>
+
     <div class="grid">
+      <!-- Kutwal Lake, Haramosh -->
       <article class="card">
         <div class="sq-image">
-          <!-- Placeholder image -->
-          <img src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
-              <rect width='1200' height='675' fill='%23EEF2F6'/>
-              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Karakoram Trek</text>
-            </svg>" alt="Karakoram Trek placeholder">
+          <img src="assets/kutwal-lake-haramosh.png"
+               alt="Kutwal Lake beneath the Haramosh massif"
+               loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-title">Karakoram Peaks</div>
-          <div class="card-text">Summited 6000m+ peaks and crossed 5000m passes. Alpine nerd.</div>
+          <div class="card-title">Kutwal Lake, Haramosh</div>
+          <div class="card-text">A beautiful sunny morning at 3200m above sea level.</div>
         </div>
       </article>
 
+      <!-- Gondogoro Peak -->
       <article class="card">
         <div class="sq-image">
-          <img src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
-              <rect width='1200' height='675' fill='%23EEF2F6'/>
-              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Writing & Essays</text>
-            </svg>" alt="Writing placeholder">
+          <img src="assets/gondogoro-peak.jpeg"
+               alt="View from Gondogoro Peak over the Hushe valley"
+               loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-title">Long-form Writing</div>
-          <div class="card-text">Occasional essays on AI, neuro, and global affairs.</div>
+          <div class="card-title">Gondogoro Peak Summit</div>
+          <div class="card-text">Summited Mt. Gondogoro (6,008 m ASL) after a tough alpine push.</div>
         </div>
       </article>
 
+      <!-- Lupke La -->
       <article class="card">
         <div class="sq-image">
-          <img src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'>
-              <rect width='1200' height='675' fill='%23EEF2F6'/>
-              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial' font-size='48' fill='%2399A3AD'>Music & Mixes</text>
-            </svg>" alt="Music placeholder">
+          <img src="assets/lupke-la.jpg"
+               alt="Wind-scoured Lupke La high pass"
+               loading="lazy">
         </div>
         <div class="card-body">
-          <div class="card-title">Music</div>
-          <div class="card-text">Perpetual playlist-tinkerer — The Weeknd, LDR, and beyond.</div>
+          <div class="card-title">Lupke La</div>
+          <div class="card-text">Traversing the Snow Lake in the heart of the Karakoram after crossing Lupke La (5710m ASL).</div>
         </div>
       </article>
+
     </div>
   </div>
 </div>
