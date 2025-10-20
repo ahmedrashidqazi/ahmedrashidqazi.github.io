@@ -43,8 +43,26 @@
 
     /* PROFILE CARD */
     .profile-card{text-align:center}
-    .profile-image{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#f0f0f0,#d0d0d0);
-      margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-light);}
+    .profile-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;       /* makes it circular */
+      overflow: hidden;         /* hides anything outside the circle */
+      margin: 0 auto 1rem;
+      background: #f0f0f0;      /* fallback background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;        /* ensures it fills the circle */
+      object-position: center;  /* centers your face */
+      border-radius: 50%;       /* ensures edges stay round */
+      display: block;
+    }
     .name{font-size:1.6rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.15rem;}
     .subtitle{color:var(--text-light);font-weight:500;margin-bottom:.5rem;font-size:.98rem;}
     .affiliation{color:var(--text-light);font-size:.92rem;margin-bottom:1.2rem;}
@@ -192,7 +210,9 @@
     <!-- LEFT: fixed profile -->
     <aside class="left-pane">
       <div class="profile-card">
-        <div class="profile-image" aria-hidden="true">AQ</div>
+        <div class="profile-image">
+          <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi portrait">
+        </div>        
         <div class="name">Ahmed Qazi</div>
         <div class="subtitle">AI Researcher & Engineer</div>
 
@@ -221,11 +241,11 @@
       <section class="section">
         <div class="section-title" style="margin-bottom:.25rem;">About</div>
         <p class="body-text">
-          I am an AI researcher and engineer working at the intersection of artificial intelligence, healthcare, and life sciences.
-          At Tibbling Technologies, I lead end-to-end ML pipelines and an LLM-powered analytics layer, cutting drug discovery cycles
-          by 67% and helping secure strategic B2B partnerships. At the Broad Institute, I contributed to computer vision pipelines
-          analyzing 600+ brain samples, culminating in a Neuron (Cell Press) journal cover. I enjoy translating fundamental research
-          into reliable production systems.
+          I am someone who enjoys exploring the space where research meets real-world impact. I love building things that
+          actually get used, systems that solve problems and create value rather than just demonstrate ideas. My work often sits at the 
+          intersection of AI, healthcare, and life sciences, where curiosity meets purpose. Whether it is designing a 
+          model, refining a pipeline, or finding cleaner ways to connect research with production, I find the most joy in 
+          creating tools that make science a little faster, smarter, and more useful for people.
         </p>
       </section>
 
@@ -428,7 +448,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Gondogoro Peak Summit</div>
-          <div class="card-text">Summited Mt. Gondogoro (6,008 m ASL) after a tough alpine push.</div>
+          <div class="card-text">Summited Mt. Gondogoro (6008 m ASL) after a tough alpine push.</div>
         </div>
       </article>
 
