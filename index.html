@@ -440,8 +440,60 @@
         font-size: 1.75rem;
       }
     }
+
+    #engineering .coming-soon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+      color: #999;
+      font-size: 1rem;
+    }
+
+    /* ---- Paper modal ---- */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5);z-index:1200;padding:1rem;}
+.modal.show{display:flex;}
+.modal-dialog{max-width:980px;width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);display:grid;grid-template-columns:1fr;gap:0;}
+.modal-image{background:#000;display:grid;place-items:center;}
+.modal-image img{width:100%;max-height:60vh;object-fit:contain;background:#000;}
+.modal-body{padding:1.25rem 1.5rem;}
+.modal-title{font-size:1.25rem;font-weight:700;line-height:1.35;margin-bottom:.35rem;}
+.modal-text{color:var(--text-light);line-height:1.6;margin-bottom:1rem;}
+.modal-actions{display:flex;gap:.75rem;align-items:center;}
+.open-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:8px;background:#111;color:#fff;text-decoration:none;font-weight:600;}
+.open-btn:hover{opacity:.92;}
+.modal-close{position:absolute;top:.75rem;right:.75rem;border:0;background:#fff;border-radius:999px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);font-size:20px;}
+body.modal-open{overflow:hidden;}
+
+@media (min-width: 860px){
+  .modal-dialog{grid-template-columns:1.1fr .9fr;}
+  .modal-body{padding:1.5rem;}
+}
+
+    
   </style>
 </head>
+
+<!-- Paper preview modal -->
+<div id="paperModal" class="modal" aria-hidden="true" aria-labelledby="paperTitle">
+  <div class="modal-dialog">
+    <button class="modal-close" id="paperClose" aria-label="Close">✕</button>
+    <div class="modal-image">
+      <img id="paperImg" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="modal-title" id="paperTitle"></div>
+      <div class="modal-text" id="paperDetails"></div>
+      <div class="modal-actions">
+        <a id="paperLink" class="open-btn" target="_blank" rel="noopener">Open paper ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body>
 
 <!-- Navigation -->
@@ -545,7 +597,7 @@
             <h4>Machine Learning Engineer</h4>
             <div class="place">Wizlabs AI</div>
             <div class="when">Jan 2021 – Dec 2022</div>
-            <p>Built virtual try-on MVP for South Asian fashion.</p>
+            <p>Researched and built a virtual try-on MVP for South Asian fashion.</p>
           </div>
         </div>
       </section>
@@ -553,6 +605,7 @@
   </div>
 </div>
 
+<!-- Research -->
 <!-- Research -->
 <div id="research" class="page">
   <div class="page-container">
@@ -562,57 +615,78 @@
       biologically-inspired architectures, computer vision for neuroscience, and multimodal AI systems.
       Below is a selection of my publications and manuscripts.
     </p>
+
     <div class="grid">
-      <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" class="card">
+      <article class="card" data-link="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/neuron.jpg" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
           <div class="card-text">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong><br>Neuron (Cell Press) 113 (10), 1525-1547<br>Journal Cover</div>
         </div>
-      </a>
+      </article>
 
-      <a href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" class="card">
+      <article class="card" data-link="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/seganyneuron.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">Segment AnyNeuron</div>
-          <div class="card-text"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal<br>CVPR Workshops 2025</div>
+          <div class="card-text">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal<br>CVPR Workshops 2025</div>
         </div>
-      </a>
+      </article>
 
-      <a href="https://arxiv.org/pdf/2505.06886" target="_blank" class="card">
+      <article class="card" data-link="https://arxiv.org/pdf/2505.06886" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/m2m.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
           <div class="card-text"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal<br>UniReps @ NeurIPS 2025</div>
         </div>
-      </a>
+      </article>
 
-      <a href="#" target="_blank" class="card">
+      <article class="card" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/exeraide.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
           <div class="card-text"><strong>Ahmed Qazi</strong>, Asim Iqbal<br>CVPR Workshops 2024</div>
         </div>
-      </a>
+      </article>
 
-      <a href="#" target="_blank" class="card">
+      <article class="card" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/animalformer.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
           <div class="card-text"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal<br>CVPR Workshops 2024</div>
         </div>
-      </a>
+      </article>
 
-      <a href="https://arxiv.org/pdf/2505.06881" target="_blank" class="card">
+      <article class="card" data-link="https://arxiv.org/pdf/2505.06881" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/neurn.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
           <div class="card-text">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal<br>arXiv</div>
         </div>
-      </a>
+      </article>
 
-      <a href="https://arxiv.org/pdf/2505.06894" target="_blank" class="card">
+      <article class="card" data-link="https://arxiv.org/pdf/2505.06894" role="button" tabindex="0" aria-label="Open paper preview">
+        <div class="card-image">
+          <img src="assets/neugen.png" alt="" loading="lazy">
+        </div>
         <div class="card-body">
           <div class="card-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
           <div class="card-text"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal<br>arXiv</div>
         </div>
-      </a>
+      </article>
     </div>
-
   </div>
 </div>
 
@@ -621,42 +695,10 @@
   <div class="page-container">
     <h2 class="page-title">Engineering</h2>
     <p class="body-text page-intro">
-      I've built a few production systems for clients — mostly AI-powered platforms that needed to actually 
-      work at scale. These projects involved full-stack development, microservices, and the usual messy 
-      realities of deploying ML models in production. Here's what I've shipped recently.
+      Check back soon to see something interesting I've been working on :)
     </p>
-    <div class="grid">
-      <article class="card">
-        <div class="card-image">
-          <img src="assets/primeagefit.jpg" alt="Fitness AI Coach">
-        </div>
-        <div class="card-body">
-          <div class="card-title">Fitness AI Coach</div>
-          <div class="card-text">
-            Built a SaaS platform for personalized fitness coaching (adults 40+). FastAPI backend with multi-provider 
-            LLM setup (Groq, OpenAI, Gemini) for workout generation, Next.js frontend, Stripe subscriptions, 
-            and proper observability with Langfuse and Sentry. Docker-deployed with PostgreSQL and Redis.
-            <br><br>
-            <strong>Stack:</strong> Python, TypeScript, FastAPI, Next.js, PostgreSQL, Docker, LangChain, Stripe
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="assets/hr.png" alt="HR Platform">
-        </div>
-        <div class="card-body">
-          <div class="card-title">AI-Powered HR Platform</div>
-          <div class="card-text">
-            Architected an HR management platform for SMBs. Built a RAG-based chatbot using Qdrant vector DB 
-            for semantic search over documents, async document processing pipeline (PDF, DOCX, XLSX), AWS S3 
-            storage, and integrated ticketing. FastAPI + Next.js, containerized with Docker Compose.
-            <br><br>
-            <strong>Stack:</strong> Python, TypeScript, FastAPI, Next.js, Qdrant, AWS S3, LangChain, Redis
-          </div>
-        </div>
-      </article>
+    <div style="display:flex; justify-content:center; align-items:center; height:300px; border:1px dashed #dcdcdc; border-radius:10px; background:#fafafa;">
+      <p style="color:#999; font-size:1rem;">🚧 Coming Soon 🚧</p>
     </div>
   </div>
 </div>
@@ -724,6 +766,57 @@
   document.getElementById('mobileMenu').addEventListener('click', () => {
     document.getElementById('navMenu').classList.toggle('active');
   });
+
+  // ---- Research card -> modal preview ----
+(function(){
+  const modal = document.getElementById('paperModal');
+  const imgEl = document.getElementById('paperImg');
+  const titleEl = document.getElementById('paperTitle');
+  const detailsEl = document.getElementById('paperDetails');
+  const linkEl = document.getElementById('paperLink');
+  const closeBtn = document.getElementById('paperClose');
+
+  function openModal({src, title, details, link}) {
+    imgEl.src = src || '';
+    titleEl.innerHTML = title || '';
+    detailsEl.innerHTML = details || '';
+    linkEl.href = link || '#';
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+    closeBtn.focus();
+  }
+  function closeModal(){
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+    // stop any image loading to save memory if needed
+    // imgEl.src = '';
+  }
+
+  // Click cards
+  document.querySelectorAll('#research .card').forEach(card=>{
+    card.addEventListener('click', (e)=>{
+      // Ignore clicks on the "Open paper" button if any gets added inside a card later
+      if (e.target.closest('a')) return;
+      const src = card.querySelector('.card-image img')?.getAttribute('src');
+      const title = card.querySelector('.card-title')?.innerHTML || '';
+      const details = card.querySelector('.card-text')?.innerHTML || '';
+      const link = card.getAttribute('data-link') || card.querySelector('a')?.href || '#';
+      openModal({src, title, details, link});
+    });
+    // keyboard accessibility
+    card.addEventListener('keydown',(e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // Close handlers
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
+})();
 </script>
 
 </body>
