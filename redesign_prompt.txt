@@ -1,0 +1,45 @@
+You are an expert web designer and front-end developer. Your task is to redesign a personal portfolio website for an AI Researcher & Engineer. The goal is to elevate the existing site to a "premium," modern, and highly professional aesthetic, while strictly preserving all its content and functionality.
+
+Your final output must be a single, complete `index.html` file containing the redesigned HTML, CSS, and JavaScript.
+
+**Core Requirements (Non-Negotiable):**
+
+1.  **Preserve All Content:** All text, including personal information, section titles, paragraphs, and card details, must remain unchanged.
+2.  **Preserve All Assets:** All links to images (`assets/*.jpg`, etc.), external social icons, and web fonts must be kept.
+3.  **Preserve All Structure & Functionality:**
+    *   The single-page application (SPA) navigation that shows/hides sections (`home`, `research`, `engineering`, `sidequests`) must continue to work exactly as it does now.
+    *   The research paper modal (which appears when a research card is clicked) must remain fully functional.
+    *   The Snake game on the "Engineering" page, including all its JavaScript logic, canvas rendering, and controls (keyboard and mobile D-pad), must be perfectly preserved and playable.
+
+**Aesthetic & Design Direction:**
+
+Your redesign should focus on the following modern design principles:
+
+*   **Overall Vibe:** Aim for a clean, sophisticated, and minimalist aesthetic that is professional and trustworthy. The design should feel intelligent and sharp, suitable for someone in the AI research field. Avoid anything overly flashy or distracting.
+*   **Color Palette:** Introduce a more sophisticated color palette. Consider a "dark mode by default" or a refined light mode.
+    *   **Suggestion:** Use a palette with a soft black or dark charcoal background (e.g., `#111111`), off-white or light gray text (e.g., `#EAEAEA`), and a single, professional accent color for links, highlights, and key elements (e.g., a muted blue, a sophisticated green, or a warm gold). This will create a high-contrast, premium feel.
+*   **Typography:**
+    *   Retain the use of a modern sans-serif font like 'Inter' but refine its application.
+    *   Establish a clear and consistent typographic hierarchy with distinct sizes and weights for headings (h1, h2, h3), body text, and metadata.
+    *   Ensure all text is highly legible with appropriate line height and spacing.
+*   **Layout and Whitespace:**
+    *   Use whitespace generously to create a clean, uncluttered, and breathable layout.
+    *   While the current layout is functional, consider subtle refinements. For the home page, perhaps a more integrated layout than the rigid sticky sidebar. For the card grids, ensure consistent and balanced spacing.
+*   **Subtle Animations & Transitions:**
+    *   Enhance the user experience with smooth, non-intrusive animations.
+    *   **Examples:**
+        *   A gentle fade-in effect for sections or cards as they are scrolled into view.
+        *   A smooth cross-fade transition between pages instead of an abrupt show/hide.
+        *   Refined hover effects on cards and buttons (e.g., a subtle lift, a soft glow, or a gentle background color change).
+*   **Component Styling:**
+    *   **Cards (Research, Side Quests):** Give the cards a modern look. This could involve using cleaner borders (or no borders), subtle box shadows, or a sleek background color. Improve the layout of text within the cards.
+    *   **Experience Timeline:** Redesign the timeline to be more visually engaging and modern.
+    *   **Snake Game:** The game itself should retain its retro pixel aesthetic. However, the container (`.snake-wrapper`, `.snake-container`) should be styled to seamlessly integrate with the new, modern design of the page.
+    *   **Modal:** The pop-up modal for research papers should be restyled to match the new, premium theme (colors, fonts, buttons).
+
+**Technical Implementation:**
+
+*   **Code Structure:** All CSS styles should be contained within a single `<style>` block in the `<head>` of the HTML file. Do not use inline `style="..."` attributes. The existing JavaScript should be kept within its `<script>` tag at the end of the body.
+*   **Responsiveness:** The website must remain fully responsive and look polished on all screen sizes, from mobile to desktop.
+
+Read the `original_index.html` file in the current directory for the existing website content. Your output should be the complete, redesigned `index.html` file.
