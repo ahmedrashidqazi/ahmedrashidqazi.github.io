@@ -1,140 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ahmed Qazi - AI Researcher & Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Qazi — Senior AI Engineer</title>
+  <meta name="description" content="Ahmed Qazi — Senior AI Engineer specializing in neuroscience and machine learning. Building intelligent systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
     :root {
-      --bg: #101010;
-      --surface: #1a1a1a;
-      --surface-hover: #222222;
-      --primary: #EAEAEA;
-      --text-secondary: #9a9a9a;
-      --accent: #00FFFF;
-      --accent-dim: rgba(0, 255, 255, 0.1);
-      --accent-glow: rgba(0, 255, 255, 0.3);
-      --magenta: #FF00FF;
-      --magenta-dim: rgba(255, 0, 255, 0.1);
-      --border: rgba(255, 255, 255, 0.2);
-      --border-hover: rgba(255, 255, 255, 0.35);
+      --bg: #111827;
+      --bg-light: #1F2937;
+      --bg-card: #1a2332;
+      --text: #E5E7EB;
+      --text-dim: #9CA3AF;
+      --accent: #38BDF8;
+      --accent-dim: rgba(56, 189, 248, 0.1);
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --border: rgba(255, 255, 255, 0.08);
+      --nav-height: 70px;
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
     }
 
     body {
-      font-family: 'Inter', 'Roboto', sans-serif;
-      font-weight: 300;
-      color: var(--primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
       background: var(--bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    /* Global scanline overlay */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        rgba(0, 0, 0, 0.06) 2px,
-        rgba(0, 0, 0, 0.06) 4px
-      );
-      animation: scanlineScroll 8s linear infinite;
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
     }
 
-    @keyframes scanlineScroll {
-      from { background-position-y: 0; }
-      to { background-position-y: 100px; }
-    }
-
-    /* Typography */
-    h1, h2, h3 {
-      font-family: 'Fira Code', 'Courier New', monospace;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    strong, b {
-      font-weight: 500;
-    }
-
-    /* Glitch heading effect */
-    .glitch-heading {
-      position: relative;
-      display: inline-block;
-    }
-
-    .glitch-heading::before,
-    .glitch-heading::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .glitch-heading::before {
+    a {
       color: var(--accent);
-      z-index: -1;
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .glitch-heading::after {
-      color: var(--magenta);
-      z-index: -1;
+    a:hover {
+      color: #7dd3fc;
     }
 
-    .glitch-heading:hover::before {
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(16px) saturate(1.8);
+      -webkit-backdrop-filter: blur(16px) saturate(1.8);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.hidden {
+      transform: translateY(-100%);
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Fira Code', monospace;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo:hover {
       opacity: 0.8;
-      animation: glitchBefore 0.3s ease infinite;
     }
 
-    .glitch-heading:hover::after {
-      opacity: 0.8;
-      animation: glitchAfter 0.3s ease infinite;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
     }
 
-    @keyframes glitchBefore {
-      0% { transform: translate(0); }
-      20% { transform: translate(-3px, 2px); }
-      40% { transform: translate(2px, -1px); }
-      60% { transform: translate(-1px, -2px); }
-      80% { transform: translate(3px, 1px); }
-      100% { transform: translate(0); }
+    .nav-links a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
     }
 
-    @keyframes glitchAfter {
-      0% { transform: translate(0); }
-      20% { transform: translate(3px, -2px); }
-      40% { transform: translate(-2px, 1px); }
-      60% { transform: translate(1px, 2px); }
-      80% { transform: translate(-3px, -1px); }
-      100% { transform: translate(0); }
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-dim);
     }
 
-    /* Scroll reveal animations */
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-links .num {
+      color: var(--accent);
+      margin-right: 0.3rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .mobile-toggle svg {
+      display: block;
+    }
+
+    .resume-btn {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: var(--accent) !important;
+      border: 1px solid var(--accent);
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      margin-left: 0.75rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .resume-btn:hover {
+      background: var(--accent-dim);
+      color: var(--accent) !important;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-heading .num {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 300px;
+    }
+
+    /* ── Reveal animation ── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
@@ -143,1202 +213,1244 @@
       transform: translateY(0);
     }
 
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(16, 16, 16, 0.75);
-      backdrop-filter: blur(10px) saturate(1.5);
-      -webkit-backdrop-filter: blur(10px) saturate(1.5);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.9rem 2rem;
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      padding-top: var(--nav-height);
     }
 
-    .nav-logo {
+    .hero-inner {
+      max-width: 800px;
+    }
+
+    .hero-greeting {
       font-family: 'Fira Code', monospace;
-      font-size: 1.05rem;
-      font-weight: 500;
-      cursor: pointer;
-      letter-spacing: 1.5px;
+      font-size: 1rem;
       color: var(--accent);
-      text-transform: uppercase;
-      transition: color 0.2s, text-shadow 0.2s;
-      text-shadow: 0 0 8px var(--accent-glow);
-    }
-
-    .nav-logo:hover {
-      color: var(--magenta);
-      text-shadow: 0 0 12px var(--magenta-dim);
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      font-family: 'Fira Code', monospace;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
       font-weight: 400;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--text-dim);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.85rem 1.75rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: color 0.25s, background 0.25s, transform 0.15s;
-      padding: 0.45rem 0.9rem;
-      border-radius: 0;
+      background: transparent;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+      color: var(--accent);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-dim);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .about-text a {
+      color: var(--accent);
+    }
+
+    .skills-category {
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-category h4 {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      border: 1px solid transparent;
     }
 
-    .nav-menu a:hover {
-      color: var(--bg);
-      background: var(--accent);
-      transform: translate(2px, 2px);
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .nav-menu a.active {
-      color: var(--accent);
+    .skills-list span {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-light);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skills-list span:hover {
       border-color: var(--accent);
-      background: var(--accent-dim);
-      text-shadow: 0 0 6px var(--accent-glow);
+      color: var(--accent);
     }
 
-    .mobile-menu {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      padding: 4px;
-    }
-
-    .mobile-menu span {
-      width: 20px;
-      height: 1.5px;
-      background: var(--accent);
-      border-radius: 0;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    /* Pages */
-    .page {
-      display: none;
-      min-height: 100vh;
-      padding-top: 65px;
-    }
-
-    .page.active {
-      display: block;
-      animation: pageIn 0.5s ease-out;
-    }
-
-    @keyframes pageIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .page-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    /* Home Layout - Asymmetrical */
-    .home-grid {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .profile-section {
-      position: sticky;
-      top: 90px;
-      height: fit-content;
-    }
-
-    .content-section {
-      max-height: calc(100vh - 110px);
-      overflow-y: auto;
-      padding-right: 0.5rem;
-    }
-
-    .content-section::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .content-section::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .content-section::-webkit-scrollbar-thumb {
-      background: var(--accent-dim);
-    }
-
-    .content-section::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-glow);
-    }
-
-    /* Profile */
-    .profile-image {
-      width: 160px;
-      height: 160px;
-      overflow: hidden;
-      margin: 0 0 1.5rem 0;
+    /* ── Experience ── */
+    .exp-timeline {
       position: relative;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(0, 255, 255, 0.05);
-      transition: box-shadow 0.4s;
+      padding-left: 2.5rem;
     }
 
-    .profile-image::after {
+    .exp-timeline::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(0, 255, 255, 0.12);
-      mix-blend-mode: overlay;
-      pointer-events: none;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+      border-radius: 1px;
     }
 
-    .profile-image:hover {
-      box-shadow: 0 0 30px var(--accent-glow), 0 0 80px rgba(0, 255, 255, 0.1);
+    .exp-item {
+      position: relative;
+      padding-bottom: 3rem;
     }
 
-    .profile-image img {
+    .exp-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -2.05rem;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--accent-glow);
+      z-index: 1;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exp-title .company {
+      color: var(--accent);
+    }
+
+    .exp-date {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .exp-bullets {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 0.4rem;
+    }
+
+    .exp-bullets li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .exp-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .exp-tech span {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      padding: 0.2rem 0.55rem;
+      background: var(--accent-dim);
+      border-radius: 3px;
+    }
+
+    /* ── Projects ── */
+    .featured-project {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 4rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .featured-project:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .featured-project.reverse {
+      grid-template-columns: 1fr 1.1fr;
+    }
+
+    .featured-project.reverse .fp-image {
+      order: 2;
+    }
+
+    .fp-image {
+      border-radius: 6px;
+      overflow: hidden;
+      background: #0f1923;
+      aspect-ratio: 16/10;
+    }
+
+    .fp-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(1) contrast(1.2) brightness(0.8);
-      transition: filter 0.4s;
+      transition: transform 0.4s;
+      opacity: 0.85;
     }
 
-    .profile-image:hover img {
-      filter: grayscale(0.5) contrast(1.1) brightness(0.9);
+    .featured-project:hover .fp-image img {
+      transform: scale(1.03);
+      opacity: 1;
     }
 
-    .name {
-      font-family: 'Fira Code', 'Courier New', monospace;
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--primary);
-      line-height: 1.2;
-    }
-
-    .subtitle {
+    .fp-label {
       font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
       color: var(--accent);
-      font-weight: 400;
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-shadow: 0 0 6px var(--accent-glow);
+      margin-bottom: 0.5rem;
     }
 
-    .social-links {
+    .fp-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .fp-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .fp-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .fp-tech span {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .fp-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .fp-links a {
+      color: var(--text);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .fp-links a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .pc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+
+    .pc-folder svg {
+      color: var(--accent);
+    }
+
+    .pc-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .pc-links a {
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+
+    .pc-links a:hover {
+      color: var(--accent);
+    }
+
+    .pc-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .pc-title {
+      color: var(--accent);
+    }
+
+    .pc-desc {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .pc-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pc-tech span {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Publications ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pub-item {
+      padding: 1.5rem 1.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+
+    .pub-item:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      border-left-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .pub-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .pub-authors {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-authors strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .pub-venue {
+      font-style: italic;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pub-links {
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
 
-    .social-links a {
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface);
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
-    }
-
-    .social-links a:hover {
-      transform: translate(2px, 2px);
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
-      background: var(--accent-dim);
-    }
-
-    .social-links a img {
-      filter: brightness(0.9);
-    }
-
-    /* Content Sections */
-    .section {
-      margin-bottom: 3.5rem;
-    }
-
-    .section-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.7rem;
-      font-weight: 500;
-      margin-bottom: 1.25rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent);
-      text-shadow: 0 0 6px var(--accent-glow);
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .section-title::before {
-      content: '>';
-      position: absolute;
-      left: 0;
-      color: var(--magenta);
-    }
-
-    .body-text {
-      color: var(--text-secondary);
-      font-size: 0.94rem;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    /* Education */
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .edu-card {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      border: 1px solid var(--border);
-      padding: 1rem 1.1rem;
-      background: var(--surface);
-      transition: border-color 0.25s, background 0.25s, box-shadow 0.3s;
-    }
-
-    .edu-card:hover {
-      border-color: var(--accent);
-      background: var(--surface-hover);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    .edu-logo {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .edu-text h4 {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88rem;
-      font-weight: 500;
-      margin-bottom: 0.2rem;
-      color: var(--primary);
-      letter-spacing: 0.5px;
-    }
-
-    .edu-text p {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Experience Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 5px;
-      top: 8px;
-      bottom: 16px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--accent) 0%, rgba(0, 255, 255, 0.1) 100%);
-      transform-origin: top;
-      transform: scaleY(0);
-      transition: transform 1.2s ease-out;
-    }
-
-    .timeline.timeline-drawn::before {
-      transform: scaleY(1);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 2rem;
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -1.5rem;
-      top: 7px;
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent-glow), 0 0 0 3px var(--bg), 0 0 0 4px var(--accent-dim);
-    }
-
-    .timeline-item h4 {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.92rem;
-      font-weight: 500;
-      margin-bottom: 0.15rem;
-      color: var(--primary);
-      letter-spacing: 0.5px;
-    }
-
-    .timeline-item .place {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.1rem;
-    }
-
-    .timeline-item .when {
+    .pub-link {
       font-family: 'Fira Code', monospace;
       font-size: 0.75rem;
       color: var(--accent);
-      margin-bottom: 0.5rem;
-      font-weight: 400;
-      text-shadow: 0 0 4px var(--accent-glow);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      transition: background 0.2s;
     }
 
-    .timeline-item p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Other Pages */
-    .page-title {
-      font-family: 'Fira Code', 'Courier New', monospace;
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--primary);
-    }
-
-    .page-intro {
-      max-width: 720px;
-      margin-bottom: 3rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Project/Research Cards */
-    .card {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      cursor: default;
-    }
-
-    .card:hover {
-      transform: perspective(1000px) rotateY(-5deg);
-      box-shadow: 0 0 25px var(--accent-glow), 0 16px 48px rgba(0, 0, 0, 0.5);
-      border-color: var(--accent);
-    }
-
-    .card-image {
-      width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: #0d0d0d;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      filter: brightness(0.85);
-    }
-
-    .card:hover .card-image img {
-      transform: scale(1.05);
-      filter: brightness(1);
-    }
-
-    .card-body {
-      padding: 1.25rem 1.35rem 1.35rem;
-      flex: 1;
-    }
-
-    .card-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      line-height: 1.5;
-      letter-spacing: 0.5px;
-      color: var(--primary);
-      transition: color 0.3s;
-    }
-
-    .card:hover .card-title {
-      color: var(--accent);
-    }
-
-    .card-text {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      line-height: 1.65;
-      opacity: 0.6;
-      transition: opacity 0.4s ease;
-    }
-
-    .card:hover .card-text {
-      opacity: 1;
-    }
-
-    /* Research specific */
-    #research .card {
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    #research .card-title {
-      font-size: 0.92rem;
-      font-weight: 500;
-    }
-
-    #research .card-text strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* Mobile */
-    @media (max-width: 980px) {
-      .home-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem 1.5rem;
-      }
-
-      .profile-section {
-        position: static;
-        text-align: center;
-      }
-
-      .profile-image {
-        margin: 0 auto 1.5rem;
-      }
-
-      .name {
-        text-align: center;
-      }
-
-      .subtitle {
-        text-align: center;
-      }
-
-      .social-links {
-        justify-content: center;
-      }
-
-      .content-section {
-        max-height: none;
-        overflow: visible;
-      }
-
-      .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(16, 16, 16, 0.96);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        flex-direction: column;
-        padding: 0.75rem 1rem 1rem;
-        border-bottom: 1px solid var(--border);
-        gap: 0.15rem;
-      }
-
-      .nav-menu.active {
-        display: flex;
-      }
-
-      .mobile-menu {
-        display: flex;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-container {
-        padding: 2rem 1.5rem;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav-container {
-        padding: 0.85rem 1.25rem;
-      }
-
-      .education-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .edu-logo {
-        width: 42px;
-        height: 42px;
-      }
-
-      .page-title {
-        font-size: 1.5rem;
-      }
-
-      .home-grid {
-        padding: 1.5rem 1.25rem;
-      }
-
-      .name {
-        font-size: 1.6rem;
-      }
-    }
-
-    /* ---- Snake Game ---- */
-    .snake-flavour {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.6rem;
-      color: var(--magenta);
-      opacity: 0.75;
-      margin-bottom: 1.5rem;
-      line-height: 2;
-      letter-spacing: 0.02em;
-    }
-
-    .snake-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .snake-container {
-      position: relative;
-      overflow: hidden;
-      line-height: 0;
-      border: 3px solid var(--accent);
-      box-shadow:
-        0 0 20px var(--accent-glow),
-        0 0 60px rgba(0, 255, 255, 0.08),
-        inset 0 0 30px rgba(0, 0, 0, 0.5),
-        0 4px 32px rgba(0, 0, 0, 0.5);
-      /* CRT monitor bezel */
-      outline: 6px solid #1a1a1a;
-      outline-offset: 0;
-    }
-
-    .snake-container::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .snake-container::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.5) 100%);
-      pointer-events: none;
-    }
-
-    #snakeCanvas {
-      display: block;
-      width: 100%;
-      height: auto;
-      background: #0d0d0d;
-    }
-
-    .snake-scanlines {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 2px,
-        rgba(0, 0, 0, 0.12) 2px,
-        rgba(0, 0, 0, 0.12) 4px
-      );
-      pointer-events: none;
-    }
-
-    /* D-pad */
-    .dpad {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      padding: 1.5rem 0 0.5rem;
-      margin: 0 auto;
-    }
-
-    .dpad-top, .dpad-bottom {
-      display: flex;
-      justify-content: center;
-    }
-
-    .dpad-middle {
-      display: flex;
-      gap: 3px;
-      align-items: center;
-    }
-
-    .dpad-center {
-      width: 52px;
-      height: 52px;
-      background: var(--surface);
-    }
-
-    .dpad-btn {
-      width: 52px;
-      height: 52px;
-      background: var(--surface);
-      color: var(--accent);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-      -webkit-user-select: none;
-      transition: background 0.1s, box-shadow 0.1s;
-      touch-action: manipulation;
-    }
-
-    .dpad-btn:active {
+    .pub-link:hover {
       background: var(--accent-dim);
-      box-shadow: 0 0 10px var(--accent-glow);
+      color: var(--accent);
     }
 
-    @media (max-width: 900px) {
-      .dpad { display: flex; }
+    /* ── Contact ── */
+    #contact {
+      text-align: center;
+      padding: 8rem 2rem;
     }
 
-    /* ---- Paper modal ---- */
-    .modal {
+    .contact-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-text {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-socials a {
+      color: var(--text-dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .footer-socials a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-credit {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Command Palette ── */
+    .cmd-trigger {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      z-index: 900;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .cmd-trigger:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: scale(1.05);
+    }
+
+    .cmd-overlay {
       position: fixed;
       inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
       display: none;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1200;
-      padding: 1rem;
+      padding-top: 20vh;
     }
 
-    .modal.show {
+    .cmd-overlay.open {
       display: flex;
-      animation: modalIn 0.3s ease-out;
+      animation: fadeIn 0.15s ease;
     }
 
-    @keyframes modalIn {
+    @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    .modal-dialog {
-      max-width: 920px;
+    .cmd-palette {
       width: 100%;
-      background: var(--surface);
+      max-width: 520px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 30px var(--accent-glow), 0 24px 80px rgba(0, 0, 0, 0.7);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      animation: modalSlide 0.3s ease-out;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+      animation: slideDown 0.15s ease;
     }
 
-    @keyframes modalSlide {
-      from { transform: translateY(16px); opacity: 0; }
+    @keyframes slideDown {
+      from { transform: translateY(-10px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    .modal-image {
-      background: #000;
-      display: grid;
-      place-items: center;
-    }
-
-    .modal-image img {
-      width: 100%;
-      max-height: 55vh;
-      object-fit: contain;
-      background: #000;
-    }
-
-    .modal-body {
-      padding: 1.25rem 1.5rem;
-    }
-
-    .modal-title {
-      font-family: 'Fira Code', monospace;
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1.5;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-      letter-spacing: 0.5px;
-    }
-
-    .modal-text {
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
-      font-size: 0.9rem;
-    }
-
-    .modal-text strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .modal-actions {
+    .cmd-input-wrap {
       display: flex;
-      gap: 0.75rem;
       align-items: center;
+      padding: 0 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .open-btn {
-      font-family: 'Fira Code', monospace;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.15rem;
-      background: var(--accent);
-      color: var(--bg);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    .cmd-input-wrap svg {
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .cmd-input {
+      width: 100%;
+      padding: 1rem 0.75rem;
+      background: none;
       border: none;
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      outline: none;
     }
 
-    .open-btn:hover {
-      background: var(--magenta);
-      transform: translate(2px, 2px);
-      box-shadow: 0 0 15px var(--magenta-dim);
+    .cmd-input::placeholder {
+      color: var(--text-dim);
     }
 
-    .modal-close {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-secondary);
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
+    .cmd-results {
+      max-height: 260px;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.75rem;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-      z-index: 2;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      transition: background 0.15s, color 0.15s;
     }
 
-    .modal-close:hover {
-      background: var(--accent);
-      color: var(--bg);
-      border-color: var(--accent);
+    .cmd-item:hover,
+    .cmd-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
     }
 
-    body.modal-open {
-      overflow: hidden;
+    .cmd-item svg {
+      flex-shrink: 0;
     }
 
-    @media (min-width: 860px) {
-      .modal-dialog { grid-template-columns: 1.1fr 0.9fr; }
-      .modal-body { padding: 1.5rem 1.75rem; }
+    .cmd-hint {
+      padding: 0.5rem 1rem 0.75rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
     }
 
-    /* Selection color */
-    ::selection {
-      background: var(--accent);
-      color: var(--bg);
+    .cmd-hint kbd {
+      background: var(--bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .featured-project {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+
+      .featured-project.reverse .fp-image {
+        order: 0;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: rgba(17, 24, 39, 0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        padding: 1rem 1.5rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 0.25rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .resume-btn {
+        margin-left: 0;
+        text-align: center;
+      }
+
+      .hero-inner {
+        padding-top: 2rem;
+      }
+
+      .cmd-trigger {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section-heading {
+        font-size: 1.35rem;
+      }
+
+      .exp-header {
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .nav-inner {
+        padding: 0 1.25rem;
+      }
     }
   </style>
 </head>
-
-<!-- Paper preview modal -->
-<div id="paperModal" class="modal" aria-hidden="true" aria-labelledby="paperTitle">
-  <div class="modal-dialog">
-    <button class="modal-close" id="paperClose" aria-label="Close">&#10005;</button>
-    <div class="modal-image">
-      <img id="paperImg" alt="">
-    </div>
-    <div class="modal-body">
-      <div class="modal-title" id="paperTitle"></div>
-      <div class="modal-text" id="paperDetails"></div>
-      <div class="modal-actions">
-        <a id="paperLink" class="open-btn" target="_blank" rel="noopener">Open paper &#8599;</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <body>
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-container">
-    <div class="nav-logo" onclick="showPage('home')">Ahmed Qazi</div>
-    <ul class="nav-menu" id="navMenu">
-      <li><a class="nav-link active" onclick="showPage('home')">Home</a></li>
-      <li><a class="nav-link" onclick="showPage('research')">Research</a></li>
-      <li><a class="nav-link" onclick="showPage('engineering')">Engineering</a></li>
-      <li><a class="nav-link" onclick="showPage('sidequests')">Side Quests</a></li>
+<!-- ═══ Navigation ═══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Ahmed Qazi</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about"><span class="num">01.</span> About</a></li>
+      <li><a href="#experience"><span class="num">02.</span> Experience</a></li>
+      <li><a href="#projects"><span class="num">03.</span> Projects</a></li>
+      <li><a href="#publications"><span class="num">04.</span> Publications</a></li>
+      <li><a href="#contact"><span class="num">05.</span> Contact</a></li>
     </ul>
-    <button class="mobile-menu" id="mobileMenu" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </nav>
 
-<!-- Home -->
-<div id="home" class="page active">
-  <div class="home-grid">
-    <aside class="profile-section">
-      <div class="profile-image">
-        <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
-      </div>
-      <div class="name glitch-heading" data-text="Ahmed Qazi">Ahmed Qazi</div>
-      <div class="subtitle">AI Researcher & Engineer</div>
-      <div class="social-links">
-        <a href="mailto:ahmedrashidqazi@gmail.com" title="Email">
-          <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" width="22" height="22">
-        </a>
-        <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" title="LinkedIn">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="22" height="22">
-        </a>
-        <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" title="Google Scholar">
-          <img src="https://cdn.simpleicons.org/googlescholar/4285F4" alt="Scholar" width="22" height="22">
-        </a>
-        <a href="https://www.upwork.com/freelancers/~018c7f4296364a33dc" target="_blank" title="Upwork">
-          <img src="https://cdn.simpleicons.org/upwork/14A800" alt="Upwork" width="22" height="22">
-        </a>
-      </div>
-    </aside>
+<!-- ═══ Hero ═══ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-greeting reveal">Hi, my name is</p>
+      <h1 class="hero-name reveal">Ahmed Qazi.</h1>
+      <h2 class="hero-tagline reveal">I build intelligent systems.</h2>
+      <p class="hero-desc reveal">
+        I am a Senior AI Engineer specializing in the intersection of neuroscience and machine learning.
+        I design and build production-ready AI platforms that solve real-world problems.
+      </p>
+      <a href="#projects" class="btn reveal">View My Work ↓</a>
+    </div>
+  </div>
+</section>
 
-    <main class="content-section">
-      <section class="section reveal">
-        <div class="section-title">About</div>
-        <p class="body-text">
-          I work at the intersection of neuroscience and AI, with publications at top journals and conferences.
-          My research focuses on understanding how biological vision systems can inform machine learning, and
-          how AI methods can advance neuroscience. I also build production systems — AI platforms and tools
-          that solve practical problems. Whether it's training models on neural data or architecting backend
+<!-- ═══ About ═══ -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">01.</span> About Me</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I work at the intersection of <a href="#publications">neuroscience and AI</a>, with publications at top venues
+          including Neuron (Cell Press), CVPR, NeurIPS, and AAAI. My research focuses on understanding how biological
+          vision systems can inform machine learning, and how AI methods can advance neuroscience.
+        </p>
+        <p>
+          Beyond research, I build production systems — AI platforms and tools that solve practical problems. Whether
+          it's training models on neural data, building multimodal AI for healthcare, or architecting backend
           infrastructure, I aim to create work that's both rigorous and useful.
         </p>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-title">Education</div>
-        <div class="education-grid">
-          <div class="edu-card">
-            <img src="assets/lums.png" alt="LUMS" class="edu-logo">
-            <div class="edu-text">
-              <h4>B.S. Computer Science</h4>
-              <p>Lahore University of Management Sciences (LUMS) · 2018 - 2022</p>
-            </div>
-          </div>
-          <div class="edu-card">
-            <img src="assets/stanford.png" alt="Stanford" class="edu-logo">
-            <div class="edu-text">
-              <h4>Pre-Collegiate Scholar</h4>
-              <p>Stanford University · Summer 2017</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-title">Experience</div>
-        <div class="timeline" id="experienceTimeline">
-          <div class="timeline-item">
-            <h4>Senior AI Engineer</h4>
-            <div class="place">Osmium Labs</div>
-            <div class="when">Oct 2025 - Present</div>
-            <p>Building and shipping AI products.</p>
-          </div>
-          <div class="timeline-item">
-            <h4>Member of Technical Staff</h4>
-            <div class="place">Tibbling Technologies</div>
-            <div class="when">Feb 2024 – Oct 2025</div>
-            <p>Built multimodal AI solutions for healthcare.</p>
-          </div>
-          <div class="timeline-item">
-            <h4>Research Assistant</h4>
-            <div class="place">NeurAI, LUMS</div>
-            <div class="when">Apr 2023 – Dec 2023</div>
-            <p>Conducted research and published papers on topics at the intersection of neuroscience and AI.</p>
-          </div>
-          <div class="timeline-item">
-            <h4>Research Assistant</h4>
-            <div class="place">World Wide Fund for Nature (WWF) x Centre for Water Informatics & Technology (WIT), LUMS
-            </div>
-            <div class="when">Sep 2022 – Mar 2023</div>
-            <p>Developed mathematical and ML models to predict forest fire spread.</p>
-          </div>
-          <div class="timeline-item">
-            <h4>Machine Learning Engineer</h4>
-            <div class="place">Wizlabs AI</div>
-            <div class="when">Jan 2021 – Dec 2022</div>
-            <p>Researched and built a virtual try-on MVP for South Asian fashion.</p>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-</div>
-
-<!-- Research -->
-<!-- Research -->
-<div id="research" class="page">
-  <div class="page-container">
-    <h2 class="page-title glitch-heading" data-text="Research">Research</h2>
-    <p class="body-text page-intro">
-      My research explores the intersection of neuroscience and artificial intelligence, with a focus on
-      biologically-inspired architectures, computer vision for neuroscience, and multimodal AI systems.
-      Below is a selection of my publications and manuscripts.
-    </p>
-
-    <div class="grid">
-      <article class="card reveal" data-link="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/neuron.jpg" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
-          <div class="card-text">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong><br>Neuron (Cell Press) 113 (10), 1525-1547<br>Journal Cover</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/seganyneuron.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">Segment AnyNeuron</div>
-          <div class="card-text">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal<br>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06886" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/m2m.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
-          <div class="card-text"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal<br>Unifying Representations in Neural Models (UniReps) @ Neural Information Processing Systems (NeurIPS) 2025</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/viT_paper.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</div>
-          <div class="card-text">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal<br>Neuro for AI & AI for Neuro: Towards Multi-Modal Natural Intelligence @ Association for the Advancement of Artificial Intelligence (AAAI) 2026</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/exeraide.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
-          <div class="card-text"><strong>Ahmed Qazi</strong>, Asim Iqbal<br>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/animalformer.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
-          <div class="card-text"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal<br>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06881" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/neurn.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
-          <div class="card-text">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal<br>arXiv</div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06894" role="button" tabindex="0" aria-label="Open paper preview">
-        <div class="card-image">
-          <img src="assets/neugen.png" alt="" loading="lazy">
-        </div>
-        <div class="card-body">
-          <div class="card-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
-          <div class="card-text"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal<br>arXiv</div>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-
-<!-- Engineering -->
-<div id="engineering" class="page">
-  <div class="page-container">
-    <h2 class="page-title glitch-heading" data-text="Engineering">Engineering</h2>
-    <p class="snake-flavour">While the builds are loading — play a game.</p>
-    <div class="snake-wrapper">
-      <div class="snake-container">
-        <canvas id="snakeCanvas" width="900" height="450"></canvas>
-        <div class="snake-scanlines" aria-hidden="true"></div>
+        <p>
+          I graduated with a B.S. in Computer Science from
+          <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
+          Stanford University as a Pre-Collegiate Scholar.
+        </p>
       </div>
-      <div class="dpad" id="snakeDpad" aria-label="D-pad controls">
-        <div class="dpad-top">
-          <button class="dpad-btn" id="dpadUp" aria-label="Up">&#9650;</button>
+      <div class="reveal">
+        <div class="skills-category">
+          <h4>Languages</h4>
+          <div class="skills-list">
+            <span>Python</span>
+            <span>C++</span>
+            <span>SQL</span>
+            <span>JavaScript</span>
+            <span>TypeScript</span>
+          </div>
         </div>
-        <div class="dpad-middle">
-          <button class="dpad-btn" id="dpadLeft" aria-label="Left">&#9664;</button>
-          <div class="dpad-center"></div>
-          <button class="dpad-btn" id="dpadRight" aria-label="Right">&#9654;</button>
+        <div class="skills-category">
+          <h4>Frameworks &amp; Libraries</h4>
+          <div class="skills-list">
+            <span>PyTorch</span>
+            <span>TensorFlow</span>
+            <span>Scikit-learn</span>
+            <span>FastAPI</span>
+            <span>Django</span>
+            <span>HuggingFace</span>
+            <span>OpenCV</span>
+          </div>
         </div>
-        <div class="dpad-bottom">
-          <button class="dpad-btn" id="dpadDown" aria-label="Down">&#9660;</button>
+        <div class="skills-category">
+          <h4>Tools &amp; Platforms</h4>
+          <div class="skills-list">
+            <span>Docker</span>
+            <span>Kubernetes</span>
+            <span>GCP</span>
+            <span>AWS</span>
+            <span>Git</span>
+            <span>Linux</span>
+            <span>MLflow</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Side Quests -->
-<div id="sidequests" class="page">
-  <div class="page-container">
-    <h2 class="page-title glitch-heading" data-text="Side Quests">Side Quests</h2>
-    <p class="body-text page-intro">
-      Here you can find some of my side quests — moments outside research and code. I'm a bit of an alpine nerd at
-      heart, chasing summits, quiet lakes - basically the occasional trip that reminds me how small (and big) the
-      world can feel.
-    </p>
-    <div class="grid">
-      <article class="card reveal">
-        <div class="card-image">
-          <img src="assets/kutwal-lake-haramosh.png" alt="Kutwal Lake">
-        </div>
-        <div class="card-body">
-          <div class="card-title">Kutwal Lake, Haramosh</div>
-          <div class="card-text">A clear morning at 3200m. Camped near the lake with the Haramosh massif overhead.</div>
-        </div>
-      </article>
+<!-- ═══ Experience ═══ -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">02.</span> Experience</h2>
+    <div class="exp-timeline">
 
-      <article class="card reveal">
-        <div class="card-image">
-          <img src="assets/gondogoro-peak.jpeg" alt="Gondogoro Peak">
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-title">Senior AI Engineer <span class="company">@ Osmium Labs</span></div>
+          <div class="exp-date">Oct 2025 – Present</div>
         </div>
-        <div class="card-body">
-          <div class="card-title">Gondogoro Peak Summit</div>
-          <div class="card-text">Summited at 6008m after a long push. View over the Hushe valley made it worth it.</div>
+        <ul class="exp-bullets">
+          <li>Architected and shipped end-to-end AI products from research prototype to production deployment.</li>
+          <li>Led technical design of ML pipelines and model serving infrastructure at scale.</li>
+        </ul>
+        <div class="exp-tech">
+          <span>Python</span><span>PyTorch</span><span>Kubernetes</span><span>GCP</span>
         </div>
-      </article>
+      </div>
 
-      <article class="card reveal">
-        <div class="card-image">
-          <img src="assets/lupke-la.jpg" alt="Lupke La">
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-title">Member of Technical Staff <span class="company">@ Tibbling Technologies</span></div>
+          <div class="exp-date">Feb 2024 – Oct 2025</div>
         </div>
-        <div class="card-body">
-          <div class="card-title">Lupke La</div>
-          <div class="card-text">Crossing into Snow Lake at 5710m. Wind-scoured pass in the heart of the Karakoram.</div>
+        <ul class="exp-bullets">
+          <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
+          <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
+        </ul>
+        <div class="exp-tech">
+          <span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>AWS</span><span>Computer Vision</span>
         </div>
-      </article>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-title">Research Assistant <span class="company">@ NeurAI, LUMS</span></div>
+          <div class="exp-date">Apr 2023 – Dec 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Conducted research and published papers on topics at the intersection of neuroscience and AI.</li>
+          <li>Developed biologically-inspired architectures for computer vision tasks.</li>
+        </ul>
+        <div class="exp-tech">
+          <span>PyTorch</span><span>NumPy</span><span>Neuroscience</span><span>Computer Vision</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-title">Research Assistant <span class="company">@ WWF × WIT, LUMS</span></div>
+          <div class="exp-date">Sep 2022 – Mar 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed mathematical and ML models to predict forest fire spread across Pakistani landscapes.</li>
+          <li>Collaborated with domain experts at WWF to validate model outputs against satellite data.</li>
+        </ul>
+        <div class="exp-tech">
+          <span>Python</span><span>Scikit-learn</span><span>GIS</span><span>Remote Sensing</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-header">
+          <div class="exp-title">Machine Learning Engineer <span class="company">@ Wizlabs AI</span></div>
+          <div class="exp-date">Jan 2021 – Dec 2022</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched and built a virtual try-on MVP for South Asian fashion using generative models.</li>
+          <li>Designed the model pipeline from data collection to deployment for real-time garment transfer.</li>
+        </ul>
+        <div class="exp-tech">
+          <span>Python</span><span>PyTorch</span><span>GANs</span><span>OpenCV</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Projects ═══ -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">03.</span> Projects</h2>
+
+    <!-- Featured Projects -->
+    <div class="featured-project reveal">
+      <div class="fp-image">
+        <img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy">
+      </div>
+      <div>
+        <div class="fp-label">Featured Project</div>
+        <h3 class="fp-title">Enhancer-AAV Toolbox for Interneuron Manipulation</h3>
+        <p class="fp-desc">
+          Contributed to a large-scale neuroscience study published in Neuron (Cell Press) that developed an enhancer-AAV
+          toolbox to target and manipulate distinct interneuron subtypes — featured as the journal cover.
+        </p>
+        <div class="fp-tech">
+          <span>Neuroscience</span><span>·</span>
+          <span>Computer Vision</span><span>·</span>
+          <span>Cell Segmentation</span><span>·</span>
+          <span>Python</span>
+        </div>
+        <div class="fp-links">
+          <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener" title="View paper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="featured-project reverse reveal">
+      <div class="fp-image">
+        <img src="assets/m2m.png" alt="Mice to Machines" loading="lazy">
+      </div>
+      <div>
+        <div class="fp-label">Featured Project</div>
+        <h3 class="fp-title">Mice to Machines: Neural Representations for Domain Generalization</h3>
+        <p class="fp-desc">
+          Developed a novel approach leveraging neural representations from mouse visual cortex to improve
+          domain generalization in image classification. Presented at NeurIPS 2025.
+        </p>
+        <div class="fp-tech">
+          <span>PyTorch</span><span>·</span>
+          <span>Neuroscience</span><span>·</span>
+          <span>Domain Generalization</span><span>·</span>
+          <span>Vision Models</span>
+        </div>
+        <div class="fp-links">
+          <a href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener" title="View paper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="featured-project reveal">
+      <div class="fp-image">
+        <img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy">
+      </div>
+      <div>
+        <div class="fp-label">Featured Project</div>
+        <h3 class="fp-title">Segment AnyNeuron</h3>
+        <p class="fp-desc">
+          Built a universal neuron segmentation framework presented at CVPR 2025 Workshops.
+          Enables automated segmentation of neurons across diverse brain regions and imaging modalities.
+        </p>
+        <div class="fp-tech">
+          <span>PyTorch</span><span>·</span>
+          <span>Segmentation</span><span>·</span>
+          <span>Computer Vision</span><span>·</span>
+          <span>CVPR</span>
+        </div>
+        <div class="fp-links">
+          <a href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener" title="View paper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Projects Grid -->
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="pc-links">
+            <a href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener" title="Paper">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="pc-title">NeuRN: Neuro-inspired Domain Generalization</h3>
+        <p class="pc-desc">A neuro-inspired approach to domain generalization for image classification leveraging insights from biological neural networks.</p>
+        <div class="pc-tech">
+          <span>PyTorch</span><span>·</span><span>Domain Generalization</span><span>·</span><span>Neuroscience</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="pc-links">
+            <a href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener" title="Paper">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="pc-title">NeuGen: Amplifying the 'Neural' in NeRFs</h3>
+        <p class="pc-desc">Bringing neuroscience-inspired representations into Neural Radiance Fields for improved 3D scene synthesis.</p>
+        <div class="pc-tech">
+          <span>NeRF</span><span>·</span><span>3D Vision</span><span>·</span><span>PyTorch</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+        </div>
+        <h3 class="pc-title">ExerAIde: Multimodal Sports Diagnosis</h3>
+        <p class="pc-desc">AI-assisted multimodal diagnosis system for enhanced sports performance analysis, presented at CVPR 2024 Workshops.</p>
+        <div class="pc-tech">
+          <span>Multimodal AI</span><span>·</span><span>Pose Estimation</span><span>·</span><span>CVPR</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+        </div>
+        <h3 class="pc-title">AnimalFormer: Precision Livestock Farming</h3>
+        <p class="pc-desc">A multimodal vision framework for precision livestock farming, presented at CVPR 2024 Workshops.</p>
+        <div class="pc-tech">
+          <span>Transformers</span><span>·</span><span>Computer Vision</span><span>·</span><span>CVPR</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+        </div>
+        <h3 class="pc-title">Virtual Try-On for South Asian Fashion</h3>
+        <p class="pc-desc">Built a real-time generative virtual try-on system for South Asian garments — from data collection to deployment.</p>
+        <div class="pc-tech">
+          <span>GANs</span><span>·</span><span>OpenCV</span><span>·</span><span>PyTorch</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="pc-top">
+          <div class="pc-folder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+          </div>
+        </div>
+        <h3 class="pc-title">Forest Fire Spread Prediction</h3>
+        <p class="pc-desc">ML models to predict forest fire spread across Pakistani landscapes for WWF, validated against satellite data.</p>
+        <div class="pc-tech">
+          <span>Scikit-learn</span><span>·</span><span>GIS</span><span>·</span><span>Remote Sensing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Publications ═══ -->
+<section id="publications">
+  <div class="container">
+    <h2 class="section-heading reveal"><span class="num">04.</span> Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub-item reveal">
+        <div class="pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
+        <div class="pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></div>
+        <div class="pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
+          <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">Segment AnyNeuron</div>
+        <div class="pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
+        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</div>
+        <div class="pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</div>
+        <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+        <div class="pub-venue">Neuro for AI & AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
+        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
+        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</div>
+        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
+        <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+        <div class="pub-venue">arXiv Preprint</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
+        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</div>
+        <div class="pub-venue">arXiv Preprint</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Contact ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <p class="contact-num">05. What's Next?</p>
+      <h2 class="contact-heading">Get In Touch</h2>
+      <p class="contact-text">
+        I'm always open to discussing new projects, research collaborations, or interesting opportunities.
+        Feel free to reach out.
+      </p>
+      <a href="mailto:ahmedrashidqazi@gmail.com" class="btn">Say Hello →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer>
+  <div class="footer-socials">
+    <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener" title="GitHub">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+    </a>
+    <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" rel="noopener" title="LinkedIn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
+    </a>
+    <a href="mailto:ahmedrashidqazi@gmail.com" title="Email">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+  <p class="footer-credit">Designed &amp; Built by Ahmed Qazi</p>
+</footer>
+
+<!-- ═══ Command Palette Trigger ═══ -->
+<button class="cmd-trigger" id="cmdTrigger" aria-label="Open command palette" title="⌘K / Ctrl+K">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+</button>
+
+<!-- ═══ Command Palette ═══ -->
+<div class="cmd-overlay" id="cmdOverlay">
+  <div class="cmd-palette">
+    <div class="cmd-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="cmd-input" id="cmdInput" type="text" placeholder="Type a command..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="cmd-results" id="cmdResults"></div>
+    <div class="cmd-hint">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>esc</kbd> close</span>
     </div>
   </div>
 </div>
 
 <script>
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    event.target.classList.add('active');
+(function() {
+  'use strict';
 
-    if (id === 'home') {
-      const content = document.querySelector('.content-section');
-      if (content) content.scrollTop = 0;
-    }
-
-    if (window.innerWidth <= 980) {
-      document.getElementById('navMenu').classList.remove('active');
-    }
-
-    // Re-observe reveal elements for the new page
-    setTimeout(function() {
-      document.querySelectorAll('#' + id + ' .reveal:not(.visible)').forEach(function(el) {
-        revealObserver.observe(el);
-      });
-      // Trigger timeline draw if on home page
-      if (id === 'home') {
-        var tl = document.getElementById('experienceTimeline');
-        if (tl) timelineObserver.observe(tl);
-      }
-    }, 100);
-  }
-
-  document.getElementById('mobileMenu').addEventListener('click', () => {
-    document.getElementById('navMenu').classList.toggle('active');
-  });
-
-  // ---- Intersection Observer: Scroll-driven reveal ----
+  // ── Scroll reveal ──
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -1346,247 +1458,179 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   document.querySelectorAll('.reveal').forEach(function(el) {
     revealObserver.observe(el);
   });
 
-  // ---- Intersection Observer: Timeline draw ----
-  var timelineObserver = new IntersectionObserver(function(entries) {
+  // ── Navbar: hide on scroll down, show on scroll up ──
+  var navbar = document.getElementById('navbar');
+  var lastScroll = 0;
+
+  window.addEventListener('scroll', function() {
+    var current = window.scrollY;
+    if (current > 80) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    if (current > lastScroll && current > 300) {
+      navbar.classList.add('hidden');
+    } else {
+      navbar.classList.remove('hidden');
+    }
+    lastScroll = current;
+  }, { passive: true });
+
+  // ── Active section highlighting ──
+  var sections = document.querySelectorAll('section[id]');
+  var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  var sectionObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        entry.target.classList.add('timeline-drawn');
-        timelineObserver.unobserve(entry.target);
+        var id = entry.target.getAttribute('id');
+        navAnchors.forEach(function(a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
       }
     });
-  }, { threshold: 0.2 });
+  }, { rootMargin: '-40% 0px -55% 0px' });
 
-  var timeline = document.getElementById('experienceTimeline');
-  if (timeline) timelineObserver.observe(timeline);
+  sections.forEach(function(s) { sectionObserver.observe(s); });
 
-  // Also observe within scrollable content-section
-  var contentSection = document.querySelector('.content-section');
-  if (contentSection) {
-    var contentRevealObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          contentRevealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, root: contentSection });
+  // ── Mobile menu ──
+  var mobileToggle = document.getElementById('mobileToggle');
+  var navLinks = document.getElementById('navLinks');
 
-    contentSection.querySelectorAll('.reveal').forEach(function(el) {
-      contentRevealObserver.observe(el);
-    });
+  mobileToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+  });
 
-    var contentTimelineObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('timeline-drawn');
-          contentTimelineObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2, root: contentSection });
-
-    if (timeline) contentTimelineObserver.observe(timeline);
-  }
-
-  // ---- Research card -> modal preview ----
-(function(){
-  const modal = document.getElementById('paperModal');
-  const imgEl = document.getElementById('paperImg');
-  const titleEl = document.getElementById('paperTitle');
-  const detailsEl = document.getElementById('paperDetails');
-  const linkEl = document.getElementById('paperLink');
-  const closeBtn = document.getElementById('paperClose');
-
-  function openModal({src, title, details, link}) {
-    imgEl.src = src || '';
-    titleEl.innerHTML = title || '';
-    detailsEl.innerHTML = details || '';
-    linkEl.href = link || '#';
-    modal.classList.add('show');
-    document.body.classList.add('modal-open');
-    closeBtn.focus();
-  }
-  function closeModal(){
-    modal.classList.remove('show');
-    document.body.classList.remove('modal-open');
-  }
-
-  // Click cards
-  document.querySelectorAll('#research .card').forEach(card=>{
-    card.addEventListener('click', (e)=>{
-      if (e.target.closest('a')) return;
-      const src = card.querySelector('.card-image img')?.getAttribute('src');
-      const title = card.querySelector('.card-title')?.innerHTML || '';
-      const details = card.querySelector('.card-text')?.innerHTML || '';
-      const link = card.getAttribute('data-link') || card.querySelector('a')?.href || '#';
-      openModal({src, title, details, link});
-    });
-    card.addEventListener('keydown',(e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        card.click();
-      }
+  navLinks.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      navLinks.classList.remove('open');
     });
   });
 
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
-})();
+  // ── Command Palette ──
+  var cmdOverlay = document.getElementById('cmdOverlay');
+  var cmdInput = document.getElementById('cmdInput');
+  var cmdResults = document.getElementById('cmdResults');
+  var cmdTrigger = document.getElementById('cmdTrigger');
+  var activeIdx = 0;
 
-// ---- Snake Game ----
-(function(){
-  const canvas = document.getElementById('snakeCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  var commands = [
+    { label: 'Go to About', section: '#about', icon: 'user' },
+    { label: 'Go to Experience', section: '#experience', icon: 'briefcase' },
+    { label: 'Go to Projects', section: '#projects', icon: 'code' },
+    { label: 'Go to Publications', section: '#publications', icon: 'book' },
+    { label: 'Go to Contact', section: '#contact', icon: 'mail' },
+    { label: 'Back to Top', section: '#hero', icon: 'arrow-up' },
+    { label: 'Email Ahmed', section: 'mailto:ahmedrashidqazi@gmail.com', icon: 'mail' },
+    { label: 'View LinkedIn', section: 'https://linkedin.com/in/ahmed-qazi-9099', icon: 'link' },
+    { label: 'View Google Scholar', section: 'https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en', icon: 'link' }
+  ];
 
-  const CELL = 18, W = 900, H = 450;
-  const COLS = W / CELL; // 50
-  const ROWS = H / CELL; // 25
-  const AMBER = '#cc00ff';
-
-  let snake, dir, nextDir, food, score, state, gameInterval;
-
-  function reset() {
-    const cx = Math.floor(COLS / 2), cy = Math.floor(ROWS / 2);
-    snake = [{x:cx,y:cy},{x:cx-1,y:cy},{x:cx-2,y:cy}];
-    dir = {x:1,y:0}; nextDir = {x:1,y:0};
-    score = 0;
-    spawnFood();
+  function iconSvg(name) {
+    var icons = {
+      'user': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+      'briefcase': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',
+      'code': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+      'book': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',
+      'mail': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+      'arrow-up': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
+      'link': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
+    };
+    return icons[name] || '';
   }
 
-  function spawnFood() {
-    let p;
-    do { p = {x:Math.floor(Math.random()*COLS), y:Math.floor(Math.random()*ROWS)}; }
-    while (snake.some(s=>s.x===p.x && s.y===p.y));
-    food = p;
+  function renderResults(filter) {
+    var filtered = commands.filter(function(c) {
+      return c.label.toLowerCase().includes(filter.toLowerCase());
+    });
+    activeIdx = 0;
+    cmdResults.innerHTML = filtered.map(function(c, i) {
+      return '<div class="cmd-item' + (i === 0 ? ' active' : '') + '" data-section="' + c.section + '">' + iconSvg(c.icon) + ' ' + c.label + '</div>';
+    }).join('');
   }
 
-  function startGame() {
-    reset(); state = 'playing';
-    clearInterval(gameInterval);
-    gameInterval = setInterval(tick, 100);
+  function openCmd() {
+    cmdOverlay.classList.add('open');
+    cmdInput.value = '';
+    renderResults('');
+    setTimeout(function() { cmdInput.focus(); }, 50);
   }
 
-  function tick() {
-    if (!document.getElementById('engineering').classList.contains('active')) return;
-    dir = nextDir;
-    const h = {x:snake[0].x+dir.x, y:snake[0].y+dir.y};
-    if (h.x<0||h.x>=COLS||h.y<0||h.y>=ROWS||snake.some(s=>s.x===h.x&&s.y===h.y)) {
-      clearInterval(gameInterval); state = 'dead'; draw(); return;
+  function closeCmd() {
+    cmdOverlay.classList.remove('open');
+  }
+
+  function executeCmd(section) {
+    closeCmd();
+    if (section.startsWith('http') || section.startsWith('mailto:')) {
+      window.open(section, '_blank');
+    } else {
+      document.querySelector(section).scrollIntoView({ behavior: 'smooth' });
     }
-    snake.unshift(h);
-    if (h.x===food.x && h.y===food.y) { score++; spawnFood(); } else snake.pop();
-    draw();
   }
 
-  function txt(str, x, y, size) {
-    ctx.font = size + 'px "Press Start 2P"';
-    ctx.fillStyle = AMBER;
-    ctx.shadowColor = AMBER; ctx.shadowBlur = 12;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(str, x, y);
-    ctx.shadowBlur = 0;
-  }
+  cmdTrigger.addEventListener('click', openCmd);
 
-  function draw() {
-    ctx.fillStyle = '#0d000d';
-    ctx.fillRect(0, 0, W, H);
+  cmdOverlay.addEventListener('click', function(e) {
+    if (e.target === cmdOverlay) closeCmd();
+  });
 
-    // Faint grid
-    ctx.strokeStyle = 'rgba(204,0,255,0.035)';
-    ctx.lineWidth = 0.5;
-    for (let x=0; x<=COLS; x++) { ctx.beginPath(); ctx.moveTo(x*CELL,0); ctx.lineTo(x*CELL,H); ctx.stroke(); }
-    for (let y=0; y<=ROWS; y++) { ctx.beginPath(); ctx.moveTo(0,y*CELL); ctx.lineTo(W,y*CELL); ctx.stroke(); }
+  cmdInput.addEventListener('input', function() {
+    renderResults(this.value);
+  });
 
-    if (state === 'idle') {
-      txt('SNAKE', W/2, H/2-36, 22);
-      txt('WASD  /  ARROW KEYS', W/2, H/2+8, 8);
-      txt('ENTER / SPACE / TAP TO START', W/2, H/2+30, 7);
+  cmdResults.addEventListener('click', function(e) {
+    var item = e.target.closest('.cmd-item');
+    if (item) executeCmd(item.dataset.section);
+  });
+
+  cmdInput.addEventListener('keydown', function(e) {
+    var items = cmdResults.querySelectorAll('.cmd-item');
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIdx = Math.min(activeIdx + 1, items.length - 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIdx = Math.max(activeIdx - 1, 0);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (items[activeIdx]) executeCmd(items[activeIdx].dataset.section);
+      return;
+    } else if (e.key === 'Escape') {
+      closeCmd();
+      return;
+    } else {
       return;
     }
+    items.forEach(function(el, i) {
+      el.classList.toggle('active', i === activeIdx);
+    });
+    if (items[activeIdx]) items[activeIdx].scrollIntoView({ block: 'nearest' });
+  });
 
-    // Snake segments
-    for (let i=0; i<snake.length; i++) {
-      const alpha = i===0 ? 1 : Math.max(0.3, 1-(i/snake.length)*0.65);
-      ctx.fillStyle = 'rgba(204,0,255,' + alpha + ')';
-      if (i === 0) { ctx.shadowColor = AMBER; ctx.shadowBlur = 14; }
-      ctx.fillRect(snake[i].x*CELL+1, snake[i].y*CELL+1, CELL-2, CELL-2);
-      if (i === 0) ctx.shadowBlur = 0;
-    }
-
-    // Food with glow
-    ctx.save();
-    ctx.shadowBlur = 14; ctx.shadowColor = AMBER; ctx.fillStyle = AMBER;
-    ctx.fillRect(food.x*CELL+4, food.y*CELL+4, CELL-8, CELL-8);
-    ctx.restore();
-
-    // Score (top-left)
-    ctx.shadowColor = AMBER; ctx.shadowBlur = 8;
-    ctx.fillStyle = AMBER;
-    ctx.font = '10px "Press Start 2P"';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText('SCORE: ' + score, 12, 12);
-    ctx.shadowBlur = 0;
-
-    if (state === 'dead') {
-      ctx.fillStyle = 'rgba(0,0,0,0.75)';
-      ctx.fillRect(0, 0, W, H);
-      txt('GAME OVER', W/2, H/2-40, 20);
-      txt('SCORE: ' + score, W/2, H/2+4, 11);
-      txt('ENTER / SPACE / TAP TO RETRY', W/2, H/2+44, 7);
-    }
-  }
-
-  // Init
-  reset(); state = 'idle';
-  food = {x:Math.floor(COLS*0.65), y:Math.floor(ROWS/2)};
-  document.fonts.ready.then(draw).catch(draw);
-
-  // Keyboard controls
   document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('engineering').classList.contains('active')) return;
-    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
-    if (e.key === 'Enter' || e.key === ' ') { if (state !== 'playing') { startGame(); return; } }
-    if (state !== 'playing') return;
-    switch (e.key) {
-      case 'ArrowUp':  case 'w': case 'W': if (dir.y !==  1) nextDir = {x:0,y:-1}; break;
-      case 'ArrowDown':case 's': case 'S': if (dir.y !== -1) nextDir = {x:0,y: 1}; break;
-      case 'ArrowLeft':case 'a': case 'A': if (dir.x !==  1) nextDir = {x:-1,y:0}; break;
-      case 'ArrowRight':case 'd':case 'D': if (dir.x !== -1) nextDir = {x: 1,y:0}; break;
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (cmdOverlay.classList.contains('open')) {
+        closeCmd();
+      } else {
+        openCmd();
+      }
+    }
+    if (e.key === 'Escape' && cmdOverlay.classList.contains('open')) {
+      closeCmd();
     }
   });
 
-  // Click / tap canvas to start/restart
-  canvas.addEventListener('click', function() { if (state !== 'playing') startGame(); });
-
-  // D-pad
-  function dInput(action) {
-    if (state !== 'playing') { startGame(); return; }
-    switch (action) {
-      case 'up':    if (dir.y !==  1) nextDir = {x:0,y:-1}; break;
-      case 'down':  if (dir.y !== -1) nextDir = {x:0,y: 1}; break;
-      case 'left':  if (dir.x !==  1) nextDir = {x:-1,y:0}; break;
-      case 'right': if (dir.x !== -1) nextDir = {x: 1,y:0}; break;
-    }
-  }
-
-  [['dpadUp','up'],['dpadDown','down'],['dpadLeft','left'],['dpadRight','right']].forEach(function(pair) {
-    var btn = document.getElementById(pair[0]);
-    if (!btn) return;
-    btn.addEventListener('click', function() { dInput(pair[1]); });
-    btn.addEventListener('touchstart', function(e) { e.preventDefault(); dInput(pair[1]); }, {passive:false});
-  });
 })();
 </script>
 
 </body>
-
 </html>

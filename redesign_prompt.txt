@@ -1,64 +1,101 @@
-**Subject: Comprehensive Redesign of `index.html` - Retro-Futuristic Glitch Art Theme**
+**Objective:** Redesign the personal website `ahmedrashidqazi.github.io` to project the image of a "top-tier engineer." This is a complete structural and aesthetic overhaul, not just a theme update. The new design should be modern, professional, and interactive, showcasing technical expertise and research accomplishments.
 
-**Objective:**
-Your task is to perform a significant visual and interactive redesign of the provided `index.html` file. You must transform its aesthetic from a standard portfolio into a modern, engaging, and memorable "Retro-Futuristic Glitch Art" experience.
+**I. Overall Aesthetic & Tone**
 
-**Strict Constraints (Must be followed):**
-1.  **Preserve All Content:** All existing text, image paths (`src` attributes), and link destinations (`href` attributes) within the HTML must remain unchanged. You may restructure the HTML elements for layout purposes, but the content itself must be preserved.
-2.  **Preserve Functionality:** The single-page application (SPA) navigation logic, the research modal functionality, and the Snake Game JavaScript must remain fully functional.
-3.  **No External Files:** All CSS styles must be contained within the `<style>` tag in the `<head>` of the `index.html` file. Do not create external CSS files. Any new JavaScript for animations should be placed in a `<script>` tag at the end of the `<body>`.
-4.  **Maintain Responsiveness:** The new design must be fully responsive and usable on modern mobile devices.
-5.  **Output:** Your final output should be the single, complete, modified `index.html` file.
+*   **Theme:** Professional, clean, and modern with a "dark mode" aesthetic. Use a dark background (e.g., `#111827` or a dark slate gray) with contrasting text (e.g., `#E5E7EB` or a light gray).
+*   **Accent Color:** A single, striking accent color (e.g., a vibrant blue, green, or orange like `#38BDF8`) for links, buttons, and highlights.
+*   **Typography:**
+    *   **Headings:** A clean, modern sans-serif font like Inter, Manrope, or a slightly stylized one like Calistoga.
+    *   **Body:** A highly readable sans-serif font like Inter or a monospace font like Fira Code or JetBrains Mono to give a technical feel.
+*   **Tone:** The language should be concise, confident, and impactful.
 
----
+**II. Layout & Structure (Single-Page Application Feel)**
 
-### **Design Directives: Retro-Futuristic Glitch Art**
+The site should be a single, scrollable page with a fixed navigation bar that smoothly scrolls to the corresponding sections.
 
-**1. Overall Theme & Atmosphere:**
--   **Concept:** A dark-themed, retro-futuristic interface reminiscent of old CRT monitors, cyberpunk aesthetics, and digital glitch art. The feeling should be clean and modern, but with a distinct, "glitchy" personality.
--   **Visuals:** Think scanlines, subtle chromatic aberration, and sharp geometric lines combined with modern typography and layout.
+*   **Navigation Bar (Header):**
+    *   **Left:** A simple logo or the name "Ahmed Qazi".
+    *   **Right:** Navigation links: `01. About`, `02. Experience`, `03. Projects`, `04. Publications`, `05. Contact`. The numbers give it a deliberate, ordered feel.
+    *   **Behavior:** The header should be sticky or become visible on scrolling up. The active section link should be highlighted.
 
-**2. Color Palette:**
--   **Background:** A very dark charcoal, almost black (`#101010`).
--   **Primary Text:** A slightly off-white (`#EAEAEA`) for readability.
--   **Accent/Highlight Color:** A vibrant, neon cyan (`#00FFFF`). Use this for links, buttons, active navigation items, and key headings.
--   **Secondary Accent:** A neon magenta (`#FF00FF`). Use this for secondary highlights or hover effects to create a dynamic glitch effect.
--   **Borders/Lines:** A semi-transparent white (`rgba(255, 255, 255, 0.2)`).
+*   **Section Order:**
+    1.  Hero Section
+    2.  About Section
+    3.  Experience Section
+    4.  Projects Section
+    5.  Publications Section
+    6.  Contact Section
+    7.  Footer
 
-**3. Typography:**
--   **Headings (`h1`, `h2`, `h3`):**
-    -   Font Family: `'Fira Code', 'Courier New', monospace`.
-    -   Weight: `500`.
-    -   Letter Spacing: `1.5px`.
-    -   Transform: `uppercase`.
--   **Body Text (`p`, `li`, etc.):**
-    -   Font Family: `'Inter', 'Roboto', sans-serif`.
-    -   Weight: `300` for standard text, `500` for bold/strong.
-    -   Line Height: `1.6`.
--   **Navigation/Links:**
-    -   Font Family: `'Fira Code', monospace`.
-    -   Weight: `400`.
+**III. Content Sections Breakdown**
 
-**4. Layout & Structure:**
--   **Asymmetrical Grid:** Reorganize the page sections into a more dynamic, asymmetrical layout. Avoid the standard single-column, centered approach. For example, the profile image could be on the left, with the name/title overlapping it slightly and the "About" section to the right.
--   **Negative Space:** Use generous negative space to let elements breathe and create a clean, uncluttered feel despite the "glitchy" effects.
--   **Visual Hierarchy:** Establish a clear visual hierarchy using typography, color, and positioning. The user's name/title should be the most prominent element on load.
+**1. Hero Section**
 
-**5. Micro-interactions & Animations:**
--   **Global Scanline Overlay:** Implement a faint, animated scanline effect over the entire page using a pseudo-element (`::after`) on the `body` with a repeating linear gradient and a subtle animation.
--   **Heading Glitch on Hover:** When a user hovers over a major heading (`h1`, `h2`), apply a "glitch" effect. This can be achieved with CSS using pseudo-elements (`::before`, `::after`) that rapidly shift position with different colors (the neon cyan and magenta).
--   **Scroll-Driven Animations (Intersection Observer):** As the user scrolls, fade in and slightly slide up each section (`<section>`) as it enters the viewport. Use the Intersection Observer API for performance.
--   **Button/Link Hover Effect:** On hover, links and buttons should have their text color change to the background color (`#101010`) and their background fill with the neon cyan (`#00FFFF`). Add a subtle `transform: translate(2px, 2px);` to give it a slight "jolt".
--   **Project Card Interactions:**
-    -   On hover, the project card's border should glow with the neon cyan color.
-    -   Apply a subtle `transform: perspective(1000px) rotateY(-5deg);` to give the card a slight 3D tilt on hover.
-    -   The project description text, initially hidden or semi-transparent, should fade in clearly on hover.
--   **Timeline/Experience Section:** The connecting line in the timeline should "draw" itself in as the user scrolls down the section.
+*   **Content:**
+    *   **Greeting:** "Hi, my name is" in the accent color.
+    *   **Name:** "Ahmed Qazi." in a large, bold heading.
+    *   **Tagline:** "I build intelligent systems." or a similarly impactful, short statement in a slightly smaller heading.
+    *   **Introduction:** A 2-3 sentence summary: "I am a Senior AI Engineer specializing in the intersection of neuroscience and machine learning. I design and build production-ready AI platforms that solve real-world problems."
+    *   **Call to Action:** A prominent button with the text "View My Work" that links to the Projects section.
 
-**6. Component-Specific Styling:**
--   **Navigation:** Keep it fixed to the top but make the background semi-transparent with a blur effect (`backdrop-filter: blur(10px);`) to see content scrolling underneath. The active link should be highlighted in the neon cyan.
--   **Profile Image:** Apply a duotone or a CRT-like filter effect to the profile image using CSS filters (`filter: grayscale(1) contrast(1.2) brightness(0.8);`) and blend a semi-transparent cyan layer on top using a pseudo-element.
--   **Research Modal:** Style the modal to match the new dark theme. Use sharp corners and the defined color palette. Add a blurred background for the content behind the modal.
--   **Snake Game Integration:** The Snake Game has a retro aesthetic that fits perfectly. Do not change its core JavaScript. Instead, style the *container* of the game. Give it a distinct border that looks like an old monitor bezel, perhaps with a subtle glowing border in the accent color. When the game is active, you could even intensify the global scanline effect.
+**2. About Section (Titled "01. About Me")**
 
-Please now apply all these directives to the provided `index.html` and output the complete, final HTML file.
+*   **Layout:** Two-column layout.
+*   **Left Column:**
+    *   A brief, engaging narrative about your professional journey and passion for AI and neuroscience.
+*   **Right Column:**
+    *   A list of key technologies and skills, categorized for clarity.
+    *   **Categories:** Programming Languages, Frameworks & Libraries, Tools & Platforms.
+    *   **Example:**
+        *   **Programming Languages:** Python, C++, SQL
+        *   **Frameworks & Libraries:** PyTorch, TensorFlow, Scikit-learn, FastAPI, Django
+        *   **Tools & Platforms:** Docker, Kubernetes, GCP, AWS, Git
+
+**3. Experience Section (Titled "02. Experience")**
+
+*   **Layout:** A vertical timeline format.
+*   **For each role:**
+    *   **Title & Company:** "Senior AI Engineer @ Osmium Labs" (company name is a link).
+    *   **Dates:** "Oct 2025 - Present".
+    *   **Description:** 2-3 bullet points detailing key achievements and responsibilities. Start each bullet with a strong action verb.
+    *   **Technologies Used:** A list of relevant technologies for that role (e.g., `PyTorch`, `Kubernetes`, `GCP`).
+
+**4. Projects Section (Titled "03. Projects")**
+
+*   **Layout:** A grid of project cards (2-3 per row).
+*   **Each Project Card:**
+    *   **Title:** Project Name.
+    *   **Description:** A short, one-sentence summary.
+    *   **Technologies:** A list of technologies used.
+    *   **Links:** Icons linking to the **Live Demo**, **GitHub Repository**, and (if applicable) a **Case Study/Blog Post**.
+*   **Key Feature: Featured Projects:** Have 2-3 "featured" projects at the top that are larger and have more detail, including a small screenshot or graphic.
+
+**5. Publications Section (Titled "04. Publications")**
+
+*   **Layout:** A clean, academic-style list.
+*   **For each publication:**
+    *   **Title:** "Title of the Paper".
+    *   **Authors:** List of authors with your name in **bold**.
+    *   **Journal/Conference:** "Published in *Journal of Neuroscience*, 2024".
+    *   **Links:** Buttons or links for "PDF", "Code", and "DOI".
+
+**6. Contact Section (Titled "05. What's Next?")**
+
+*   **Content:**
+    *   **Heading:** "Get In Touch".
+    *   **Text:** A short, inviting message. "I'm always open to discussing new projects, research collaborations, or interesting opportunities. Feel free to reach out."
+    *   **Call to Action:** A prominent button with your email address: `mailto:ahmedrashidqazi@gmail.com`.
+
+**IV. Footer**
+
+*   **Content:**
+    *   A simple, centered line with social media links (GitHub, LinkedIn, Google Scholar).
+    *   "Designed & Built by Ahmed Qazi".
+
+**V. Key Features & Interactivity**
+
+*   **Scroll Animations:** Subtle fade-in or slide-up animations as the user scrolls down to each section.
+*   **Hover Effects:** Links, buttons, and project cards should have clean hover effects (e.g., a slight change in color or a subtle upward shift).
+*   **Responsive Design:** The website must be fully responsive and look great on all devices, from mobile phones to desktops.
+*   **Performance:** Optimized for fast loading times.
+*   **(Optional) Command Palette:** For an extra "top-tier engineer" touch, consider adding a small, clickable terminal icon that opens a command palette (`Ctrl+K` or `Cmd+K`) allowing users to quickly navigate to different sections (e.g., typing `goto projects`).
