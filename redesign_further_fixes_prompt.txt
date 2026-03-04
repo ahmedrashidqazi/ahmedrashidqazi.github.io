@@ -1,0 +1,37 @@
+**Objective:** Implement further refinements and fixes to the website `ahmedrashidqazi.github.io` based on the user's feedback.
+
+**I. Fix Profile Picture Loading**
+*   **Issue:** The profile picture `assets/profile.jpg` is not loading.
+*   **Action:** Ensure the image path is correct relative to the `index.html`. If the image file `assets/profile.jpg` does not exist, create a simple placeholder image (e.g., a dark gray circle) at that path to ensure something displays. Also, verify that the CSS is correctly styling and displaying the image.
+
+**II. Implement Playable Snake Game in Projects Section**
+*   **Change:** Instead of just a folder-like entry, embed a simple, playable Snake game directly within the "Snake Game" project card or a dedicated section within the card.
+*   **Content:** Keep the text "Something amazing is coming soon here, in the meanwhile, play the Snake game."
+*   **Implementation:** Create the necessary HTML, CSS, and JavaScript files for a basic Snake game. Embed this game directly into the `index.html` within the projects section. The game should be functional and playable on the page.
+
+**III. Relocate and Style Social/Contact Links**
+*   **Move:** Relocate all social and contact links (Email, Upwork, GitHub, LinkedIn, Google Scholar) from the footer.
+*   **Position:** Place them prominently next to the profile picture in the Hero or About section.
+*   **Styling:** Use appropriate SVG or font icons for each link (e.g., Font Awesome or similar free icon library). Ensure they are visually appealing and clickable.
+    *   Email: `mailto:ahmedrashidqazi@gmail.com`
+    *   Upwork: `https://www.upwork.com/freelancers/~0123456789abcdef`
+    *   GitHub: `https://github.com/ahmedrashidqazi` (assuming this is the correct GitHub profile)
+    *   LinkedIn: `https://linkedin.com/in/ahmed-rashid-qazi` (assuming this is the correct LinkedIn profile)
+    *   Google Scholar: `https://scholar.google.com/citations?user=YOUR_ID&hl=en`
+
+**IV. Enhance Publications Section with Modal and New Tab Links**
+*   **PDF Links:** Ensure that all PDF links within the publications section open in a *new tab* (target="_blank").
+*   **Publication Click Behavior:** When a user clicks anywhere on a publication entry (not just the PDF link), a modal dialog should appear.
+*   **Modal Content:** The modal should display:
+    *   The publication's image.
+    *   The full publication name (title).
+    *   Authors.
+    *   Venue (Journal/Conference).
+    *   A prominent button within the modal to "View PDF" that also opens the PDF in a new tab.
+*   **Implementation:** This will likely require JavaScript to handle the modal display and content population dynamically.
+
+**Constraints:**
+*   Work exclusively within the `ahmedrashidqazi.github.io` directory.
+*   Maintain the existing dark-mode aesthetic and overall structural integrity.
+*   Prioritize a clean, modern, and highly functional implementation.
+*   Ensure all new features are responsive across different screen sizes.

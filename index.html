@@ -1030,6 +1030,218 @@
         height: 80px;
       }
     }
+
+    /* ── Snake Game ── */
+    .snake-game-wrapper {
+      margin-top: 1.5rem;
+      background: #0a0f1a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .snake-game-wrapper canvas {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 4px;
+      max-width: 100%;
+    }
+
+    .snake-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .snake-controls button {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .snake-controls button:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    .snake-score {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .snake-mobile-dpad {
+      display: none;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .snake-mobile-dpad {
+        display: grid;
+        grid-template-areas:
+          ". up ."
+          "left . right"
+          ". down .";
+        gap: 0.4rem;
+        justify-content: center;
+        width: fit-content;
+        margin: 0.75rem auto 0;
+      }
+
+      .snake-mobile-dpad button {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        background: var(--bg-light);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--accent);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+
+      .snake-mobile-dpad button:active {
+        background: var(--accent-dim);
+      }
+
+      .dpad-up { grid-area: up; }
+      .dpad-down { grid-area: down; }
+      .dpad-left { grid-area: left; }
+      .dpad-right { grid-area: right; }
+    }
+
+    /* ── Publication Modal ── */
+    .pub-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .pub-modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .pub-modal {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+      animation: slideDown 0.2s ease;
+    }
+
+    .pub-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .pub-modal-close:hover {
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .pub-modal-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+      background: var(--bg);
+    }
+
+    .pub-modal-body {
+      padding: 1.5rem 2rem 2rem;
+      position: relative;
+    }
+
+    .pub-modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .pub-modal-authors {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-modal-authors strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .pub-modal-venue {
+      font-style: italic;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pub-modal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+
+    .pub-modal-btn:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+      color: var(--accent);
+    }
+
+    .pub-item {
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .pub-modal-img {
+        height: 160px;
+      }
+
+      .pub-modal-body {
+        padding: 1rem 1.25rem 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1072,19 +1284,27 @@
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">01.</span> About Me</h2>
     <div class="about-profile reveal">
-      <img src="assets/profile.jpg" alt="Ahmed Qazi" class="about-profile-pic">
+      <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="about-profile-pic">
       <div class="personal-links">
-        <a href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener" title="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Email
         </a>
-        <a href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener" title="Upwork">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Upwork
         </a>
-        <a href="https://scholar.google.com/citations?user=YOUR_ID&hl=en" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
-          Google Scholar
+        <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
+          Scholar
         </a>
       </div>
     </div>
@@ -1232,20 +1452,29 @@
     <h2 class="section-heading reveal"><span class="num">03.</span> Projects</h2>
 
     <!-- Snake Game Project -->
-    <div class="project-card reveal" style="max-width: 500px;">
+    <div class="project-card reveal" style="max-width: 520px;">
       <div class="pc-top">
         <div class="pc-folder">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-        </div>
-        <div class="pc-links">
-          <a href="#snake-game-link" title="Play Snake Game">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
       </div>
       <h3 class="pc-title">Snake Game</h3>
-      <p class="pc-desc">Something amazing is coming soon here. In the meanwhile, play the classic Snake game!</p>
-      <div class="pc-tech">
+      <p class="pc-desc">Something amazing is coming soon here, in the meanwhile, play the Snake game.</p>
+      <div class="snake-game-wrapper">
+        <div class="snake-score" id="snakeScore">Score: 0</div>
+        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        <div class="snake-controls">
+          <button id="snakeStartBtn">Start Game</button>
+          <button id="snakeResetBtn">Reset</button>
+        </div>
+        <div class="snake-mobile-dpad">
+          <button class="dpad-up" id="dpadUp">&#9650;</button>
+          <button class="dpad-left" id="dpadLeft">&#9664;</button>
+          <button class="dpad-right" id="dpadRight">&#9654;</button>
+          <button class="dpad-down" id="dpadDown">&#9660;</button>
+        </div>
+      </div>
+      <div class="pc-tech" style="margin-top: 1rem;">
         <span>JavaScript</span><span>·</span><span>HTML5 Canvas</span><span>·</span><span>Game</span>
       </div>
     </div>
@@ -1302,7 +1531,7 @@
           <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
           <div class="pub-venue">Neuro for AI & AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</div>
           <div class="pub-links">
-            <a class="pub-link" href="#">PDF</a>
+            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
           </div>
         </div>
       </div>
@@ -1314,7 +1543,7 @@
           <div class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</div>
           <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
           <div class="pub-links">
-            <a class="pub-link" href="#">PDF</a>
+            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
           </div>
         </div>
       </div>
@@ -1326,7 +1555,7 @@
           <div class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</div>
           <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
           <div class="pub-links">
-            <a class="pub-link" href="#">PDF</a>
+            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
           </div>
         </div>
       </div>
@@ -1376,22 +1605,27 @@
 
 <!-- ═══ Footer ═══ -->
 <footer>
-  <div class="footer-socials">
-    <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener" title="GitHub">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-    </a>
-    <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" rel="noopener" title="LinkedIn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-    </a>
-    <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
-    </a>
-    <a href="mailto:ahmedrashidqazi@gmail.com" title="Email">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    </a>
-  </div>
   <p class="footer-credit">Designed &amp; Built by Ahmed Qazi</p>
 </footer>
+
+<!-- ═══ Publication Modal ═══ -->
+<div class="pub-modal-overlay" id="pubModalOverlay">
+  <div class="pub-modal">
+    <img class="pub-modal-img" id="pubModalImg" src="" alt="">
+    <div class="pub-modal-body">
+      <button class="pub-modal-close" id="pubModalClose" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3 class="pub-modal-title" id="pubModalTitle"></h3>
+      <p class="pub-modal-authors" id="pubModalAuthors"></p>
+      <p class="pub-modal-venue" id="pubModalVenue"></p>
+      <a class="pub-modal-btn" id="pubModalPdfBtn" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View PDF
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ Command Palette Trigger ═══ -->
 <button class="cmd-trigger" id="cmdTrigger" aria-label="Open command palette" title="⌘K / Ctrl+K">
@@ -1594,6 +1828,230 @@
     }
     if (e.key === 'Escape' && cmdOverlay.classList.contains('open')) {
       closeCmd();
+    }
+  });
+
+  // ── Snake Game ──
+  var canvas = document.getElementById('snakeCanvas');
+  var ctx = canvas.getContext('2d');
+  var scoreEl = document.getElementById('snakeScore');
+  var startBtn = document.getElementById('snakeStartBtn');
+  var resetBtn = document.getElementById('snakeResetBtn');
+
+  var gridSize = 20;
+  var tileCount = canvas.width / gridSize;
+  var snake, food, dx, dy, score, gameRunning, gameLoop;
+
+  function initSnake() {
+    snake = [{ x: 10, y: 10 }];
+    food = { x: 15, y: 15 };
+    dx = 0;
+    dy = 0;
+    score = 0;
+    gameRunning = false;
+    scoreEl.textContent = 'Score: 0';
+    if (gameLoop) clearInterval(gameLoop);
+    drawGame();
+  }
+
+  function spawnFood() {
+    food.x = Math.floor(Math.random() * tileCount);
+    food.y = Math.floor(Math.random() * tileCount);
+    for (var i = 0; i < snake.length; i++) {
+      if (snake[i].x === food.x && snake[i].y === food.y) {
+        spawnFood();
+        return;
+      }
+    }
+  }
+
+  function drawGame() {
+    ctx.fillStyle = '#0a0f1a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw grid lines
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
+    ctx.lineWidth = 0.5;
+    for (var i = 0; i < tileCount; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * gridSize, 0);
+      ctx.lineTo(i * gridSize, canvas.height);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(0, i * gridSize);
+      ctx.lineTo(canvas.width, i * gridSize);
+      ctx.stroke();
+    }
+
+    // Draw food
+    ctx.fillStyle = '#ef4444';
+    ctx.shadowColor = '#ef4444';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Draw snake
+    for (var i = 0; i < snake.length; i++) {
+      var alpha = 1 - (i / snake.length) * 0.5;
+      ctx.fillStyle = i === 0 ? '#38BDF8' : 'rgba(56, 189, 248, ' + alpha + ')';
+      ctx.shadowColor = '#38BDF8';
+      ctx.shadowBlur = i === 0 ? 6 : 2;
+      ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
+    }
+    ctx.shadowBlur = 0;
+
+    if (!gameRunning && dx === 0 && dy === 0) {
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+      ctx.font = '14px "Fira Code", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('Press Start or Arrow Keys', canvas.width / 2, canvas.height / 2 + 40);
+    }
+  }
+
+  function updateGame() {
+    var head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+    // Wrap around
+    if (head.x < 0) head.x = tileCount - 1;
+    if (head.x >= tileCount) head.x = 0;
+    if (head.y < 0) head.y = tileCount - 1;
+    if (head.y >= tileCount) head.y = 0;
+
+    // Check self-collision
+    for (var i = 0; i < snake.length; i++) {
+      if (snake[i].x === head.x && snake[i].y === head.y) {
+        gameRunning = false;
+        clearInterval(gameLoop);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ef4444';
+        ctx.font = 'bold 20px "Fira Code", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 10);
+        ctx.fillStyle = '#38BDF8';
+        ctx.font = '14px "Fira Code", monospace';
+        ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 20);
+        ctx.fillText('Press Reset to try again', canvas.width / 2, canvas.height / 2 + 45);
+        startBtn.textContent = 'Start Game';
+        return;
+      }
+    }
+
+    snake.unshift(head);
+
+    if (head.x === food.x && head.y === food.y) {
+      score++;
+      scoreEl.textContent = 'Score: ' + score;
+      spawnFood();
+    } else {
+      snake.pop();
+    }
+
+    drawGame();
+  }
+
+  function startGame() {
+    if (gameRunning) {
+      gameRunning = false;
+      clearInterval(gameLoop);
+      startBtn.textContent = 'Resume';
+      return;
+    }
+    if (dx === 0 && dy === 0) {
+      dx = 1;
+      dy = 0;
+    }
+    gameRunning = true;
+    startBtn.textContent = 'Pause';
+    gameLoop = setInterval(updateGame, 120);
+  }
+
+  function changeDirection(newDx, newDy) {
+    if (newDx === -dx && newDy === -dy) return;
+    dx = newDx;
+    dy = newDy;
+    if (!gameRunning) startGame();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.key) === -1) return;
+    // Only prevent default if snake game area is visible
+    var rect = canvas.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      e.preventDefault();
+    }
+    switch (e.key) {
+      case 'ArrowUp': changeDirection(0, -1); break;
+      case 'ArrowDown': changeDirection(0, 1); break;
+      case 'ArrowLeft': changeDirection(-1, 0); break;
+      case 'ArrowRight': changeDirection(1, 0); break;
+    }
+  });
+
+  startBtn.addEventListener('click', startGame);
+  resetBtn.addEventListener('click', function() {
+    initSnake();
+    startBtn.textContent = 'Start Game';
+  });
+
+  // Mobile D-pad
+  document.getElementById('dpadUp').addEventListener('click', function() { changeDirection(0, -1); });
+  document.getElementById('dpadDown').addEventListener('click', function() { changeDirection(0, 1); });
+  document.getElementById('dpadLeft').addEventListener('click', function() { changeDirection(-1, 0); });
+  document.getElementById('dpadRight').addEventListener('click', function() { changeDirection(1, 0); });
+
+  initSnake();
+
+  // ── Publication Modal ──
+  var pubOverlay = document.getElementById('pubModalOverlay');
+  var pubModalImg = document.getElementById('pubModalImg');
+  var pubModalTitle = document.getElementById('pubModalTitle');
+  var pubModalAuthors = document.getElementById('pubModalAuthors');
+  var pubModalVenue = document.getElementById('pubModalVenue');
+  var pubModalPdfBtn = document.getElementById('pubModalPdfBtn');
+  var pubModalClose = document.getElementById('pubModalClose');
+
+  document.querySelectorAll('.pub-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      // Don't open modal if clicking a PDF/DOI link
+      if (e.target.closest('.pub-link')) return;
+
+      var imgEl = item.querySelector('.pub-image img');
+      var titleEl = item.querySelector('.pub-title');
+      var authorsEl = item.querySelector('.pub-authors');
+      var venueEl = item.querySelector('.pub-venue');
+      var pdfLink = item.querySelector('.pub-link');
+
+      pubModalImg.src = imgEl ? imgEl.src : '';
+      pubModalImg.alt = imgEl ? imgEl.alt : '';
+      pubModalTitle.textContent = titleEl ? titleEl.textContent : '';
+      pubModalAuthors.innerHTML = authorsEl ? authorsEl.innerHTML : '';
+      pubModalVenue.textContent = venueEl ? venueEl.textContent : '';
+      pubModalPdfBtn.href = pdfLink ? pdfLink.href : '#';
+
+      pubOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  pubModalClose.addEventListener('click', function() {
+    pubOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  pubOverlay.addEventListener('click', function(e) {
+    if (e.target === pubOverlay) {
+      pubOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && pubOverlay.classList.contains('open')) {
+      pubOverlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
   });
 
