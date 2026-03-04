@@ -441,19 +441,17 @@
       }
     }
 
-    #engineering .coming-soon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 300px;
-      border: 1px dashed var(--border);
-      border-radius: 10px;
-      background: #fafafa;
-      color: #999;
-      font-size: 1rem;
+    /* ---- Snake Game ---- */
+    .snake-flavour {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: #FFB300;
+      opacity: 0.75;
+      margin-bottom: 1.5rem;
+      line-height: 2;
+      letter-spacing: 0.02em;
     }
 
-    /* ---- Snake Game ---- */
     .snake-wrapper {
       max-width: 900px;
       margin: 0 auto;
@@ -464,10 +462,19 @@
       border-radius: 8px;
       overflow: hidden;
       line-height: 0;
+      border: 2px solid rgba(255,179,0,0.4);
       box-shadow:
-        0 0 0 1px rgba(255,179,0,0.15),
-        0 0 20px rgba(255,179,0,0.12),
-        0 0 50px rgba(255,179,0,0.06);
+        0 0 18px rgba(255,179,0,0.6),
+        0 0 50px rgba(255,179,0,0.28),
+        0 0 100px rgba(255,179,0,0.1);
+    }
+
+    .snake-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
     }
 
     #snakeCanvas {
@@ -801,9 +808,7 @@ body.modal-open{overflow:hidden;}
 <div id="engineering" class="page">
   <div class="page-container">
     <h2 class="page-title">Engineering</h2>
-    <p class="body-text page-intro">
-      While the builds are loading — play a game.
-    </p>
+    <p class="snake-flavour">While the builds are loading — play a game.</p>
     <div class="snake-wrapper">
       <div class="snake-container">
         <canvas id="snakeCanvas" width="900" height="450"></canvas>
@@ -996,7 +1001,7 @@ body.modal-open{overflow:hidden;}
   }
 
   function draw() {
-    ctx.fillStyle = '#0d0d0d';
+    ctx.fillStyle = '#0d0800';
     ctx.fillRect(0, 0, W, H);
 
     // Faint grid
@@ -1007,8 +1012,8 @@ body.modal-open{overflow:hidden;}
 
     if (state === 'idle') {
       txt('SNAKE', W/2, H/2-36, 22);
-      txt('PRESS ENTER TO START', W/2, H/2+8, 9);
-      txt('OR TAP TO START', W/2, H/2+28, 9);
+      txt('WASD  /  ARROW KEYS', W/2, H/2+8, 8);
+      txt('PRESS SPACE OR TAP TO START', W/2, H/2+30, 7);
       return;
     }
 
@@ -1016,7 +1021,9 @@ body.modal-open{overflow:hidden;}
     for (let i=0; i<snake.length; i++) {
       const alpha = i===0 ? 1 : Math.max(0.3, 1-(i/snake.length)*0.65);
       ctx.fillStyle = 'rgba(255,179,0,' + alpha + ')';
+      if (i === 0) { ctx.shadowColor = AMBER; ctx.shadowBlur = 14; }
       ctx.fillRect(snake[i].x*CELL+1, snake[i].y*CELL+1, CELL-2, CELL-2);
+      if (i === 0) ctx.shadowBlur = 0;
     }
 
     // Food with glow
@@ -1037,8 +1044,7 @@ body.modal-open{overflow:hidden;}
       ctx.fillRect(0, 0, W, H);
       txt('GAME OVER', W/2, H/2-40, 20);
       txt('SCORE: ' + score, W/2, H/2+4, 11);
-      txt('PRESS ENTER TO RESTART', W/2, H/2+44, 9);
-      txt('OR TAP TO RESTART', W/2, H/2+64, 9);
+      txt('PRESS SPACE OR TAP TO RETRY', W/2, H/2+44, 7);
     }
   }
 
@@ -1050,8 +1056,8 @@ body.modal-open{overflow:hidden;}
   // Keyboard controls
   document.addEventListener('keydown', function(e) {
     if (!document.getElementById('engineering').classList.contains('active')) return;
-    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) e.preventDefault();
-    if (e.key === 'Enter') { if (state !== 'playing') { startGame(); return; } }
+    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
+    if (e.key === 'Enter' || e.key === ' ') { if (state !== 'playing') { startGame(); return; } }
     if (state !== 'playing') return;
     switch (e.key) {
       case 'ArrowUp':  case 'w': case 'W': if (dir.y !==  1) nextDir = {x:0,y:-1}; break;
