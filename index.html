@@ -995,9 +995,11 @@ body.modal-open{overflow:hidden;}
   function txt(str, x, y, size) {
     ctx.font = size + 'px "Press Start 2P"';
     ctx.fillStyle = AMBER;
+    ctx.shadowColor = AMBER; ctx.shadowBlur = 12;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(str, x, y);
+    ctx.shadowBlur = 0;
   }
 
   function draw() {
@@ -1013,7 +1015,7 @@ body.modal-open{overflow:hidden;}
     if (state === 'idle') {
       txt('SNAKE', W/2, H/2-36, 22);
       txt('WASD  /  ARROW KEYS', W/2, H/2+8, 8);
-      txt('PRESS SPACE OR TAP TO START', W/2, H/2+30, 7);
+      txt('ENTER / SPACE / TAP TO START', W/2, H/2+30, 7);
       return;
     }
 
@@ -1033,18 +1035,20 @@ body.modal-open{overflow:hidden;}
     ctx.restore();
 
     // Score (top-left)
+    ctx.shadowColor = AMBER; ctx.shadowBlur = 8;
     ctx.fillStyle = AMBER;
     ctx.font = '10px "Press Start 2P"';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
     ctx.fillText('SCORE: ' + score, 12, 12);
+    ctx.shadowBlur = 0;
 
     if (state === 'dead') {
       ctx.fillStyle = 'rgba(0,0,0,0.75)';
       ctx.fillRect(0, 0, W, H);
       txt('GAME OVER', W/2, H/2-40, 20);
       txt('SCORE: ' + score, W/2, H/2+4, 11);
-      txt('PRESS SPACE OR TAP TO RETRY', W/2, H/2+44, 7);
+      txt('ENTER / SPACE / TAP TO RETRY', W/2, H/2+44, 7);
     }
   }
 
