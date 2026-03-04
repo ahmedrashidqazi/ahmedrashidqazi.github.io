@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ahmed Qazi - AI Researcher & Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,16 +13,18 @@
     }
 
     :root {
-      --bg: #0B0B0F;
-      --surface: #141418;
-      --surface-hover: #1A1A20;
-      --primary: #EBEBEF;
-      --text-secondary: #8A8A95;
-      --accent: #6B8AFF;
-      --accent-dim: rgba(107, 138, 255, 0.12);
-      --accent-glow: rgba(107, 138, 255, 0.25);
-      --border: rgba(255, 255, 255, 0.07);
-      --border-hover: rgba(255, 255, 255, 0.12);
+      --bg: #101010;
+      --surface: #1a1a1a;
+      --surface-hover: #222222;
+      --primary: #EAEAEA;
+      --text-secondary: #9a9a9a;
+      --accent: #00FFFF;
+      --accent-dim: rgba(0, 255, 255, 0.1);
+      --accent-glow: rgba(0, 255, 255, 0.3);
+      --magenta: #FF00FF;
+      --magenta-dim: rgba(255, 0, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.2);
+      --border-hover: rgba(255, 255, 255, 0.35);
     }
 
     html {
@@ -30,12 +32,115 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'Roboto', sans-serif;
+      font-weight: 300;
       color: var(--primary);
       background: var(--bg);
-      line-height: 1.7;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Global scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.06) 2px,
+        rgba(0, 0, 0, 0.06) 4px
+      );
+      animation: scanlineScroll 8s linear infinite;
+    }
+
+    @keyframes scanlineScroll {
+      from { background-position-y: 0; }
+      to { background-position-y: 100px; }
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    strong, b {
+      font-weight: 500;
+    }
+
+    /* Glitch heading effect */
+    .glitch-heading {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch-heading::before,
+    .glitch-heading::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .glitch-heading::before {
+      color: var(--accent);
+      z-index: -1;
+    }
+
+    .glitch-heading::after {
+      color: var(--magenta);
+      z-index: -1;
+    }
+
+    .glitch-heading:hover::before {
+      opacity: 0.8;
+      animation: glitchBefore 0.3s ease infinite;
+    }
+
+    .glitch-heading:hover::after {
+      opacity: 0.8;
+      animation: glitchAfter 0.3s ease infinite;
+    }
+
+    @keyframes glitchBefore {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 2px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, -2px); }
+      80% { transform: translate(3px, 1px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes glitchAfter {
+      0% { transform: translate(0); }
+      20% { transform: translate(3px, -2px); }
+      40% { transform: translate(-2px, 1px); }
+      60% { transform: translate(1px, 2px); }
+      80% { transform: translate(-3px, -1px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Navigation */
@@ -43,15 +148,15 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(11, 11, 15, 0.82);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      background: rgba(16, 16, 16, 0.75);
+      backdrop-filter: blur(10px) saturate(1.5);
+      -webkit-backdrop-filter: blur(10px) saturate(1.5);
       z-index: 1000;
       border-bottom: 1px solid var(--border);
     }
 
     .nav-container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0.9rem 2rem;
       display: flex;
@@ -60,16 +165,20 @@
     }
 
     .nav-logo {
+      font-family: 'Fira Code', monospace;
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 500;
       cursor: pointer;
-      letter-spacing: -0.02em;
-      color: var(--primary);
-      transition: color 0.2s;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-transform: uppercase;
+      transition: color 0.2s, text-shadow 0.2s;
+      text-shadow: 0 0 8px var(--accent-glow);
     }
 
     .nav-logo:hover {
-      color: var(--accent);
+      color: var(--magenta);
+      text-shadow: 0 0 12px var(--magenta-dim);
     }
 
     .nav-menu {
@@ -79,24 +188,31 @@
     }
 
     .nav-menu a {
+      font-family: 'Fira Code', monospace;
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 400;
       cursor: pointer;
-      transition: color 0.25s, background 0.25s;
+      transition: color 0.25s, background 0.25s, transform 0.15s;
       padding: 0.45rem 0.9rem;
-      border-radius: 8px;
+      border-radius: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
     }
 
     .nav-menu a:hover {
-      color: var(--primary);
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--bg);
+      background: var(--accent);
+      transform: translate(2px, 2px);
     }
 
     .nav-menu a.active {
       color: var(--accent);
+      border-color: var(--accent);
       background: var(--accent-dim);
+      text-shadow: 0 0 6px var(--accent-glow);
     }
 
     .mobile-menu {
@@ -112,8 +228,8 @@
     .mobile-menu span {
       width: 20px;
       height: 1.5px;
-      background: var(--primary);
-      border-radius: 2px;
+      background: var(--accent);
+      border-radius: 0;
       transition: transform 0.2s, opacity 0.2s;
     }
 
@@ -135,26 +251,25 @@
     }
 
     .page-container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 3rem 2rem;
     }
 
-    /* Home Layout */
+    /* Home Layout - Asymmetrical */
     .home-grid {
       display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 4rem;
-      max-width: 1100px;
+      grid-template-columns: 280px 1fr;
+      gap: 5rem;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
     }
 
     .profile-section {
       position: sticky;
       top: 90px;
       height: fit-content;
-      text-align: center;
     }
 
     .content-section {
@@ -164,7 +279,7 @@
     }
 
     .content-section::-webkit-scrollbar {
-      width: 4px;
+      width: 3px;
     }
 
     .content-section::-webkit-scrollbar-track {
@@ -172,74 +287,94 @@
     }
 
     .content-section::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+      background: var(--accent-dim);
     }
 
     .content-section::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.18);
+      background: var(--accent-glow);
     }
 
     /* Profile */
     .profile-image {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+      width: 160px;
+      height: 160px;
       overflow: hidden;
-      margin: 0 auto 1.25rem;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      box-shadow: 0 0 0 6px rgba(107, 138, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.4);
+      margin: 0 0 1.5rem 0;
+      position: relative;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(0, 255, 255, 0.05);
       transition: box-shadow 0.4s;
     }
 
+    .profile-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 255, 255, 0.12);
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
     .profile-image:hover {
-      box-shadow: 0 0 0 6px rgba(107, 138, 255, 0.15), 0 8px 40px rgba(107, 138, 255, 0.1);
+      box-shadow: 0 0 30px var(--accent-glow), 0 0 80px rgba(0, 255, 255, 0.1);
     }
 
     .profile-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(1) contrast(1.2) brightness(0.8);
+      transition: filter 0.4s;
+    }
+
+    .profile-image:hover img {
+      filter: grayscale(0.5) contrast(1.1) brightness(0.9);
     }
 
     .name {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 2rem;
+      font-weight: 500;
       margin-bottom: 0.3rem;
-      letter-spacing: -0.03em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      line-height: 1.2;
     }
 
     .subtitle {
-      color: var(--text-secondary);
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
+      font-family: 'Fira Code', monospace;
+      color: var(--accent);
+      font-weight: 400;
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 0 6px var(--accent-glow);
     }
 
     .social-links {
       display: flex;
-      justify-content: center;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .social-links a {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border: 1px solid var(--border);
-      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: var(--surface);
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
     }
 
     .social-links a:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-hover);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      transform: translate(2px, 2px);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+      background: var(--accent-dim);
     }
 
     .social-links a img {
@@ -248,22 +383,34 @@
 
     /* Content Sections */
     .section {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
 
     .section-title {
+      font-family: 'Fira Code', monospace;
       font-size: 0.7rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 3px;
       color: var(--accent);
+      text-shadow: 0 0 6px var(--accent-glow);
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .section-title::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--magenta);
     }
 
     .body-text {
       color: var(--text-secondary);
       font-size: 0.94rem;
-      line-height: 1.75;
+      line-height: 1.7;
+      font-weight: 300;
     }
 
     /* Education */
@@ -278,15 +425,15 @@
       align-items: center;
       gap: 1rem;
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 1rem 1.1rem;
       background: var(--surface);
-      transition: border-color 0.25s, background 0.25s;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.3s;
     }
 
     .edu-card:hover {
-      border-color: var(--border-hover);
+      border-color: var(--accent);
       background: var(--surface-hover);
+      box-shadow: 0 0 15px var(--accent-glow);
     }
 
     .edu-logo {
@@ -294,14 +441,15 @@
       height: 48px;
       object-fit: contain;
       flex-shrink: 0;
-      border-radius: 8px;
     }
 
     .edu-text h4 {
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      font-weight: 500;
       margin-bottom: 0.2rem;
       color: var(--primary);
+      letter-spacing: 0.5px;
     }
 
     .edu-text p {
@@ -313,7 +461,7 @@
     /* Experience Timeline */
     .timeline {
       position: relative;
-      padding-left: 1.75rem;
+      padding-left: 2rem;
     }
 
     .timeline::before {
@@ -323,12 +471,19 @@
       top: 8px;
       bottom: 16px;
       width: 1px;
-      background: linear-gradient(to bottom, var(--accent) 0%, rgba(107, 138, 255, 0.15) 100%);
+      background: linear-gradient(to bottom, var(--accent) 0%, rgba(0, 255, 255, 0.1) 100%);
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 1.2s ease-out;
+    }
+
+    .timeline.timeline-drawn::before {
+      transform: scaleY(1);
     }
 
     .timeline-item {
       position: relative;
-      padding-bottom: 1.75rem;
+      padding-bottom: 2rem;
     }
 
     .timeline-item:last-child {
@@ -338,20 +493,21 @@
     .timeline-item::before {
       content: "";
       position: absolute;
-      left: -1.25rem;
+      left: -1.5rem;
       top: 7px;
       width: 8px;
       height: 8px;
-      border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent-dim);
+      box-shadow: 0 0 8px var(--accent-glow), 0 0 0 3px var(--bg), 0 0 0 4px var(--accent-dim);
     }
 
     .timeline-item h4 {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      font-weight: 500;
       margin-bottom: 0.15rem;
       color: var(--primary);
+      letter-spacing: 0.5px;
     }
 
     .timeline-item .place {
@@ -361,11 +517,12 @@
     }
 
     .timeline-item .when {
-      font-size: 0.78rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
       color: var(--accent);
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-      opacity: 0.85;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+      text-shadow: 0 0 4px var(--accent-glow);
     }
 
     .timeline-item p {
@@ -376,56 +533,61 @@
 
     /* Other Pages */
     .page-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.03em;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
     }
 
     .page-intro {
       max-width: 720px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
+    /* Project/Research Cards */
     .card {
       border: 1px solid var(--border);
-      border-radius: 14px;
       background: var(--surface);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
       display: flex;
       flex-direction: column;
       cursor: default;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(107, 138, 255, 0.08);
-      border-color: var(--border-hover);
+      transform: perspective(1000px) rotateY(-5deg);
+      box-shadow: 0 0 25px var(--accent-glow), 0 16px 48px rgba(0, 0, 0, 0.5);
+      border-color: var(--accent);
     }
 
     .card-image {
       width: 100%;
       aspect-ratio: 16/9;
       overflow: hidden;
-      background: #0d0d10;
+      background: #0d0d0d;
     }
 
     .card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(0.85);
     }
 
     .card:hover .card-image img {
-      transform: scale(1.03);
+      transform: scale(1.05);
+      filter: brightness(1);
     }
 
     .card-body {
@@ -434,17 +596,30 @@
     }
 
     .card-title {
-      font-size: 1rem;
-      font-weight: 600;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
       margin-bottom: 0.5rem;
-      line-height: 1.45;
-      letter-spacing: -0.01em;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      transition: color 0.3s;
+    }
+
+    .card:hover .card-title {
+      color: var(--accent);
     }
 
     .card-text {
       color: var(--text-secondary);
       font-size: 0.85rem;
       line-height: 1.65;
+      opacity: 0.6;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover .card-text {
+      opacity: 1;
     }
 
     /* Research specific */
@@ -455,13 +630,13 @@
     }
 
     #research .card-title {
-      font-size: 1.02rem;
-      font-weight: 700;
+      font-size: 0.92rem;
+      font-weight: 500;
     }
 
     #research .card-text strong {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 500;
     }
 
     /* Mobile */
@@ -474,6 +649,23 @@
 
       .profile-section {
         position: static;
+        text-align: center;
+      }
+
+      .profile-image {
+        margin: 0 auto 1.5rem;
+      }
+
+      .name {
+        text-align: center;
+      }
+
+      .subtitle {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
       }
 
       .content-section {
@@ -487,9 +679,9 @@
         top: 100%;
         left: 0;
         right: 0;
-        background: rgba(11, 11, 15, 0.96);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: rgba(16, 16, 16, 0.96);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
         padding: 0.75rem 1rem 1rem;
         border-bottom: 1px solid var(--border);
@@ -534,13 +726,17 @@
       .home-grid {
         padding: 1.5rem 1.25rem;
       }
+
+      .name {
+        font-size: 1.6rem;
+      }
     }
 
     /* ---- Snake Game ---- */
     .snake-flavour {
       font-family: 'Press Start 2P', monospace;
       font-size: 0.6rem;
-      color: #cc00ff;
+      color: var(--magenta);
       opacity: 0.75;
       margin-bottom: 1.5rem;
       line-height: 2;
@@ -554,14 +750,29 @@
 
     .snake-container {
       position: relative;
-      border-radius: 12px;
       overflow: hidden;
       line-height: 0;
-      border: 1px solid rgba(204, 0, 255, 0.25);
+      border: 3px solid var(--accent);
       box-shadow:
-        0 0 20px rgba(204, 0, 255, 0.15),
-        0 0 60px rgba(204, 0, 255, 0.06),
+        0 0 20px var(--accent-glow),
+        0 0 60px rgba(0, 255, 255, 0.08),
+        inset 0 0 30px rgba(0, 0, 0, 0.5),
         0 4px 32px rgba(0, 0, 0, 0.5);
+      /* CRT monitor bezel */
+      outline: 6px solid #1a1a1a;
+      outline-offset: 0;
+    }
+
+    .snake-container::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .snake-container::after {
@@ -617,16 +828,14 @@
       width: 52px;
       height: 52px;
       background: var(--surface);
-      border-radius: 4px;
     }
 
     .dpad-btn {
       width: 52px;
       height: 52px;
       background: var(--surface);
-      color: #cc00ff;
-      border: 1px solid rgba(204, 0, 255, 0.2);
-      border-radius: 8px;
+      color: var(--accent);
+      border: 1px solid rgba(0, 255, 255, 0.3);
       font-size: 1.1rem;
       cursor: pointer;
       display: flex;
@@ -634,12 +843,13 @@
       justify-content: center;
       user-select: none;
       -webkit-user-select: none;
-      transition: background 0.1s;
+      transition: background 0.1s, box-shadow 0.1s;
       touch-action: manipulation;
     }
 
     .dpad-btn:active {
-      background: rgba(204, 0, 255, 0.15);
+      background: var(--accent-dim);
+      box-shadow: 0 0 10px var(--accent-glow);
     }
 
     @media (max-width: 900px) {
@@ -653,9 +863,9 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 1200;
       padding: 1rem;
     }
@@ -674,9 +884,9 @@
       max-width: 920px;
       width: 100%;
       background: var(--surface);
-      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border);
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow), 0 24px 80px rgba(0, 0, 0, 0.7);
       display: grid;
       grid-template-columns: 1fr;
       gap: 0;
@@ -706,11 +916,13 @@
     }
 
     .modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 0.4rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
       color: var(--primary);
+      letter-spacing: 0.5px;
     }
 
     .modal-text {
@@ -722,7 +934,7 @@
 
     .modal-text strong {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .modal-actions {
@@ -732,22 +944,26 @@
     }
 
     .open-btn {
+      font-family: 'Fira Code', monospace;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.6rem 1.15rem;
-      border-radius: 10px;
       background: var(--accent);
-      color: #0B0B0F;
+      color: var(--bg);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.88rem;
-      transition: opacity 0.2s, transform 0.2s;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      border: none;
     }
 
     .open-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+      background: var(--magenta);
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 15px var(--magenta-dim);
     }
 
     .modal-close {
@@ -757,20 +973,20 @@
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-secondary);
-      border-radius: 999px;
       width: 34px;
       height: 34px;
       display: grid;
       place-items: center;
       cursor: pointer;
       font-size: 16px;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
       z-index: 2;
     }
 
     .modal-close:hover {
-      background: var(--surface-hover);
-      color: var(--primary);
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
     }
 
     body.modal-open {
@@ -780,6 +996,12 @@
     @media (min-width: 860px) {
       .modal-dialog { grid-template-columns: 1.1fr 0.9fr; }
       .modal-body { padding: 1.5rem 1.75rem; }
+    }
+
+    /* Selection color */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
     }
   </style>
 </head>
@@ -828,7 +1050,7 @@
       <div class="profile-image">
         <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
       </div>
-      <div class="name">Ahmed Qazi</div>
+      <div class="name glitch-heading" data-text="Ahmed Qazi">Ahmed Qazi</div>
       <div class="subtitle">AI Researcher & Engineer</div>
       <div class="social-links">
         <a href="mailto:ahmedrashidqazi@gmail.com" title="Email">
@@ -847,7 +1069,7 @@
     </aside>
 
     <main class="content-section">
-      <section class="section">
+      <section class="section reveal">
         <div class="section-title">About</div>
         <p class="body-text">
           I work at the intersection of neuroscience and AI, with publications at top journals and conferences.
@@ -858,7 +1080,7 @@
         </p>
       </section>
 
-      <section class="section">
+      <section class="section reveal">
         <div class="section-title">Education</div>
         <div class="education-grid">
           <div class="edu-card">
@@ -878,9 +1100,9 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section reveal">
         <div class="section-title">Experience</div>
-        <div class="timeline">
+        <div class="timeline" id="experienceTimeline">
           <div class="timeline-item">
             <h4>Senior AI Engineer</h4>
             <div class="place">Osmium Labs</div>
@@ -922,7 +1144,7 @@
 <!-- Research -->
 <div id="research" class="page">
   <div class="page-container">
-    <h2 class="page-title">Research</h2>
+    <h2 class="page-title glitch-heading" data-text="Research">Research</h2>
     <p class="body-text page-intro">
       My research explores the intersection of neuroscience and artificial intelligence, with a focus on
       biologically-inspired architectures, computer vision for neuroscience, and multimodal AI systems.
@@ -930,7 +1152,7 @@
     </p>
 
     <div class="grid">
-      <article class="card" data-link="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/neuron.jpg" alt="" loading="lazy">
         </div>
@@ -940,7 +1162,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/seganyneuron.png" alt="" loading="lazy">
         </div>
@@ -950,7 +1172,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="https://arxiv.org/pdf/2505.06886" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06886" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/m2m.png" alt="" loading="lazy">
         </div>
@@ -960,7 +1182,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/viT_paper.png" alt="" loading="lazy">
         </div>
@@ -970,7 +1192,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/exeraide.png" alt="" loading="lazy">
         </div>
@@ -980,7 +1202,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="#" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/animalformer.png" alt="" loading="lazy">
         </div>
@@ -990,7 +1212,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="https://arxiv.org/pdf/2505.06881" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06881" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/neurn.png" alt="" loading="lazy">
         </div>
@@ -1000,7 +1222,7 @@
         </div>
       </article>
 
-      <article class="card" data-link="https://arxiv.org/pdf/2505.06894" role="button" tabindex="0" aria-label="Open paper preview">
+      <article class="card reveal" data-link="https://arxiv.org/pdf/2505.06894" role="button" tabindex="0" aria-label="Open paper preview">
         <div class="card-image">
           <img src="assets/neugen.png" alt="" loading="lazy">
         </div>
@@ -1016,7 +1238,7 @@
 <!-- Engineering -->
 <div id="engineering" class="page">
   <div class="page-container">
-    <h2 class="page-title">Engineering</h2>
+    <h2 class="page-title glitch-heading" data-text="Engineering">Engineering</h2>
     <p class="snake-flavour">While the builds are loading — play a game.</p>
     <div class="snake-wrapper">
       <div class="snake-container">
@@ -1043,14 +1265,14 @@
 <!-- Side Quests -->
 <div id="sidequests" class="page">
   <div class="page-container">
-    <h2 class="page-title">Side Quests</h2>
+    <h2 class="page-title glitch-heading" data-text="Side Quests">Side Quests</h2>
     <p class="body-text page-intro">
       Here you can find some of my side quests — moments outside research and code. I'm a bit of an alpine nerd at
       heart, chasing summits, quiet lakes - basically the occasional trip that reminds me how small (and big) the
       world can feel.
     </p>
     <div class="grid">
-      <article class="card">
+      <article class="card reveal">
         <div class="card-image">
           <img src="assets/kutwal-lake-haramosh.png" alt="Kutwal Lake">
         </div>
@@ -1060,7 +1282,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card reveal">
         <div class="card-image">
           <img src="assets/gondogoro-peak.jpeg" alt="Gondogoro Peak">
         </div>
@@ -1070,7 +1292,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card reveal">
         <div class="card-image">
           <img src="assets/lupke-la.jpg" alt="Lupke La">
         </div>
@@ -1098,11 +1320,78 @@
     if (window.innerWidth <= 980) {
       document.getElementById('navMenu').classList.remove('active');
     }
+
+    // Re-observe reveal elements for the new page
+    setTimeout(function() {
+      document.querySelectorAll('#' + id + ' .reveal:not(.visible)').forEach(function(el) {
+        revealObserver.observe(el);
+      });
+      // Trigger timeline draw if on home page
+      if (id === 'home') {
+        var tl = document.getElementById('experienceTimeline');
+        if (tl) timelineObserver.observe(tl);
+      }
+    }, 100);
   }
 
   document.getElementById('mobileMenu').addEventListener('click', () => {
     document.getElementById('navMenu').classList.toggle('active');
   });
+
+  // ---- Intersection Observer: Scroll-driven reveal ----
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // ---- Intersection Observer: Timeline draw ----
+  var timelineObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('timeline-drawn');
+        timelineObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  var timeline = document.getElementById('experienceTimeline');
+  if (timeline) timelineObserver.observe(timeline);
+
+  // Also observe within scrollable content-section
+  var contentSection = document.querySelector('.content-section');
+  if (contentSection) {
+    var contentRevealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          contentRevealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, root: contentSection });
+
+    contentSection.querySelectorAll('.reveal').forEach(function(el) {
+      contentRevealObserver.observe(el);
+    });
+
+    var contentTimelineObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('timeline-drawn');
+          contentTimelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, root: contentSection });
+
+    if (timeline) contentTimelineObserver.observe(timeline);
+  }
 
   // ---- Research card -> modal preview ----
 (function(){
@@ -1125,14 +1414,11 @@
   function closeModal(){
     modal.classList.remove('show');
     document.body.classList.remove('modal-open');
-    // stop any image loading to save memory if needed
-    // imgEl.src = '';
   }
 
   // Click cards
   document.querySelectorAll('#research .card').forEach(card=>{
     card.addEventListener('click', (e)=>{
-      // Ignore clicks on the "Open paper" button if any gets added inside a card later
       if (e.target.closest('a')) return;
       const src = card.querySelector('.card-image img')?.getAttribute('src');
       const title = card.querySelector('.card-title')?.innerHTML || '';
@@ -1140,7 +1426,6 @@
       const link = card.getAttribute('data-link') || card.querySelector('a')?.href || '#';
       openModal({src, title, details, link});
     });
-    // keyboard accessibility
     card.addEventListener('keydown',(e)=>{
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
@@ -1149,7 +1434,6 @@
     });
   });
 
-  // Close handlers
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });

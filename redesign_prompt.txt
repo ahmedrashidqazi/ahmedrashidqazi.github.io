@@ -1,45 +1,64 @@
-You are an expert web designer and front-end developer. Your task is to redesign a personal portfolio website for an AI Researcher & Engineer. The goal is to elevate the existing site to a "premium," modern, and highly professional aesthetic, while strictly preserving all its content and functionality.
+**Subject: Comprehensive Redesign of `index.html` - Retro-Futuristic Glitch Art Theme**
 
-Your final output must be a single, complete `index.html` file containing the redesigned HTML, CSS, and JavaScript.
+**Objective:**
+Your task is to perform a significant visual and interactive redesign of the provided `index.html` file. You must transform its aesthetic from a standard portfolio into a modern, engaging, and memorable "Retro-Futuristic Glitch Art" experience.
 
-**Core Requirements (Non-Negotiable):**
+**Strict Constraints (Must be followed):**
+1.  **Preserve All Content:** All existing text, image paths (`src` attributes), and link destinations (`href` attributes) within the HTML must remain unchanged. You may restructure the HTML elements for layout purposes, but the content itself must be preserved.
+2.  **Preserve Functionality:** The single-page application (SPA) navigation logic, the research modal functionality, and the Snake Game JavaScript must remain fully functional.
+3.  **No External Files:** All CSS styles must be contained within the `<style>` tag in the `<head>` of the `index.html` file. Do not create external CSS files. Any new JavaScript for animations should be placed in a `<script>` tag at the end of the `<body>`.
+4.  **Maintain Responsiveness:** The new design must be fully responsive and usable on modern mobile devices.
+5.  **Output:** Your final output should be the single, complete, modified `index.html` file.
 
-1.  **Preserve All Content:** All text, including personal information, section titles, paragraphs, and card details, must remain unchanged.
-2.  **Preserve All Assets:** All links to images (`assets/*.jpg`, etc.), external social icons, and web fonts must be kept.
-3.  **Preserve All Structure & Functionality:**
-    *   The single-page application (SPA) navigation that shows/hides sections (`home`, `research`, `engineering`, `sidequests`) must continue to work exactly as it does now.
-    *   The research paper modal (which appears when a research card is clicked) must remain fully functional.
-    *   The Snake game on the "Engineering" page, including all its JavaScript logic, canvas rendering, and controls (keyboard and mobile D-pad), must be perfectly preserved and playable.
+---
 
-**Aesthetic & Design Direction:**
+### **Design Directives: Retro-Futuristic Glitch Art**
 
-Your redesign should focus on the following modern design principles:
+**1. Overall Theme & Atmosphere:**
+-   **Concept:** A dark-themed, retro-futuristic interface reminiscent of old CRT monitors, cyberpunk aesthetics, and digital glitch art. The feeling should be clean and modern, but with a distinct, "glitchy" personality.
+-   **Visuals:** Think scanlines, subtle chromatic aberration, and sharp geometric lines combined with modern typography and layout.
 
-*   **Overall Vibe:** Aim for a clean, sophisticated, and minimalist aesthetic that is professional and trustworthy. The design should feel intelligent and sharp, suitable for someone in the AI research field. Avoid anything overly flashy or distracting.
-*   **Color Palette:** Introduce a more sophisticated color palette. Consider a "dark mode by default" or a refined light mode.
-    *   **Suggestion:** Use a palette with a soft black or dark charcoal background (e.g., `#111111`), off-white or light gray text (e.g., `#EAEAEA`), and a single, professional accent color for links, highlights, and key elements (e.g., a muted blue, a sophisticated green, or a warm gold). This will create a high-contrast, premium feel.
-*   **Typography:**
-    *   Retain the use of a modern sans-serif font like 'Inter' but refine its application.
-    *   Establish a clear and consistent typographic hierarchy with distinct sizes and weights for headings (h1, h2, h3), body text, and metadata.
-    *   Ensure all text is highly legible with appropriate line height and spacing.
-*   **Layout and Whitespace:**
-    *   Use whitespace generously to create a clean, uncluttered, and breathable layout.
-    *   While the current layout is functional, consider subtle refinements. For the home page, perhaps a more integrated layout than the rigid sticky sidebar. For the card grids, ensure consistent and balanced spacing.
-*   **Subtle Animations & Transitions:**
-    *   Enhance the user experience with smooth, non-intrusive animations.
-    *   **Examples:**
-        *   A gentle fade-in effect for sections or cards as they are scrolled into view.
-        *   A smooth cross-fade transition between pages instead of an abrupt show/hide.
-        *   Refined hover effects on cards and buttons (e.g., a subtle lift, a soft glow, or a gentle background color change).
-*   **Component Styling:**
-    *   **Cards (Research, Side Quests):** Give the cards a modern look. This could involve using cleaner borders (or no borders), subtle box shadows, or a sleek background color. Improve the layout of text within the cards.
-    *   **Experience Timeline:** Redesign the timeline to be more visually engaging and modern.
-    *   **Snake Game:** The game itself should retain its retro pixel aesthetic. However, the container (`.snake-wrapper`, `.snake-container`) should be styled to seamlessly integrate with the new, modern design of the page.
-    *   **Modal:** The pop-up modal for research papers should be restyled to match the new, premium theme (colors, fonts, buttons).
+**2. Color Palette:**
+-   **Background:** A very dark charcoal, almost black (`#101010`).
+-   **Primary Text:** A slightly off-white (`#EAEAEA`) for readability.
+-   **Accent/Highlight Color:** A vibrant, neon cyan (`#00FFFF`). Use this for links, buttons, active navigation items, and key headings.
+-   **Secondary Accent:** A neon magenta (`#FF00FF`). Use this for secondary highlights or hover effects to create a dynamic glitch effect.
+-   **Borders/Lines:** A semi-transparent white (`rgba(255, 255, 255, 0.2)`).
 
-**Technical Implementation:**
+**3. Typography:**
+-   **Headings (`h1`, `h2`, `h3`):**
+    -   Font Family: `'Fira Code', 'Courier New', monospace`.
+    -   Weight: `500`.
+    -   Letter Spacing: `1.5px`.
+    -   Transform: `uppercase`.
+-   **Body Text (`p`, `li`, etc.):**
+    -   Font Family: `'Inter', 'Roboto', sans-serif`.
+    -   Weight: `300` for standard text, `500` for bold/strong.
+    -   Line Height: `1.6`.
+-   **Navigation/Links:**
+    -   Font Family: `'Fira Code', monospace`.
+    -   Weight: `400`.
 
-*   **Code Structure:** All CSS styles should be contained within a single `<style>` block in the `<head>` of the HTML file. Do not use inline `style="..."` attributes. The existing JavaScript should be kept within its `<script>` tag at the end of the body.
-*   **Responsiveness:** The website must remain fully responsive and look polished on all screen sizes, from mobile to desktop.
+**4. Layout & Structure:**
+-   **Asymmetrical Grid:** Reorganize the page sections into a more dynamic, asymmetrical layout. Avoid the standard single-column, centered approach. For example, the profile image could be on the left, with the name/title overlapping it slightly and the "About" section to the right.
+-   **Negative Space:** Use generous negative space to let elements breathe and create a clean, uncluttered feel despite the "glitchy" effects.
+-   **Visual Hierarchy:** Establish a clear visual hierarchy using typography, color, and positioning. The user's name/title should be the most prominent element on load.
 
-Read the `original_index.html` file in the current directory for the existing website content. Your output should be the complete, redesigned `index.html` file.
+**5. Micro-interactions & Animations:**
+-   **Global Scanline Overlay:** Implement a faint, animated scanline effect over the entire page using a pseudo-element (`::after`) on the `body` with a repeating linear gradient and a subtle animation.
+-   **Heading Glitch on Hover:** When a user hovers over a major heading (`h1`, `h2`), apply a "glitch" effect. This can be achieved with CSS using pseudo-elements (`::before`, `::after`) that rapidly shift position with different colors (the neon cyan and magenta).
+-   **Scroll-Driven Animations (Intersection Observer):** As the user scrolls, fade in and slightly slide up each section (`<section>`) as it enters the viewport. Use the Intersection Observer API for performance.
+-   **Button/Link Hover Effect:** On hover, links and buttons should have their text color change to the background color (`#101010`) and their background fill with the neon cyan (`#00FFFF`). Add a subtle `transform: translate(2px, 2px);` to give it a slight "jolt".
+-   **Project Card Interactions:**
+    -   On hover, the project card's border should glow with the neon cyan color.
+    -   Apply a subtle `transform: perspective(1000px) rotateY(-5deg);` to give the card a slight 3D tilt on hover.
+    -   The project description text, initially hidden or semi-transparent, should fade in clearly on hover.
+-   **Timeline/Experience Section:** The connecting line in the timeline should "draw" itself in as the user scrolls down the section.
+
+**6. Component-Specific Styling:**
+-   **Navigation:** Keep it fixed to the top but make the background semi-transparent with a blur effect (`backdrop-filter: blur(10px);`) to see content scrolling underneath. The active link should be highlighted in the neon cyan.
+-   **Profile Image:** Apply a duotone or a CRT-like filter effect to the profile image using CSS filters (`filter: grayscale(1) contrast(1.2) brightness(0.8);`) and blend a semi-transparent cyan layer on top using a pseudo-element.
+-   **Research Modal:** Style the modal to match the new dark theme. Use sharp corners and the defined color palette. Add a blurred background for the content behind the modal.
+-   **Snake Game Integration:** The Snake Game has a retro aesthetic that fits perfectly. Do not change its core JavaScript. Instead, style the *container* of the game. Give it a distinct border that looks like an old monitor bezel, perhaps with a subtle glowing border in the accent color. When the game is active, you could even intensify the global scanline effect.
+
+Please now apply all these directives to the provided `index.html` and output the complete, final HTML file.
