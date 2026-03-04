@@ -445,7 +445,7 @@
     .snake-flavour {
       font-family: 'Press Start 2P', monospace;
       font-size: 0.6rem;
-      color: #FFB300;
+      color: #cc00ff;
       opacity: 0.75;
       margin-bottom: 1.5rem;
       line-height: 2;
@@ -462,11 +462,11 @@
       border-radius: 8px;
       overflow: hidden;
       line-height: 0;
-      border: 2px solid rgba(255,179,0,0.4);
+      border: 2px solid rgba(204,0,255,0.4);
       box-shadow:
-        0 0 18px rgba(255,179,0,0.6),
-        0 0 50px rgba(255,179,0,0.28),
-        0 0 100px rgba(255,179,0,0.1);
+        0 0 18px rgba(204,0,255,0.6),
+        0 0 50px rgba(204,0,255,0.28),
+        0 0 100px rgba(204,0,255,0.1);
     }
 
     .snake-container::after {
@@ -529,8 +529,8 @@
       width: 52px;
       height: 52px;
       background: #1a1a1a;
-      color: #FFB300;
-      border: 1px solid rgba(255,179,0,0.3);
+      color: #cc00ff;
+      border: 1px solid rgba(204,0,255,0.3);
       border-radius: 6px;
       font-size: 1.1rem;
       cursor: pointer;
@@ -544,7 +544,7 @@
     }
 
     .dpad-btn:active {
-      background: rgba(255,179,0,0.18);
+      background: rgba(204,0,255,0.18);
     }
 
     @media (max-width: 900px) {
@@ -955,7 +955,7 @@ body.modal-open{overflow:hidden;}
   const CELL = 18, W = 900, H = 450;
   const COLS = W / CELL; // 50
   const ROWS = H / CELL; // 25
-  const AMBER = '#FFB300';
+  const AMBER = '#cc00ff';
 
   let snake, dir, nextDir, food, score, state, gameInterval;
 
@@ -1007,7 +1007,7 @@ body.modal-open{overflow:hidden;}
     ctx.fillRect(0, 0, W, H);
 
     // Faint grid
-    ctx.strokeStyle = 'rgba(255,179,0,0.035)';
+    ctx.strokeStyle = 'rgba(204,0,255,0.035)';
     ctx.lineWidth = 0.5;
     for (let x=0; x<=COLS; x++) { ctx.beginPath(); ctx.moveTo(x*CELL,0); ctx.lineTo(x*CELL,H); ctx.stroke(); }
     for (let y=0; y<=ROWS; y++) { ctx.beginPath(); ctx.moveTo(0,y*CELL); ctx.lineTo(W,y*CELL); ctx.stroke(); }
@@ -1022,7 +1022,7 @@ body.modal-open{overflow:hidden;}
     // Snake segments
     for (let i=0; i<snake.length; i++) {
       const alpha = i===0 ? 1 : Math.max(0.3, 1-(i/snake.length)*0.65);
-      ctx.fillStyle = 'rgba(255,179,0,' + alpha + ')';
+      ctx.fillStyle = 'rgba(204,0,255,' + alpha + ')';
       if (i === 0) { ctx.shadowColor = AMBER; ctx.shadowBlur = 14; }
       ctx.fillRect(snake[i].x*CELL+1, snake[i].y*CELL+1, CELL-2, CELL-2);
       if (i === 0) ctx.shadowBlur = 0;
