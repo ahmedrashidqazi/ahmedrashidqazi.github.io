@@ -282,6 +282,48 @@
     }
 
     /* ── About ── */
+    .about-profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+      flex-shrink: 0;
+    }
+
+    .personal-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .personal-links a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.4rem 0.85rem;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .personal-links a:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+      color: var(--accent);
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -623,12 +665,31 @@
     }
 
     .pub-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1.25rem;
+      align-items: start;
       padding: 1.5rem 1.75rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
       border-left: 3px solid var(--accent);
       transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+
+    .pub-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--bg-light);
+      flex-shrink: 0;
+    }
+
+    .pub-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .pub-item:hover {
@@ -884,6 +945,11 @@
         padding: 4rem 1.5rem;
       }
 
+      .about-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+
       .about-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -954,6 +1020,15 @@
       .nav-inner {
         padding: 0 1.25rem;
       }
+
+      .pub-item {
+        grid-template-columns: 1fr;
+      }
+
+      .pub-image {
+        width: 80px;
+        height: 80px;
+      }
     }
   </style>
 </head>
@@ -996,6 +1071,23 @@
 <section id="about">
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">01.</span> About Me</h2>
+    <div class="about-profile reveal">
+      <img src="assets/profile.jpg" alt="Ahmed Qazi" class="about-profile-pic">
+      <div class="personal-links">
+        <a href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Upwork
+        </a>
+        <a href="https://scholar.google.com/citations?user=YOUR_ID&hl=en" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
+          Google Scholar
+        </a>
+      </div>
+    </div>
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
@@ -1139,170 +1231,22 @@
   <div class="container">
     <h2 class="section-heading reveal"><span class="num">03.</span> Projects</h2>
 
-    <!-- Featured Projects -->
-    <div class="featured-project reveal">
-      <div class="fp-image">
-        <img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy">
-      </div>
-      <div>
-        <div class="fp-label">Featured Project</div>
-        <h3 class="fp-title">Enhancer-AAV Toolbox for Interneuron Manipulation</h3>
-        <p class="fp-desc">
-          Contributed to a large-scale neuroscience study published in Neuron (Cell Press) that developed an enhancer-AAV
-          toolbox to target and manipulate distinct interneuron subtypes — featured as the journal cover.
-        </p>
-        <div class="fp-tech">
-          <span>Neuroscience</span><span>·</span>
-          <span>Computer Vision</span><span>·</span>
-          <span>Cell Segmentation</span><span>·</span>
-          <span>Python</span>
+    <!-- Snake Game Project -->
+    <div class="project-card reveal" style="max-width: 500px;">
+      <div class="pc-top">
+        <div class="pc-folder">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
         </div>
-        <div class="fp-links">
-          <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener" title="View paper">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <div class="pc-links">
+          <a href="#snake-game-link" title="Play Snake Game">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </div>
       </div>
-    </div>
-
-    <div class="featured-project reverse reveal">
-      <div class="fp-image">
-        <img src="assets/m2m.png" alt="Mice to Machines" loading="lazy">
-      </div>
-      <div>
-        <div class="fp-label">Featured Project</div>
-        <h3 class="fp-title">Mice to Machines: Neural Representations for Domain Generalization</h3>
-        <p class="fp-desc">
-          Developed a novel approach leveraging neural representations from mouse visual cortex to improve
-          domain generalization in image classification. Presented at NeurIPS 2025.
-        </p>
-        <div class="fp-tech">
-          <span>PyTorch</span><span>·</span>
-          <span>Neuroscience</span><span>·</span>
-          <span>Domain Generalization</span><span>·</span>
-          <span>Vision Models</span>
-        </div>
-        <div class="fp-links">
-          <a href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener" title="View paper">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="featured-project reveal">
-      <div class="fp-image">
-        <img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy">
-      </div>
-      <div>
-        <div class="fp-label">Featured Project</div>
-        <h3 class="fp-title">Segment AnyNeuron</h3>
-        <p class="fp-desc">
-          Built a universal neuron segmentation framework presented at CVPR 2025 Workshops.
-          Enables automated segmentation of neurons across diverse brain regions and imaging modalities.
-        </p>
-        <div class="fp-tech">
-          <span>PyTorch</span><span>·</span>
-          <span>Segmentation</span><span>·</span>
-          <span>Computer Vision</span><span>·</span>
-          <span>CVPR</span>
-        </div>
-        <div class="fp-links">
-          <a href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener" title="View paper">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Other Projects Grid -->
-    <div class="project-grid">
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="pc-links">
-            <a href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener" title="Paper">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <h3 class="pc-title">NeuRN: Neuro-inspired Domain Generalization</h3>
-        <p class="pc-desc">A neuro-inspired approach to domain generalization for image classification leveraging insights from biological neural networks.</p>
-        <div class="pc-tech">
-          <span>PyTorch</span><span>·</span><span>Domain Generalization</span><span>·</span><span>Neuroscience</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="pc-links">
-            <a href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener" title="Paper">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <h3 class="pc-title">NeuGen: Amplifying the 'Neural' in NeRFs</h3>
-        <p class="pc-desc">Bringing neuroscience-inspired representations into Neural Radiance Fields for improved 3D scene synthesis.</p>
-        <div class="pc-tech">
-          <span>NeRF</span><span>·</span><span>3D Vision</span><span>·</span><span>PyTorch</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-        </div>
-        <h3 class="pc-title">ExerAIde: Multimodal Sports Diagnosis</h3>
-        <p class="pc-desc">AI-assisted multimodal diagnosis system for enhanced sports performance analysis, presented at CVPR 2024 Workshops.</p>
-        <div class="pc-tech">
-          <span>Multimodal AI</span><span>·</span><span>Pose Estimation</span><span>·</span><span>CVPR</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-        </div>
-        <h3 class="pc-title">AnimalFormer: Precision Livestock Farming</h3>
-        <p class="pc-desc">A multimodal vision framework for precision livestock farming, presented at CVPR 2024 Workshops.</p>
-        <div class="pc-tech">
-          <span>Transformers</span><span>·</span><span>Computer Vision</span><span>·</span><span>CVPR</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-        </div>
-        <h3 class="pc-title">Virtual Try-On for South Asian Fashion</h3>
-        <p class="pc-desc">Built a real-time generative virtual try-on system for South Asian garments — from data collection to deployment.</p>
-        <div class="pc-tech">
-          <span>GANs</span><span>·</span><span>OpenCV</span><span>·</span><span>PyTorch</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="pc-top">
-          <div class="pc-folder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-          </div>
-        </div>
-        <h3 class="pc-title">Forest Fire Spread Prediction</h3>
-        <p class="pc-desc">ML models to predict forest fire spread across Pakistani landscapes for WWF, validated against satellite data.</p>
-        <div class="pc-tech">
-          <span>Scikit-learn</span><span>·</span><span>GIS</span><span>·</span><span>Remote Sensing</span>
-        </div>
+      <h3 class="pc-title">Snake Game</h3>
+      <p class="pc-desc">Something amazing is coming soon here. In the meanwhile, play the classic Snake game!</p>
+      <div class="pc-tech">
+        <span>JavaScript</span><span>·</span><span>HTML5 Canvas</span><span>·</span><span>Game</span>
       </div>
     </div>
   </div>
@@ -1315,75 +1259,99 @@
     <div class="pub-list">
 
       <div class="pub-item reveal">
-        <div class="pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
-        <div class="pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></div>
-        <div class="pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
-          <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
+        <div class="pub-image"><img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy"></div>
+        <div>
+          <div class="pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
+          <div class="pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></div>
+          <div class="pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
+            <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">Segment AnyNeuron</div>
-        <div class="pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
+        <div class="pub-image"><img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy"></div>
+        <div>
+          <div class="pub-title">Segment AnyNeuron</div>
+          <div class="pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
-        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</div>
-        <div class="pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
+        <div class="pub-image"><img src="assets/m2m.png" alt="Mice to Machines" loading="lazy"></div>
+        <div>
+          <div class="pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
+          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</div>
+          <div class="pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</div>
-        <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-        <div class="pub-venue">Neuro for AI & AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</div>
-        <div class="pub-links">
-          <a class="pub-link" href="#">PDF</a>
+        <div class="pub-image"><img src="assets/viT_paper.png" alt="Neural Attention Maps" loading="lazy"></div>
+        <div>
+          <div class="pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</div>
+          <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+          <div class="pub-venue">Neuro for AI & AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</div>
+          <div class="pub-links">
+            <a class="pub-link" href="#">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
-        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-        <div class="pub-links">
-          <a class="pub-link" href="#">PDF</a>
+        <div class="pub-image"><img src="assets/exeraide.png" alt="ExerAIde" loading="lazy"></div>
+        <div>
+          <div class="pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
+          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
+          <div class="pub-links">
+            <a class="pub-link" href="#">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
-        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</div>
-        <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-        <div class="pub-links">
-          <a class="pub-link" href="#">PDF</a>
+        <div class="pub-image"><img src="assets/animalformer.png" alt="AnimalFormer" loading="lazy"></div>
+        <div>
+          <div class="pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
+          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</div>
+          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
+          <div class="pub-links">
+            <a class="pub-link" href="#">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
-        <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-        <div class="pub-venue">arXiv Preprint</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
+        <div class="pub-image"><img src="assets/neurn.png" alt="NeuRN" loading="lazy"></div>
+        <div>
+          <div class="pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
+          <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
+          <div class="pub-venue">arXiv Preprint</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
+          </div>
         </div>
       </div>
 
       <div class="pub-item reveal">
-        <div class="pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
-        <div class="pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</div>
-        <div class="pub-venue">arXiv Preprint</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
+        <div class="pub-image"><img src="assets/neugen.png" alt="NeuGen" loading="lazy"></div>
+        <div>
+          <div class="pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
+          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</div>
+          <div class="pub-venue">arXiv Preprint</div>
+          <div class="pub-links">
+            <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
+          </div>
         </div>
       </div>
 
