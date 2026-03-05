@@ -58,8 +58,7 @@
     }
 
     a:hover {
-      color: #E0E0E0;
-      text-decoration-color: #E0E0E0;
+      color: #FFFFFF;
     }
 
     /* ── Navigation ── */
@@ -68,7 +67,7 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(17, 24, 39, 0.85);
+      background: rgba(18, 18, 18, 0.9);
       backdrop-filter: blur(16px) saturate(1.8);
       -webkit-backdrop-filter: blur(16px) saturate(1.8);
       border-bottom: 1px solid var(--border);
@@ -533,7 +532,7 @@
     }
 
     .featured-project:hover {
-      border-color: rgba(56, 189, 248, 0.3);
+      border-color: rgba(187, 187, 187, 0.3);
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
       transform: translateY(-4px);
     }
@@ -549,7 +548,7 @@
     .fp-image {
       border-radius: 6px;
       overflow: hidden;
-      background: #0f1923;
+      background: #1a1a1a;
       aspect-ratio: 16/10;
     }
 
@@ -633,7 +632,7 @@
     }
 
     .project-card:hover {
-      border-color: rgba(56, 189, 248, 0.3);
+      border-color: rgba(187, 187, 187, 0.3);
       transform: translateY(-4px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
@@ -731,7 +730,7 @@
     }
 
     .pub-item:hover {
-      border-color: rgba(56, 189, 248, 0.3);
+      border-color: rgba(187, 187, 187, 0.3);
       border-left-color: var(--accent);
       transform: translateX(4px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -1028,7 +1027,7 @@
         top: var(--nav-height);
         left: 0;
         right: 0;
-        background: rgba(17, 24, 39, 0.97);
+        background: rgba(18, 18, 18, 0.97);
         backdrop-filter: blur(16px);
         flex-direction: column;
         padding: 1rem 1.5rem 1.5rem;
@@ -1088,7 +1087,7 @@
     /* ── Snake Game ── */
     .snake-game-wrapper {
       margin-top: 1.5rem;
-      background: #0a0f1a;
+      background: #1a1a1a;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1rem;
@@ -1098,7 +1097,7 @@
     .snake-game-wrapper canvas {
       display: block;
       margin: 0 auto;
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(187, 187, 187, 0.3);
       border-radius: 4px;
       max-width: 100%;
     }
@@ -1123,7 +1122,7 @@
     }
 
     .snake-controls button:hover {
-      background: rgba(56, 189, 248, 0.25);
+      background: rgba(187, 187, 187, 0.25);
     }
 
     .snake-score {
@@ -1925,11 +1924,11 @@
   }
 
   function drawGame() {
-    ctx.fillStyle = '#0a0f1a';
+    ctx.fillStyle = '#1a1a1a';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw grid lines
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
     ctx.lineWidth = 0.5;
     for (var i = 0; i < tileCount; i++) {
       ctx.beginPath();
@@ -1943,8 +1942,8 @@
     }
 
     // Draw food
-    ctx.fillStyle = '#ef4444';
-    ctx.shadowColor = '#ef4444';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = '#FFFFFF';
     ctx.shadowBlur = 8;
     ctx.beginPath();
     ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
@@ -1954,15 +1953,15 @@
     // Draw snake
     for (var i = 0; i < snake.length; i++) {
       var alpha = 1 - (i / snake.length) * 0.5;
-      ctx.fillStyle = i === 0 ? '#38BDF8' : 'rgba(56, 189, 248, ' + alpha + ')';
-      ctx.shadowColor = '#38BDF8';
+      ctx.fillStyle = i === 0 ? '#BBBBBB' : 'rgba(187, 187, 187, ' + alpha + ')';
+      ctx.shadowColor = '#BBBBBB';
       ctx.shadowBlur = i === 0 ? 6 : 2;
       ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
     }
     ctx.shadowBlur = 0;
 
     if (!gameRunning && dx === 0 && dy === 0) {
-      ctx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+      ctx.fillStyle = 'rgba(187, 187, 187, 0.9)';
       ctx.font = '14px "Fira Code", monospace';
       ctx.textAlign = 'center';
       ctx.fillText('Press Start or Arrow Keys', canvas.width / 2, canvas.height / 2 + 40);
@@ -1985,11 +1984,11 @@
         clearInterval(gameLoop);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ef4444';
+        ctx.fillStyle = '#FFFFFF';
         ctx.font = 'bold 20px "Fira Code", monospace';
         ctx.textAlign = 'center';
         ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 10);
-        ctx.fillStyle = '#38BDF8';
+        ctx.fillStyle = '#BBBBBB';
         ctx.font = '14px "Fira Code", monospace';
         ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 20);
         ctx.fillText('Press Reset to try again', canvas.width / 2, canvas.height / 2 + 45);
