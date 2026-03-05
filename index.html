@@ -51,11 +51,15 @@
     a {
       color: var(--accent);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.3s ease, text-decoration-color 0.3s ease;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 3px;
     }
 
     a:hover {
-      color: #7dd3fc;
+      color: #E0E0E0;
+      text-decoration-color: #E0E0E0;
     }
 
     /* ── Navigation ── */

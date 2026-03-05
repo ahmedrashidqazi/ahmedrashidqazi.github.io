@@ -1,0 +1,1 @@
+Please add a subtle hover effect to all anchor (<a>) tags in the CSS. A smooth transition to a slightly brighter color or a subtle underline effect would be great. Make the change directly in the main stylesheet.
