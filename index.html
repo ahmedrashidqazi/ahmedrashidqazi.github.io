@@ -3,212 +3,843 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ahmed Qazi — Senior AI Engineer</title>
-  <meta name="description" content="Ahmed Qazi — Senior AI Engineer. Building and deploying production-ready AI systems.">
+  <title>Ahmed Qazi - Senior AI Engineer</title>
+  <meta name="description" content="Ahmed Qazi - Senior AI Engineer. Building and deploying production-ready AI systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
-      --bg: #ffffff;
-      --bg-light: #f5f5f5;
-      --bg-card: #ffffff;
-      --text: #000000;
-      --text-dim: #333333;
-      --accent: #000000;
-      --accent-dim: rgba(0, 0, 0, 0.08);
-      --accent-glow: rgba(0, 0, 0, 0.14);
-      --border: rgba(0, 0, 0, 0.16);
-      --nav-height: 70px;
+      --bg: #f3f5f8;
+      --bg-elevated: rgba(255, 255, 255, 0.72);
+      --surface: #ffffff;
+      --surface-strong: #f8fafc;
+      --surface-muted: #eef2f7;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-soft: #64748b;
+      --line: rgba(15, 23, 42, 0.1);
+      --line-strong: rgba(15, 23, 42, 0.18);
+      --accent: #153a66;
+      --accent-soft: rgba(21, 58, 102, 0.08);
+      --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+      --section-space: clamp(4.5rem, 8vw, 8rem);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --nav-height: 78px;
+      --container: 1180px;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: var(--nav-height);
+      scroll-padding-top: calc(var(--nav-height) + 20px);
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      font-family: "Manrope", sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(21, 58, 102, 0.08), transparent 30%),
+        linear-gradient(180deg, #f8fafc 0%, var(--bg) 48%, #edf2f7 100%);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
+    }
+
+    body.menu-open,
+    body.modal-open {
+      overflow: hidden;
     }
 
     ::selection {
       background: var(--accent);
-      color: var(--bg);
+      color: #ffffff;
     }
 
     a {
-      color: var(--accent);
+      color: inherit;
       text-decoration: none;
-      transition: color 0.3s ease, text-decoration-color 0.3s ease;
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      text-underline-offset: 3px;
     }
 
-    a:hover {
-      color: #000000;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    /* ── Navigation ── */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px) saturate(1.8);
-      -webkit-backdrop-filter: blur(16px) saturate(1.8);
-      border-bottom: 1px solid var(--border);
-      transform: translateY(0);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .page-shell {
+      width: min(calc(100% - 2rem), 1320px);
+      margin: 1rem auto;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      overflow: clip;
+      backdrop-filter: blur(18px);
     }
 
-    nav.hidden {
-      transform: translateY(-100%);
-    }
-
-    nav.scrolled {
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
+    .container {
+      width: min(calc(100% - 3rem), var(--container));
       margin: 0 auto;
-      padding: 0 2rem;
+    }
+
+    .eyebrow,
+    .meta-label,
+    .section-index,
+    .skill-tag,
+    .pub-link,
+    .project-meta span,
+    .nav-link,
+    .stat-label,
+    .contact-kicker,
+    .footer-note,
+    .snake-controls button,
+    .timeline-date {
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
       height: var(--nav-height);
       display: flex;
       align-items: center;
+      background: rgba(243, 245, 248, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(calc(100% - 3rem), var(--container));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
+      gap: 1.25rem;
     }
 
-    .nav-logo {
-      font-family: 'Fira Code', monospace;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--accent);
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: opacity 0.2s;
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
     }
 
-    .nav-logo:hover {
-      opacity: 0.8;
+    .brand-name {
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-role {
+      color: var(--text-soft);
+      font-size: 0.78rem;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.35rem;
       list-style: none;
     }
 
-    .nav-links a {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      padding: 0.5rem 0.85rem;
-      border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
-      white-space: nowrap;
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
-    .nav-links a:hover {
+    .nav-link:hover,
+    .nav-link.active {
+      background: var(--accent-soft);
       color: var(--accent);
-      background: var(--accent-dim);
     }
 
-    .nav-links a.active {
-      color: var(--accent);
+    .nav-link .num {
+      color: var(--text-soft);
     }
 
-    .nav-links .num {
-      color: var(--accent);
-      margin-right: 0.3rem;
-    }
-
-    .mobile-toggle {
+    .nav-toggle {
       display: none;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 8px;
-      cursor: pointer;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.7);
       color: var(--text);
+      border-radius: 12px;
+      padding: 0.6rem;
+      cursor: pointer;
     }
 
-    .mobile-toggle svg {
-      display: block;
-    }
-
-    .resume-btn {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.82rem;
-      color: var(--accent) !important;
-      border: 1px solid var(--accent);
-      padding: 0.45rem 1rem;
-      border-radius: 6px;
-      margin-left: 0.75rem;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .resume-btn:hover {
-      background: var(--accent-dim);
-      color: var(--accent) !important;
-    }
-
-    /* ── Sections ── */
     section {
-      padding: 6rem 2rem;
+      padding: var(--section-space) 0;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
     }
 
-    .section-heading {
+    .section-index {
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .section-intro {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 720px;
+    }
+
+    .hero {
+      padding-top: clamp(3rem, 6vw, 5rem);
+      padding-bottom: clamp(4rem, 8vw, 7rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+      gap: 3rem;
+      align-items: end;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--accent);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 52px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 1rem;
+      max-width: 10ch;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      max-width: 620px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 3rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: var(--text);
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
     }
 
-    .section-heading .num {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.1rem;
-      font-weight: 400;
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0.9rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 18px 36px rgba(21, 58, 102, 0.18);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--text);
+      border-color: var(--line-strong);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 680px;
+    }
+
+    .stat-card {
+      padding: 1.1rem 1.15rem;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 18px;
+    }
+
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 1.4rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.92));
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -15% -30% 15%;
+      height: 220px;
+      background: radial-gradient(circle, rgba(21, 58, 102, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-portrait {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      background: var(--surface-muted);
+    }
+
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-panel-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .hero-panel-meta strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-panel-meta p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .meta-label {
+      display: inline-flex;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .copy-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .copy-stack p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 720px;
+    }
+
+    .copy-stack a {
       color: var(--accent);
     }
 
-    .section-heading::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      max-width: 300px;
+    .identity-card,
+    .skills-card,
+    .projects-card,
+    .contact-card,
+    .publication-card,
+    .timeline-card {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
     }
 
-    /* ── Reveal animation ── */
+    .identity-card {
+      display: grid;
+      gap: 1.25rem;
+      padding: 1.4rem;
+    }
+
+    .identity-head {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .identity-avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 20px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .identity-head h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .identity-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .personal-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .personal-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.9rem 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--text-muted);
+      background: rgba(248, 250, 252, 0.8);
+      transition: border-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
+    }
+
+    .personal-link:hover {
+      transform: translateY(-2px);
+      color: var(--accent);
+      border-color: rgba(21, 58, 102, 0.25);
+    }
+
+    .skills-card {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .skill-group h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      margin-bottom: 0.8rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-card {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(21, 58, 102, 0.22);
+    }
+
+    .timeline-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .timeline-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-title .company {
+      color: var(--accent);
+    }
+
+    .timeline-date {
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .timeline-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .timeline-list li {
+      position: relative;
+      padding-left: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    .timeline-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.65rem;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .tech-list span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .projects-card {
+      padding: clamp(1.25rem, 3vw, 2rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .project-copy h3 {
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-copy p {
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.25rem;
+    }
+
+    .project-meta span {
+      color: var(--text-soft);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+    }
+
+    .snake-shell {
+      padding: 1rem;
+      background: linear-gradient(180deg, #e2e8f0, #cbd5e1);
+      border-radius: 20px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .snake-frame {
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.94);
+      border-radius: 16px;
+    }
+
+    .snake-score {
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .snake-game-wrapper canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0f172a;
+    }
+
+    .snake-controls {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .snake-controls button,
+    .snake-mobile-dpad button {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border-radius: 12px;
+      padding: 0.72rem 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .snake-controls button:hover,
+    .snake-mobile-dpad button:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .snake-mobile-dpad {
+      display: none;
+      margin-top: 0.85rem;
+      grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .dpad-up { grid-area: up; }
+    .dpad-left { grid-area: left; }
+    .dpad-right { grid-area: right; }
+    .dpad-down { grid-area: down; }
+
+    .publications-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .publication-card {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 1.25rem;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .publication-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(21, 58, 102, 0.22);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .publication-thumb {
+      width: 112px;
+      height: 112px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--surface-muted);
+    }
+
+    .publication-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .publication-title {
+      font-size: 1.08rem;
+      line-height: 1.45;
+      margin-bottom: 0.35rem;
+    }
+
+    .publication-authors {
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .publication-authors strong {
+      color: var(--accent);
+    }
+
+    .publication-venue {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .publication-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(21, 58, 102, 0.18);
+      color: var(--accent);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      transition: background 0.25s ease;
+    }
+
+    .pub-link:hover {
+      background: var(--accent-soft);
+    }
+
+    .contact-card {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .contact-kicker {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-card h2 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card p {
+      max-width: 620px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    footer {
+      padding: 2rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: var(--text-soft);
+    }
+
+    .footer-note {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
 
     .reveal.visible {
@@ -216,1905 +847,936 @@
       transform: translateY(0);
     }
 
-    /* ── Hero ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: var(--nav-height);
-    }
-
-    .hero-layout {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-    }
-
-    .hero-inner {
-      max-width: 800px;
-      flex: 1;
-    }
-
-    .hero-portrait {
-      flex-shrink: 0;
-    }
-
-    .hero-portrait-img {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--border);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .hero-portrait-img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-greeting {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: inline-block;
-      padding: 0.3rem 0.75rem;
-      border: 1px solid var(--accent);
-      border-radius: 4px;
-      background: var(--accent-dim);
-    }
-
-    .hero-name {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-tagline {
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      font-weight: 700;
-      color: var(--text-dim);
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-desc {
-      font-size: 1.1rem;
-      color: var(--text-dim);
-      max-width: 540px;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.85rem 1.75rem;
-      border-radius: 6px;
-      cursor: pointer;
-      background: transparent;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    }
-
-    .btn:hover {
-      background: var(--accent-dim);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px var(--accent-glow);
-      color: var(--accent);
-    }
-
-    /* ── About ── */
-    .about-profile {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .about-profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
-      flex-shrink: 0;
-    }
-
-    .personal-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .personal-links a {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.82rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.4rem 0.85rem;
-      border-radius: 4px;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .personal-links a:hover {
-      background: var(--accent-dim);
-      transform: translateY(-2px);
-      color: var(--accent);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--text-dim);
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .about-text a {
-      color: var(--accent);
-    }
-
-    .skills-category {
-      margin-bottom: 1.5rem;
-    }
-
-    .skills-category h4 {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.82rem;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skills-list span {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      padding: 0.35rem 0.75rem;
-      background: var(--bg-light);
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .skills-list span:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* ── Experience ── */
-    .exp-timeline {
-      position: relative;
-      padding-left: 2.5rem;
-    }
-
-    .exp-timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--border));
-      border-radius: 1px;
-    }
-
-    .exp-item {
-      position: relative;
-      padding-bottom: 3rem;
-    }
-
-    .exp-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .exp-item::before {
-      content: '';
-      position: absolute;
-      left: -2.05rem;
-      top: 8px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--accent-glow);
-      z-index: 1;
-    }
-
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .exp-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .exp-title .company {
-      color: var(--accent);
-    }
-
-    .exp-date {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
-
-    .exp-bullets {
-      list-style: none;
-      margin-top: 0.75rem;
-    }
-
-    .exp-bullets li {
-      position: relative;
-      padding-left: 1.25rem;
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 0.4rem;
-    }
-
-    .exp-bullets li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-
-    .exp-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .exp-tech span {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: var(--accent);
-      padding: 0.2rem 0.55rem;
-      background: var(--accent-dim);
-      border-radius: 3px;
-    }
-
-    /* ── Projects ── */
-    .featured-project {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 4rem;
-      padding: 2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-
-    .featured-project:hover {
-      border-color: rgba(187, 187, 187, 0.3);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-      transform: translateY(-4px);
-    }
-
-    .featured-project.reverse {
-      grid-template-columns: 1fr 1.1fr;
-    }
-
-    .featured-project.reverse .fp-image {
-      order: 2;
-    }
-
-    .fp-image {
-      border-radius: 6px;
-      overflow: hidden;
-      background: var(--bg-light);
-      aspect-ratio: 16/10;
-    }
-
-    .fp-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s;
-      opacity: 0.85;
-    }
-
-    .featured-project:hover .fp-image img {
-      transform: scale(1.03);
-      opacity: 1;
-    }
-
-    .fp-label {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.78rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .fp-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      color: var(--text);
-    }
-
-    .fp-desc {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .fp-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .fp-tech span {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .fp-links {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .fp-links a {
-      color: var(--text);
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .fp-links a:hover {
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project-card:hover {
-      border-color: rgba(187, 187, 187, 0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    .pc-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1.25rem;
-    }
-
-    .pc-folder svg {
-      color: var(--accent);
-    }
-
-    .pc-links {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .pc-links a {
-      color: var(--text-dim);
-      transition: color 0.2s;
-    }
-
-    .pc-links a:hover {
-      color: var(--accent);
-    }
-
-    .pc-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      color: var(--text);
-      transition: color 0.2s;
-    }
-
-    .project-card:hover .pc-title {
-      color: var(--accent);
-    }
-
-    .pc-desc {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 1.25rem;
-    }
-
-    .pc-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .pc-tech span {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: var(--text-dim);
-    }
-
-    /* ── Publications ── */
-    .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .pub-item {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 1.25rem;
-      align-items: start;
-      padding: 1.5rem 1.75rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
-      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    }
-
-    .pub-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 6px;
-      overflow: hidden;
-      background: var(--bg-light);
-      flex-shrink: 0;
-    }
-
-    .pub-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .pub-item:hover {
-      border-color: rgba(187, 187, 187, 0.3);
-      border-left-color: var(--accent);
-      transform: translateX(4px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .pub-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-      line-height: 1.5;
-    }
-
-    .pub-authors {
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .pub-authors strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .pub-venue {
-      font-style: italic;
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .pub-links {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .pub-link {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-
-    .pub-link:hover {
-      background: var(--accent-dim);
-      color: var(--accent);
-    }
-
-    /* ── Contact ── */
-    #contact {
-      text-align: center;
-      padding: 8rem 2rem;
-    }
-
-    .contact-num {
-      font-family: 'Fira Code', monospace;
-      font-size: 1rem;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-
-    .contact-heading {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-    }
-
-    .contact-text {
-      color: var(--text-dim);
-      font-size: 1.05rem;
-      max-width: 500px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-    }
-
-    /* ── Footer ── */
-    footer {
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-socials {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .footer-socials a {
-      color: var(--text-dim);
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .footer-socials a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .footer-credit {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-    }
-
-    /* ── Command Palette ── */
-    .cmd-trigger {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      color: var(--accent);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      z-index: 900;
-      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-
-    .cmd-trigger:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
-      transform: scale(1.05);
-    }
-
-    .cmd-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 20vh;
-    }
-
-    .cmd-overlay.open {
-      display: flex;
-      animation: fadeIn 0.15s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .cmd-palette {
-      width: 100%;
-      max-width: 520px;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-      animation: slideDown 0.15s ease;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-10px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .cmd-input-wrap {
-      display: flex;
-      align-items: center;
-      padding: 0 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cmd-input-wrap svg {
-      color: var(--text-dim);
-      flex-shrink: 0;
-    }
-
-    .cmd-input {
-      width: 100%;
-      padding: 1rem 0.75rem;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .cmd-input::placeholder {
-      color: var(--text-dim);
-    }
-
-    .cmd-results {
-      max-height: 260px;
-      overflow-y: auto;
-      padding: 0.5rem;
-    }
-
-    .cmd-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.7rem 0.75rem;
-      border-radius: 6px;
-      cursor: pointer;
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .cmd-item:hover,
-    .cmd-item.active {
-      background: var(--accent-dim);
-      color: var(--accent);
-    }
-
-    .cmd-item svg {
-      flex-shrink: 0;
-    }
-
-    .cmd-hint {
-      padding: 0.5rem 1rem 0.75rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 1rem;
-    }
-
-    .cmd-hint kbd {
-      background: var(--bg);
-      padding: 0.15rem 0.4rem;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      font-family: inherit;
-      font-size: inherit;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      section {
-        padding: 4rem 1.5rem;
-      }
-
-      .hero-layout {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 2rem;
-      }
-
-      .hero-portrait-img {
-        width: 160px;
-        height: 160px;
-      }
-
-      .hero-desc {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .about-profile {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-
-      .featured-project {
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-      }
-
-      .featured-project.reverse .fp-image {
-        order: 0;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: var(--nav-height);
-        left: 0;
-        right: 0;
-        background: rgba(18, 18, 18, 0.97);
-        backdrop-filter: blur(16px);
-        flex-direction: column;
-        padding: 1rem 1.5rem 1.5rem;
-        border-bottom: 1px solid var(--border);
-        gap: 0.25rem;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .mobile-toggle {
-        display: block;
-      }
-
-      .resume-btn {
-        margin-left: 0;
-        text-align: center;
-      }
-
-      .hero-inner {
-        padding-top: 2rem;
-      }
-
-      .cmd-trigger {
-        bottom: 1.25rem;
-        right: 1.25rem;
-        width: 42px;
-        height: 42px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .section-heading {
-        font-size: 1.35rem;
-      }
-
-      .exp-header {
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-
-      .nav-inner {
-        padding: 0 1.25rem;
-      }
-
-      .pub-item {
-        grid-template-columns: 1fr;
-      }
-
-      .pub-image {
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    /* ── Snake Game ── */
-    .snake-game-wrapper {
-      margin-top: 1.5rem;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .snake-game-wrapper canvas {
-      display: block;
-      margin: 0 auto;
-      border: 1px solid rgba(187, 187, 187, 0.3);
-      border-radius: 4px;
-      max-width: 100%;
-    }
-
-    .snake-controls {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-    }
-
-    .snake-controls button {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--accent);
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .snake-controls button:hover {
-      background: rgba(187, 187, 187, 0.25);
-    }
-
-    .snake-score {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .snake-mobile-dpad {
-      display: none;
-      margin-top: 0.75rem;
-    }
-
-    @media (max-width: 768px) {
-      .snake-mobile-dpad {
-        display: grid;
-        grid-template-areas:
-          ". up ."
-          "left . right"
-          ". down .";
-        gap: 0.4rem;
-        justify-content: center;
-        width: fit-content;
-        margin: 0.75rem auto 0;
-      }
-
-      .snake-mobile-dpad button {
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-        background: var(--bg-light);
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        color: var(--accent);
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-      }
-
-      .snake-mobile-dpad button:active {
-        background: var(--accent-dim);
-      }
-
-      .dpad-up { grid-area: up; }
-      .dpad-down { grid-area: down; }
-      .dpad-left { grid-area: left; }
-      .dpad-right { grid-area: right; }
-    }
-
-    /* ── Publication Modal ── */
     .pub-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      z-index: 3000;
+      z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(12px);
     }
 
     .pub-modal-overlay.open {
       display: flex;
-      animation: fadeIn 0.2s ease;
     }
 
     .pub-modal {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-      animation: slideDown 0.2s ease;
-    }
-
-    .pub-modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      padding: 0.25rem;
-      border-radius: 4px;
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .pub-modal-close:hover {
-      color: var(--accent);
-      background: var(--accent-dim);
+      width: min(720px, 100%);
+      background: #ffffff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.2);
+      position: relative;
     }
 
     .pub-modal-img {
       width: 100%;
-      height: 220px;
+      height: min(38vh, 260px);
       object-fit: cover;
-      border-radius: 12px 12px 0 0;
-      background: var(--bg);
+      background: var(--surface-muted);
     }
 
     .pub-modal-body {
-      padding: 1.5rem 2rem 2rem;
-      position: relative;
+      padding: 1.5rem 1.5rem 1.75rem;
     }
 
     .pub-modal-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-      line-height: 1.5;
+      font-size: 1.3rem;
+      line-height: 1.4;
+      margin-bottom: 0.65rem;
     }
 
     .pub-modal-authors {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
     }
 
     .pub-modal-authors strong {
       color: var(--accent);
-      font-weight: 600;
     }
 
     .pub-modal-venue {
-      font-style: italic;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      color: var(--text-soft);
+      margin-bottom: 1.2rem;
     }
 
     .pub-modal-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.65rem 1.5rem;
-      border-radius: 6px;
-      background: transparent;
+      padding: 0.8rem 1rem;
+      background: var(--accent);
+      color: #ffffff;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .pub-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: none;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      color: #ffffff;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      text-decoration: none;
     }
 
-    .pub-modal-btn:hover {
-      background: var(--accent-dim);
-      transform: translateY(-2px);
-      color: var(--accent);
-    }
-
-    .pub-item {
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .pub-modal-img {
-        height: 160px;
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-layout,
+      .projects-card,
+      .contact-card,
+      .section-header {
+        grid-template-columns: 1fr;
       }
 
-      .pub-modal-body {
-        padding: 1rem 1.25rem 1.5rem;
+      .section-header {
+        gap: 0.7rem;
+      }
+
+      .hero-stats {
+        max-width: none;
+      }
+
+      .contact-card {
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .page-shell {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: calc(var(--nav-height) + 0.5rem);
+        right: 1rem;
+        left: 1rem;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-link {
+        justify-content: space-between;
+        border-radius: 14px;
+      }
+
+      .personal-links {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container,
+      .nav-inner {
+        width: min(calc(100% - 1.5rem), var(--container));
+      }
+
+      .publication-card {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-thumb {
+        width: 88px;
+        height: 88px;
+      }
+
+      .timeline-top,
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        max-width: none;
+      }
+
+      .snake-mobile-dpad {
+        display: grid;
       }
     }
   </style>
 </head>
 <body>
-
-<!-- ═══ Navigation ═══ -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo">Ahmed Qazi</a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about"><span class="num">01.</span> About</a></li>
-      <li><a href="#experience"><span class="num">02.</span> Experience</a></li>
-      <li><a href="#projects"><span class="num">03.</span> Projects</a></li>
-      <li><a href="#publications"><span class="num">04.</span> Publications</a></li>
-      <li><a href="#contact"><span class="num">05.</span> Contact</a></li>
-    </ul>
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-  </div>
-</nav>
-
-<!-- ═══ Hero ═══ -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-layout">
-      <div class="hero-inner">
-        <p class="hero-greeting reveal">Senior AI Engineer</p>
-        <h1 class="hero-name reveal">I build AI systems<br>that ship to production.</h1>
-        <h2 class="hero-tagline reveal">Engineering end-to-end.</h2>
-        <p class="hero-desc reveal">
-          I'm Ahmed Qazi. I design, build, and deploy AI products — from model training
-          and infrastructure to scalable APIs and real-world applications.
-        </p>
-        <a href="#experience" class="btn reveal">See My Work ↓</a>
-      </div>
-      <div class="hero-portrait reveal">
-        <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="hero-portrait-img">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ About ═══ -->
-<section id="about">
-  <div class="container">
-    <h2 class="section-heading reveal"><span class="num">01.</span> About Me</h2>
-    <div class="about-profile reveal">
-      <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="about-profile-pic">
-      <div class="personal-links">
-        <a href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener" title="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Email
+  <div class="page-shell">
+    <nav class="site-nav" id="navbar">
+      <div class="nav-inner">
+        <a class="brand" href="#hero" aria-label="Ahmed Qazi home">
+          <span class="brand-name">Ahmed Qazi</span>
+          <span class="brand-role">Senior AI Engineer</span>
         </a>
-        <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener" title="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener" title="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener" title="Upwork">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Upwork
-        </a>
-        <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"/><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"/></svg>
-          Scholar
-        </a>
-      </div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>
-          I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
-          to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
-          that work at scale.
-        </p>
-        <p>
-          I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
-          systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
-          solving real problems with practical engineering.
-        </p>
-        <p>
-          I graduated with a B.S. in Computer Science from
-          <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
-          Stanford University as a Pre-Collegiate Scholar.
-        </p>
-      </div>
-      <div class="reveal">
-        <div class="skills-category">
-          <h4>Languages</h4>
-          <div class="skills-list">
-            <span>Python</span>
-            <span>C++</span>
-            <span>SQL</span>
-            <span>JavaScript</span>
-            <span>TypeScript</span>
-          </div>
-        </div>
-        <div class="skills-category">
-          <h4>Frameworks &amp; Libraries</h4>
-          <div class="skills-list">
-            <span>PyTorch</span>
-            <span>TensorFlow</span>
-            <span>Scikit-learn</span>
-            <span>FastAPI</span>
-            <span>Django</span>
-            <span>HuggingFace</span>
-            <span>OpenCV</span>
-          </div>
-        </div>
-        <div class="skills-category">
-          <h4>Tools &amp; Platforms</h4>
-          <div class="skills-list">
-            <span>Docker</span>
-            <span>Kubernetes</span>
-            <span>GCP</span>
-            <span>AWS</span>
-            <span>Git</span>
-            <span>Linux</span>
-            <span>MLflow</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Experience ═══ -->
-<section id="experience">
-  <div class="container">
-    <h2 class="section-heading reveal"><span class="num">02.</span> Experience</h2>
-    <div class="exp-timeline">
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div class="exp-title">Senior AI Engineer <span class="company">@ Osmium Labs</span></div>
-          <div class="exp-date">Oct 2025 – Present</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Architected and shipped end-to-end AI products from prototype to production deployment.</li>
-          <li>Led technical design of ML pipelines and model serving infrastructure at scale.</li>
+        <ul class="nav-links" id="navLinks">
+          <li><a class="nav-link" href="#about"><span class="num">01</span><span>About</span></a></li>
+          <li><a class="nav-link" href="#experience"><span class="num">02</span><span>Experience</span></a></li>
+          <li><a class="nav-link" href="#projects"><span class="num">03</span><span>Projects</span></a></li>
+          <li><a class="nav-link" href="#publications"><span class="num">04</span><span>Publications</span></a></li>
+          <li><a class="nav-link" href="#contact"><span class="num">05</span><span>Contact</span></a></li>
         </ul>
-        <div class="exp-tech">
-          <span>Python</span><span>PyTorch</span><span>Kubernetes</span><span>GCP</span>
-        </div>
+        <button class="nav-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
       </div>
+    </nav>
 
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div class="exp-title">Member of Technical Staff <span class="company">@ Tibbling Technologies</span></div>
-          <div class="exp-date">Feb 2024 – Oct 2025</div>
+    <main>
+      <section class="hero" id="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow reveal">Senior AI Engineer</p>
+              <h1 class="hero-title reveal">I build AI systems that ship to production.</h1>
+              <p class="hero-subtitle reveal">Engineering end-to-end.</p>
+              <p class="hero-desc reveal">
+                I'm Ahmed Qazi. I design, build, and deploy AI products - from model training
+                and infrastructure to scalable APIs and real-world applications.
+              </p>
+              <div class="hero-actions reveal">
+                <a class="button button-primary" href="#experience">See My Work</a>
+                <a class="button button-secondary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
+              </div>
+              <div class="hero-stats reveal" aria-label="Highlights">
+                <div class="stat-card">
+                  <div class="stat-value">AI Products</div>
+                  <div class="stat-label">Prototype to production deployment</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value">CVPR / NeurIPS</div>
+                  <div class="stat-label">Published research and workshop papers</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-value">Multimodal Systems</div>
+                  <div class="stat-label">Healthcare, vision, and applied ML</div>
+                </div>
+              </div>
+            </div>
+            <aside class="hero-panel reveal" aria-label="Profile summary">
+              <div class="hero-portrait">
+                <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
+              </div>
+              <div class="hero-panel-meta">
+                <div>
+                  <strong>Ahmed Rashid Qazi</strong>
+                  <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
+                </div>
+                <span class="meta-label">Available</span>
+              </div>
+            </aside>
+          </div>
         </div>
-        <ul class="exp-bullets">
-          <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
-          <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
-        </ul>
-        <div class="exp-tech">
-          <span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>AWS</span><span>Computer Vision</span>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-index">01 / About</div>
+            <div>
+              <h2 class="section-title">Hands-on engineering with research depth.</h2>
+              <p class="section-intro">The emphasis here is practical execution: training, infrastructure, deployment, and enough research fluency to build better systems.</p>
+            </div>
+          </div>
+          <div class="about-layout">
+            <div class="copy-stack reveal">
+              <p>
+                I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
+                to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
+                that work at scale.
+              </p>
+              <p>
+                I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
+                systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
+                solving real problems with practical engineering.
+              </p>
+              <p>
+                I graduated with a B.S. in Computer Science from
+                <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
+                Stanford University as a Pre-Collegiate Scholar.
+              </p>
+            </div>
+            <div class="reveal" style="display:grid; gap:1rem;">
+              <div class="identity-card">
+                <div class="identity-head">
+                  <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="identity-avatar">
+                  <div>
+                    <h3>Ahmed Qazi</h3>
+                    <p>AI engineer focused on shipping reliable systems, not just promising demos.</p>
+                  </div>
+                </div>
+                <div class="personal-links">
+                  <a class="personal-link" href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>Email</span>
+                  </a>
+                  <a class="personal-link" href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
+                    <span>GitHub</span>
+                  </a>
+                  <a class="personal-link" href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                  <a class="personal-link" href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    <span>Upwork</span>
+                  </a>
+                  <a class="personal-link" href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"></path><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"></path></svg>
+                    <span>Scholar</span>
+                  </a>
+                </div>
+              </div>
+              <div class="skills-card">
+                <div class="skill-group">
+                  <h3>Languages</h3>
+                  <div class="skills-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                  </div>
+                </div>
+                <div class="skill-group">
+                  <h3>Frameworks &amp; Libraries</h3>
+                  <div class="skills-list">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Scikit-learn</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">HuggingFace</span>
+                    <span class="skill-tag">OpenCV</span>
+                  </div>
+                </div>
+                <div class="skill-group">
+                  <h3>Tools &amp; Platforms</h3>
+                  <div class="skills-list">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">MLflow</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <section id="experience">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-index">02 / Experience</div>
+            <div>
+              <h2 class="section-title">Engineering roles centered on delivery.</h2>
+              <p class="section-intro">The throughline across these roles is building systems that operate under real constraints: infrastructure, scale, product needs, and research translation.</p>
+            </div>
+          </div>
+          <div class="timeline">
+            <article class="timeline-card reveal">
+              <div class="timeline-top">
+                <div class="timeline-title">Senior AI Engineer <span class="company">@ Osmium Labs</span></div>
+                <div class="timeline-date">Oct 2025 - Present</div>
+              </div>
+              <ul class="timeline-list">
+                <li>Architected and shipped end-to-end AI products from prototype to production deployment.</li>
+                <li>Led technical design of ML pipelines and model serving infrastructure at scale.</li>
+              </ul>
+              <div class="tech-list">
+                <span>Python</span><span>PyTorch</span><span>Kubernetes</span><span>GCP</span>
+              </div>
+            </article>
+
+            <article class="timeline-card reveal">
+              <div class="timeline-top">
+                <div class="timeline-title">Member of Technical Staff <span class="company">@ Tibbling Technologies</span></div>
+                <div class="timeline-date">Feb 2024 - Oct 2025</div>
+              </div>
+              <ul class="timeline-list">
+                <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
+                <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
+              </ul>
+              <div class="tech-list">
+                <span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>AWS</span><span>Computer Vision</span>
+              </div>
+            </article>
+
+            <article class="timeline-card reveal">
+              <div class="timeline-top">
+                <div class="timeline-title">Research Assistant <span class="company">@ NeurAI, LUMS</span></div>
+                <div class="timeline-date">Apr 2023 - Dec 2023</div>
+              </div>
+              <ul class="timeline-list">
+                <li>Designed and trained deep learning models for computer vision, published at top ML venues.</li>
+                <li>Built novel architectures that improved domain generalization performance on benchmark tasks.</li>
+              </ul>
+              <div class="tech-list">
+                <span>PyTorch</span><span>NumPy</span><span>Deep Learning</span><span>Computer Vision</span>
+              </div>
+            </article>
+
+            <article class="timeline-card reveal">
+              <div class="timeline-top">
+                <div class="timeline-title">Research Assistant <span class="company">@ WWF x WIT, LUMS</span></div>
+                <div class="timeline-date">Sep 2022 - Mar 2023</div>
+              </div>
+              <ul class="timeline-list">
+                <li>Developed mathematical and ML models to predict forest fire spread across Pakistani landscapes.</li>
+                <li>Collaborated with domain experts at WWF to validate model outputs against satellite data.</li>
+              </ul>
+              <div class="tech-list">
+                <span>Python</span><span>Scikit-learn</span><span>GIS</span><span>Remote Sensing</span>
+              </div>
+            </article>
+
+            <article class="timeline-card reveal">
+              <div class="timeline-top">
+                <div class="timeline-title">Machine Learning Engineer <span class="company">@ Wizlabs AI</span></div>
+                <div class="timeline-date">Jan 2021 - Dec 2022</div>
+              </div>
+              <ul class="timeline-list">
+                <li>Built a virtual try-on MVP for South Asian fashion using generative models.</li>
+                <li>Designed the model pipeline from data collection to deployment for real-time garment transfer.</li>
+              </ul>
+              <div class="tech-list">
+                <span>Python</span><span>PyTorch</span><span>GANs</span><span>OpenCV</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-index">03 / Projects</div>
+            <div>
+              <h2 class="section-title">A restrained placeholder for future project case studies.</h2>
+              <p class="section-intro">The existing project content is preserved, but the presentation now treats it as an intentionally quiet placeholder instead of a novelty centerpiece.</p>
+            </div>
+          </div>
+          <div class="projects-card reveal">
+            <div class="project-copy">
+              <div class="meta-label" style="margin-bottom:1rem;">Project</div>
+              <h3>Snake Game</h3>
+              <p>Something amazing is coming soon here, in the meanwhile, play the Snake game.</p>
+              <p>The interaction stays available, but the surrounding page now keeps the focus on engineering work, publications, and production experience.</p>
+              <div class="project-meta">
+                <span>JavaScript</span>
+                <span>HTML5 Canvas</span>
+                <span>Game</span>
+              </div>
+            </div>
+            <div class="snake-shell">
+              <div class="snake-frame snake-game-wrapper">
+                <div class="snake-score" id="snakeScore">Score: 0</div>
+                <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                <div class="snake-controls">
+                  <button id="snakeStartBtn" type="button">Start Game</button>
+                  <button id="snakeResetBtn" type="button">Reset</button>
+                </div>
+                <div class="snake-mobile-dpad">
+                  <button class="dpad-up" id="dpadUp" type="button">&#9650;</button>
+                  <button class="dpad-left" id="dpadLeft" type="button">&#9664;</button>
+                  <button class="dpad-right" id="dpadRight" type="button">&#9654;</button>
+                  <button class="dpad-down" id="dpadDown" type="button">&#9660;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-index">04 / Publications</div>
+            <div>
+              <h2 class="section-title">Research presented as a first-class body of work.</h2>
+              <p class="section-intro">All existing publications are retained and organized in a cleaner reading flow so the research record supports, rather than competes with, the engineering profile.</p>
+            </div>
+          </div>
+          <div class="publications-grid">
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</h3>
+                <p class="publication-authors pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></p>
+                <p class="publication-venue pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
+                  <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">Segment AnyNeuron</h3>
+                <p class="publication-authors pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/m2m.png" alt="Mice to Machines" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</h3>
+                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/viT_paper.png" alt="Neural Attention Maps" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</h3>
+                <p class="publication-authors pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">Neuro for AI &amp; AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/exeraide.png" alt="ExerAIde" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</h3>
+                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/animalformer.png" alt="AnimalFormer" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</h3>
+                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/neurn.png" alt="NeuRN" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</h3>
+                <p class="publication-authors pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">arXiv Preprint</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="publication-card reveal pub-item">
+              <div class="publication-thumb pub-image"><img src="assets/neugen.png" alt="NeuGen" loading="lazy"></div>
+              <div>
+                <h3 class="publication-title pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</h3>
+                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</p>
+                <p class="publication-venue pub-venue">arXiv Preprint</p>
+                <div class="publication-actions pub-links">
+                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="contact-card reveal">
+            <div>
+              <span class="contact-kicker">05 / What's Next?</span>
+              <h2>Get In Touch</h2>
+              <p>
+                I'm always open to discussing new projects, engineering challenges, or interesting opportunities.
+                Feel free to reach out.
+              </p>
+            </div>
+            <a class="button button-primary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <p>Designed &amp; Built by Ahmed Qazi</p>
+        <div class="footer-links">
+          <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+        </div>
+        <p class="footer-note">Senior AI Engineer</p>
       </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div class="exp-title">Research Assistant <span class="company">@ NeurAI, LUMS</span></div>
-          <div class="exp-date">Apr 2023 – Dec 2023</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Designed and trained deep learning models for computer vision, published at top ML venues.</li>
-          <li>Built novel architectures that improved domain generalization performance on benchmark tasks.</li>
-        </ul>
-        <div class="exp-tech">
-          <span>PyTorch</span><span>NumPy</span><span>Deep Learning</span><span>Computer Vision</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div class="exp-title">Research Assistant <span class="company">@ WWF × WIT, LUMS</span></div>
-          <div class="exp-date">Sep 2022 – Mar 2023</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Developed mathematical and ML models to predict forest fire spread across Pakistani landscapes.</li>
-          <li>Collaborated with domain experts at WWF to validate model outputs against satellite data.</li>
-        </ul>
-        <div class="exp-tech">
-          <span>Python</span><span>Scikit-learn</span><span>GIS</span><span>Remote Sensing</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-header">
-          <div class="exp-title">Machine Learning Engineer <span class="company">@ Wizlabs AI</span></div>
-          <div class="exp-date">Jan 2021 – Dec 2022</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Built a virtual try-on MVP for South Asian fashion using generative models.</li>
-          <li>Designed the model pipeline from data collection to deployment for real-time garment transfer.</li>
-        </ul>
-        <div class="exp-tech">
-          <span>Python</span><span>PyTorch</span><span>GANs</span><span>OpenCV</span>
-        </div>
-      </div>
-
-    </div>
+    </footer>
   </div>
-</section>
 
-<!-- ═══ Projects ═══ -->
-<section id="projects">
-  <div class="container">
-    <h2 class="section-heading reveal"><span class="num">03.</span> Projects</h2>
-
-    <!-- Snake Game Project -->
-    <div class="project-card reveal" style="max-width: 520px;">
-      <div class="pc-top">
-        <div class="pc-folder">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-      </div>
-      <h3 class="pc-title">Snake Game</h3>
-      <p class="pc-desc">Something amazing is coming soon here, in the meanwhile, play the Snake game.</p>
-      <div class="snake-game-wrapper">
-        <div class="snake-score" id="snakeScore">Score: 0</div>
-        <canvas id="snakeCanvas" width="400" height="400"></canvas>
-        <div class="snake-controls">
-          <button id="snakeStartBtn">Start Game</button>
-          <button id="snakeResetBtn">Reset</button>
-        </div>
-        <div class="snake-mobile-dpad">
-          <button class="dpad-up" id="dpadUp">&#9650;</button>
-          <button class="dpad-left" id="dpadLeft">&#9664;</button>
-          <button class="dpad-right" id="dpadRight">&#9654;</button>
-          <button class="dpad-down" id="dpadDown">&#9660;</button>
-        </div>
-      </div>
-      <div class="pc-tech" style="margin-top: 1rem;">
-        <span>JavaScript</span><span>·</span><span>HTML5 Canvas</span><span>·</span><span>Game</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Publications ═══ -->
-<section id="publications">
-  <div class="container">
-    <h2 class="section-heading reveal"><span class="num">04.</span> Publications</h2>
-    <div class="pub-list">
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy"></div>
-        <div>
-          <div class="pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</div>
-          <div class="pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></div>
-          <div class="pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</div>
-          <div class="pub-links">
-            <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
-            <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy"></div>
-        <div>
-          <div class="pub-title">Segment AnyNeuron</div>
-          <div class="pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</div>
-          <div class="pub-links">
-            <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/m2m.png" alt="Mice to Machines" loading="lazy"></div>
-        <div>
-          <div class="pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</div>
-          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</div>
-          <div class="pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</div>
-          <div class="pub-links">
-            <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/viT_paper.png" alt="Neural Attention Maps" loading="lazy"></div>
-        <div>
-          <div class="pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</div>
-          <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-          <div class="pub-venue">Neuro for AI & AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</div>
-          <div class="pub-links">
-            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/exeraide.png" alt="ExerAIde" loading="lazy"></div>
-        <div>
-          <div class="pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</div>
-          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-          <div class="pub-links">
-            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/animalformer.png" alt="AnimalFormer" loading="lazy"></div>
-        <div>
-          <div class="pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</div>
-          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</div>
-          <div class="pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</div>
-          <div class="pub-links">
-            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/neurn.png" alt="NeuRN" loading="lazy"></div>
-        <div>
-          <div class="pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</div>
-          <div class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</div>
-          <div class="pub-venue">arXiv Preprint</div>
-          <div class="pub-links">
-            <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="pub-item reveal">
-        <div class="pub-image"><img src="assets/neugen.png" alt="NeuGen" loading="lazy"></div>
-        <div>
-          <div class="pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</div>
-          <div class="pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</div>
-          <div class="pub-venue">arXiv Preprint</div>
-          <div class="pub-links">
-            <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Contact ═══ -->
-<section id="contact">
-  <div class="container">
-    <div class="reveal">
-      <p class="contact-num">05. What's Next?</p>
-      <h2 class="contact-heading">Get In Touch</h2>
-      <p class="contact-text">
-        I'm always open to discussing new projects, engineering challenges, or interesting opportunities.
-        Feel free to reach out.
-      </p>
-      <a href="mailto:ahmedrashidqazi@gmail.com" class="btn">Say Hello →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Footer ═══ -->
-<footer>
-  <p class="footer-credit">Designed &amp; Built by Ahmed Qazi</p>
-</footer>
-
-<!-- ═══ Publication Modal ═══ -->
-<div class="pub-modal-overlay" id="pubModalOverlay">
-  <div class="pub-modal">
-    <img class="pub-modal-img" id="pubModalImg" src="" alt="">
-    <div class="pub-modal-body">
-      <button class="pub-modal-close" id="pubModalClose" aria-label="Close">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <div class="pub-modal-overlay" id="pubModalOverlay">
+    <div class="pub-modal" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
+      <button class="pub-modal-close" id="pubModalClose" aria-label="Close publication details">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
-      <h3 class="pub-modal-title" id="pubModalTitle"></h3>
-      <p class="pub-modal-authors" id="pubModalAuthors"></p>
-      <p class="pub-modal-venue" id="pubModalVenue"></p>
-      <a class="pub-modal-btn" id="pubModalPdfBtn" href="#" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        View PDF
-      </a>
+      <img class="pub-modal-img" id="pubModalImg" src="" alt="">
+      <div class="pub-modal-body">
+        <h3 class="pub-modal-title" id="pubModalTitle"></h3>
+        <p class="pub-modal-authors" id="pubModalAuthors"></p>
+        <p class="pub-modal-venue" id="pubModalVenue"></p>
+        <a class="pub-modal-btn" id="pubModalPdfBtn" href="#" target="_blank" rel="noopener">View PDF</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ═══ Command Palette Trigger ═══ -->
-<button class="cmd-trigger" id="cmdTrigger" aria-label="Open command palette" title="⌘K / Ctrl+K">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-</button>
+  <script>
+    (function() {
+      "use strict";
 
-<!-- ═══ Command Palette ═══ -->
-<div class="cmd-overlay" id="cmdOverlay">
-  <div class="cmd-palette">
-    <div class="cmd-input-wrap">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="cmd-input" id="cmdInput" type="text" placeholder="Type a command..." autocomplete="off" spellcheck="false">
-    </div>
-    <div class="cmd-results" id="cmdResults"></div>
-    <div class="cmd-hint">
-      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
-      <span><kbd>↵</kbd> select</span>
-      <span><kbd>esc</kbd> close</span>
-    </div>
-  </div>
-</div>
+      var navbar = document.getElementById("navbar");
+      var navLinks = document.getElementById("navLinks");
+      var mobileToggle = document.getElementById("mobileToggle");
+      var navAnchors = document.querySelectorAll(".nav-link");
+      var sections = document.querySelectorAll("main section[id]");
 
-<script>
-(function() {
-  'use strict';
-
-  // ── Scroll reveal ──
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function(el) {
-    revealObserver.observe(el);
-  });
-
-  // ── Navbar: hide on scroll down, show on scroll up ──
-  var navbar = document.getElementById('navbar');
-  var lastScroll = 0;
-
-  window.addEventListener('scroll', function() {
-    var current = window.scrollY;
-    if (current > 80) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-    if (current > lastScroll && current > 300) {
-      navbar.classList.add('hidden');
-    } else {
-      navbar.classList.remove('hidden');
-    }
-    lastScroll = current;
-  }, { passive: true });
-
-  // ── Active section highlighting ──
-  var sections = document.querySelectorAll('section[id]');
-  var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-
-  var sectionObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var id = entry.target.getAttribute('id');
-        navAnchors.forEach(function(a) {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
         });
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
+      }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
 
-  sections.forEach(function(s) { sectionObserver.observe(s); });
+      document.querySelectorAll(".reveal").forEach(function(element) {
+        revealObserver.observe(element);
+      });
 
-  // ── Mobile menu ──
-  var mobileToggle = document.getElementById('mobileToggle');
-  var navLinks = document.getElementById('navLinks');
+      var activeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
 
-  mobileToggle.addEventListener('click', function() {
-    navLinks.classList.toggle('open');
-  });
+          var id = entry.target.getAttribute("id");
+          navAnchors.forEach(function(anchor) {
+            anchor.classList.toggle("active", anchor.getAttribute("href") === "#" + id);
+          });
+        });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.1 });
 
-  navLinks.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-    });
-  });
+      sections.forEach(function(section) {
+        activeObserver.observe(section);
+      });
 
-  // ── Command Palette ──
-  var cmdOverlay = document.getElementById('cmdOverlay');
-  var cmdInput = document.getElementById('cmdInput');
-  var cmdResults = document.getElementById('cmdResults');
-  var cmdTrigger = document.getElementById('cmdTrigger');
-  var activeIdx = 0;
+      mobileToggle.addEventListener("click", function() {
+        var isOpen = navLinks.classList.toggle("open");
+        document.body.classList.toggle("menu-open", isOpen);
+      });
 
-  var commands = [
-    { label: 'Go to About', section: '#about', icon: 'user' },
-    { label: 'Go to Experience', section: '#experience', icon: 'briefcase' },
-    { label: 'Go to Projects', section: '#projects', icon: 'code' },
-    { label: 'Go to Publications', section: '#publications', icon: 'book' },
-    { label: 'Go to Contact', section: '#contact', icon: 'mail' },
-    { label: 'Back to Top', section: '#hero', icon: 'arrow-up' },
-    { label: 'Email Ahmed', section: 'mailto:ahmedrashidqazi@gmail.com', icon: 'mail' },
-    { label: 'View LinkedIn', section: 'https://linkedin.com/in/ahmed-qazi-9099', icon: 'link' },
-    { label: 'View Google Scholar', section: 'https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en', icon: 'link' }
-  ];
+      navAnchors.forEach(function(anchor) {
+        anchor.addEventListener("click", function() {
+          navLinks.classList.remove("open");
+          document.body.classList.remove("menu-open");
+        });
+      });
 
-  function iconSvg(name) {
-    var icons = {
-      'user': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
-      'briefcase': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',
-      'code': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
-      'book': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',
-      'mail': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
-      'arrow-up': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
-      'link': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
-    };
-    return icons[name] || '';
-  }
+      window.addEventListener("resize", function() {
+        if (window.innerWidth > 860) {
+          navLinks.classList.remove("open");
+          document.body.classList.remove("menu-open");
+        }
+      });
 
-  function renderResults(filter) {
-    var filtered = commands.filter(function(c) {
-      return c.label.toLowerCase().includes(filter.toLowerCase());
-    });
-    activeIdx = 0;
-    cmdResults.innerHTML = filtered.map(function(c, i) {
-      return '<div class="cmd-item' + (i === 0 ? ' active' : '') + '" data-section="' + c.section + '">' + iconSvg(c.icon) + ' ' + c.label + '</div>';
-    }).join('');
-  }
+      window.addEventListener("scroll", function() {
+        navbar.style.borderBottomColor = window.scrollY > 20 ? "rgba(15, 23, 42, 0.14)" : "rgba(15, 23, 42, 0.10)";
+      }, { passive: true });
 
-  function openCmd() {
-    cmdOverlay.classList.add('open');
-    cmdInput.value = '';
-    renderResults('');
-    setTimeout(function() { cmdInput.focus(); }, 50);
-  }
+      var canvas = document.getElementById("snakeCanvas");
+      var ctx = canvas.getContext("2d");
+      var scoreEl = document.getElementById("snakeScore");
+      var startBtn = document.getElementById("snakeStartBtn");
+      var resetBtn = document.getElementById("snakeResetBtn");
 
-  function closeCmd() {
-    cmdOverlay.classList.remove('open');
-  }
+      var gridSize = 20;
+      var tileCount = canvas.width / gridSize;
+      var snake;
+      var food;
+      var dx;
+      var dy;
+      var score;
+      var gameRunning;
+      var gameLoop;
 
-  function executeCmd(section) {
-    closeCmd();
-    if (section.startsWith('http') || section.startsWith('mailto:')) {
-      window.open(section, '_blank');
-    } else {
-      document.querySelector(section).scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  cmdTrigger.addEventListener('click', openCmd);
-
-  cmdOverlay.addEventListener('click', function(e) {
-    if (e.target === cmdOverlay) closeCmd();
-  });
-
-  cmdInput.addEventListener('input', function() {
-    renderResults(this.value);
-  });
-
-  cmdResults.addEventListener('click', function(e) {
-    var item = e.target.closest('.cmd-item');
-    if (item) executeCmd(item.dataset.section);
-  });
-
-  cmdInput.addEventListener('keydown', function(e) {
-    var items = cmdResults.querySelectorAll('.cmd-item');
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      activeIdx = Math.min(activeIdx + 1, items.length - 1);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      activeIdx = Math.max(activeIdx - 1, 0);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (items[activeIdx]) executeCmd(items[activeIdx].dataset.section);
-      return;
-    } else if (e.key === 'Escape') {
-      closeCmd();
-      return;
-    } else {
-      return;
-    }
-    items.forEach(function(el, i) {
-      el.classList.toggle('active', i === activeIdx);
-    });
-    if (items[activeIdx]) items[activeIdx].scrollIntoView({ block: 'nearest' });
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      if (cmdOverlay.classList.contains('open')) {
-        closeCmd();
-      } else {
-        openCmd();
-      }
-    }
-    if (e.key === 'Escape' && cmdOverlay.classList.contains('open')) {
-      closeCmd();
-    }
-  });
-
-  // ── Snake Game ──
-  var canvas = document.getElementById('snakeCanvas');
-  var ctx = canvas.getContext('2d');
-  var scoreEl = document.getElementById('snakeScore');
-  var startBtn = document.getElementById('snakeStartBtn');
-  var resetBtn = document.getElementById('snakeResetBtn');
-
-  var gridSize = 20;
-  var tileCount = canvas.width / gridSize;
-  var snake, food, dx, dy, score, gameRunning, gameLoop;
-
-  function initSnake() {
-    snake = [{ x: 10, y: 10 }];
-    food = { x: 15, y: 15 };
-    dx = 0;
-    dy = 0;
-    score = 0;
-    gameRunning = false;
-    scoreEl.textContent = 'Score: 0';
-    if (gameLoop) clearInterval(gameLoop);
-    drawGame();
-  }
-
-  function spawnFood() {
-    food.x = Math.floor(Math.random() * tileCount);
-    food.y = Math.floor(Math.random() * tileCount);
-    for (var i = 0; i < snake.length; i++) {
-      if (snake[i].x === food.x && snake[i].y === food.y) {
-        spawnFood();
-        return;
-      }
-    }
-  }
-
-  function drawGame() {
-    ctx.fillStyle = '#1a1a1a';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw grid lines
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.lineWidth = 0.5;
-    for (var i = 0; i < tileCount; i++) {
-      ctx.beginPath();
-      ctx.moveTo(i * gridSize, 0);
-      ctx.lineTo(i * gridSize, canvas.height);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(0, i * gridSize);
-      ctx.lineTo(canvas.width, i * gridSize);
-      ctx.stroke();
-    }
-
-    // Draw food
-    ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = '#FFFFFF';
-    ctx.shadowBlur = 8;
-    ctx.beginPath();
-    ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // Draw snake
-    for (var i = 0; i < snake.length; i++) {
-      var alpha = 1 - (i / snake.length) * 0.5;
-      ctx.fillStyle = i === 0 ? '#BBBBBB' : 'rgba(187, 187, 187, ' + alpha + ')';
-      ctx.shadowColor = '#BBBBBB';
-      ctx.shadowBlur = i === 0 ? 6 : 2;
-      ctx.fillRect(snake[i].x * gridSize + 1, snake[i].y * gridSize + 1, gridSize - 2, gridSize - 2);
-    }
-    ctx.shadowBlur = 0;
-
-    if (!gameRunning && dx === 0 && dy === 0) {
-      ctx.fillStyle = 'rgba(187, 187, 187, 0.9)';
-      ctx.font = '14px "Fira Code", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText('Press Start or Arrow Keys', canvas.width / 2, canvas.height / 2 + 40);
-    }
-  }
-
-  function updateGame() {
-    var head = { x: snake[0].x + dx, y: snake[0].y + dy };
-
-    // Wrap around
-    if (head.x < 0) head.x = tileCount - 1;
-    if (head.x >= tileCount) head.x = 0;
-    if (head.y < 0) head.y = tileCount - 1;
-    if (head.y >= tileCount) head.y = 0;
-
-    // Check self-collision
-    for (var i = 0; i < snake.length; i++) {
-      if (snake[i].x === head.x && snake[i].y === head.y) {
+      function initSnake() {
+        snake = [{ x: 10, y: 10 }];
+        food = { x: 15, y: 15 };
+        dx = 0;
+        dy = 0;
+        score = 0;
         gameRunning = false;
-        clearInterval(gameLoop);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 20px "Fira Code", monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 10);
-        ctx.fillStyle = '#BBBBBB';
-        ctx.font = '14px "Fira Code", monospace';
-        ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 20);
-        ctx.fillText('Press Reset to try again', canvas.width / 2, canvas.height / 2 + 45);
-        startBtn.textContent = 'Start Game';
-        return;
+        scoreEl.textContent = "Score: 0";
+
+        if (gameLoop) {
+          clearInterval(gameLoop);
+        }
+
+        drawGame();
       }
-    }
 
-    snake.unshift(head);
+      function spawnFood() {
+        food.x = Math.floor(Math.random() * tileCount);
+        food.y = Math.floor(Math.random() * tileCount);
 
-    if (head.x === food.x && head.y === food.y) {
-      score++;
-      scoreEl.textContent = 'Score: ' + score;
-      spawnFood();
-    } else {
-      snake.pop();
-    }
+        for (var i = 0; i < snake.length; i += 1) {
+          if (snake[i].x === food.x && snake[i].y === food.y) {
+            spawnFood();
+            return;
+          }
+        }
+      }
 
-    drawGame();
-  }
+      function drawGame() {
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  function startGame() {
-    if (gameRunning) {
-      gameRunning = false;
-      clearInterval(gameLoop);
-      startBtn.textContent = 'Resume';
-      return;
-    }
-    if (dx === 0 && dy === 0) {
-      dx = 1;
-      dy = 0;
-    }
-    gameRunning = true;
-    startBtn.textContent = 'Pause';
-    gameLoop = setInterval(updateGame, 120);
-  }
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.lineWidth = 0.5;
 
-  function changeDirection(newDx, newDy) {
-    if (newDx === -dx && newDy === -dy) return;
-    dx = newDx;
-    dy = newDy;
-    if (!gameRunning) startGame();
-  }
+        for (var i = 0; i < tileCount; i += 1) {
+          ctx.beginPath();
+          ctx.moveTo(i * gridSize, 0);
+          ctx.lineTo(i * gridSize, canvas.height);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, i * gridSize);
+          ctx.lineTo(canvas.width, i * gridSize);
+          ctx.stroke();
+        }
 
-  document.addEventListener('keydown', function(e) {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.key) === -1) return;
-    // Only prevent default if snake game area is visible
-    var rect = canvas.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      e.preventDefault();
-    }
-    switch (e.key) {
-      case 'ArrowUp': changeDirection(0, -1); break;
-      case 'ArrowDown': changeDirection(0, 1); break;
-      case 'ArrowLeft': changeDirection(-1, 0); break;
-      case 'ArrowRight': changeDirection(1, 0); break;
-    }
-  });
+        ctx.fillStyle = "#93c5fd";
+        ctx.shadowColor = "#93c5fd";
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
-  startBtn.addEventListener('click', startGame);
-  resetBtn.addEventListener('click', function() {
-    initSnake();
-    startBtn.textContent = 'Start Game';
-  });
+        for (var j = 0; j < snake.length; j += 1) {
+          var alpha = 1 - (j / snake.length) * 0.45;
+          ctx.fillStyle = j === 0 ? "#e2e8f0" : "rgba(226, 232, 240, " + alpha + ")";
+          ctx.fillRect(snake[j].x * gridSize + 1, snake[j].y * gridSize + 1, gridSize - 2, gridSize - 2);
+        }
 
-  // Mobile D-pad
-  document.getElementById('dpadUp').addEventListener('click', function() { changeDirection(0, -1); });
-  document.getElementById('dpadDown').addEventListener('click', function() { changeDirection(0, 1); });
-  document.getElementById('dpadLeft').addEventListener('click', function() { changeDirection(-1, 0); });
-  document.getElementById('dpadRight').addEventListener('click', function() { changeDirection(1, 0); });
+        if (!gameRunning && dx === 0 && dy === 0) {
+          ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+          ctx.font = '14px "IBM Plex Mono", monospace';
+          ctx.textAlign = "center";
+          ctx.fillText("Press Start or Arrow Keys", canvas.width / 2, canvas.height / 2 + 40);
+        }
+      }
 
-  initSnake();
+      function updateGame() {
+        var head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
-  // ── Publication Modal ──
-  var pubOverlay = document.getElementById('pubModalOverlay');
-  var pubModalImg = document.getElementById('pubModalImg');
-  var pubModalTitle = document.getElementById('pubModalTitle');
-  var pubModalAuthors = document.getElementById('pubModalAuthors');
-  var pubModalVenue = document.getElementById('pubModalVenue');
-  var pubModalPdfBtn = document.getElementById('pubModalPdfBtn');
-  var pubModalClose = document.getElementById('pubModalClose');
+        if (head.x < 0) head.x = tileCount - 1;
+        if (head.x >= tileCount) head.x = 0;
+        if (head.y < 0) head.y = tileCount - 1;
+        if (head.y >= tileCount) head.y = 0;
 
-  document.querySelectorAll('.pub-item').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      // Don't open modal if clicking a PDF/DOI link
-      if (e.target.closest('.pub-link')) return;
+        for (var i = 0; i < snake.length; i += 1) {
+          if (snake[i].x === head.x && snake[i].y === head.y) {
+            gameRunning = false;
+            clearInterval(gameLoop);
+            ctx.fillStyle = "rgba(15, 23, 42, 0.7)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ffffff";
+            ctx.font = 'bold 20px "IBM Plex Mono", monospace';
+            ctx.textAlign = "center";
+            ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 10);
+            ctx.font = '14px "IBM Plex Mono", monospace';
+            ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 20);
+            ctx.fillText("Press Reset to try again", canvas.width / 2, canvas.height / 2 + 45);
+            startBtn.textContent = "Start Game";
+            return;
+          }
+        }
 
-      var imgEl = item.querySelector('.pub-image img');
-      var titleEl = item.querySelector('.pub-title');
-      var authorsEl = item.querySelector('.pub-authors');
-      var venueEl = item.querySelector('.pub-venue');
-      var pdfLink = item.querySelector('.pub-link');
+        snake.unshift(head);
 
-      pubModalImg.src = imgEl ? imgEl.src : '';
-      pubModalImg.alt = imgEl ? imgEl.alt : '';
-      pubModalTitle.textContent = titleEl ? titleEl.textContent : '';
-      pubModalAuthors.innerHTML = authorsEl ? authorsEl.innerHTML : '';
-      pubModalVenue.textContent = venueEl ? venueEl.textContent : '';
-      pubModalPdfBtn.href = pdfLink ? pdfLink.href : '#';
+        if (head.x === food.x && head.y === food.y) {
+          score += 1;
+          scoreEl.textContent = "Score: " + score;
+          spawnFood();
+        } else {
+          snake.pop();
+        }
 
-      pubOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-  });
+        drawGame();
+      }
 
-  pubModalClose.addEventListener('click', function() {
-    pubOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+      function startGame() {
+        if (gameRunning) {
+          gameRunning = false;
+          clearInterval(gameLoop);
+          startBtn.textContent = "Resume";
+          return;
+        }
 
-  pubOverlay.addEventListener('click', function(e) {
-    if (e.target === pubOverlay) {
-      pubOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
+        if (dx === 0 && dy === 0) {
+          dx = 1;
+          dy = 0;
+        }
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && pubOverlay.classList.contains('open')) {
-      pubOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
+        gameRunning = true;
+        startBtn.textContent = "Pause";
+        gameLoop = setInterval(updateGame, 120);
+      }
 
-})();
-</script>
+      function changeDirection(newDx, newDy) {
+        if (newDx === -dx && newDy === -dy) {
+          return;
+        }
 
+        dx = newDx;
+        dy = newDy;
+
+        if (!gameRunning) {
+          startGame();
+        }
+      }
+
+      document.addEventListener("keydown", function(event) {
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(event.key) === -1) {
+          return;
+        }
+
+        var rect = canvas.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          event.preventDefault();
+        }
+
+        if (event.key === "ArrowUp") changeDirection(0, -1);
+        if (event.key === "ArrowDown") changeDirection(0, 1);
+        if (event.key === "ArrowLeft") changeDirection(-1, 0);
+        if (event.key === "ArrowRight") changeDirection(1, 0);
+      });
+
+      startBtn.addEventListener("click", startGame);
+      resetBtn.addEventListener("click", function() {
+        initSnake();
+        startBtn.textContent = "Start Game";
+      });
+
+      document.getElementById("dpadUp").addEventListener("click", function() { changeDirection(0, -1); });
+      document.getElementById("dpadDown").addEventListener("click", function() { changeDirection(0, 1); });
+      document.getElementById("dpadLeft").addEventListener("click", function() { changeDirection(-1, 0); });
+      document.getElementById("dpadRight").addEventListener("click", function() { changeDirection(1, 0); });
+
+      initSnake();
+
+      var pubOverlay = document.getElementById("pubModalOverlay");
+      var pubModalImg = document.getElementById("pubModalImg");
+      var pubModalTitle = document.getElementById("pubModalTitle");
+      var pubModalAuthors = document.getElementById("pubModalAuthors");
+      var pubModalVenue = document.getElementById("pubModalVenue");
+      var pubModalPdfBtn = document.getElementById("pubModalPdfBtn");
+      var pubModalClose = document.getElementById("pubModalClose");
+
+      function closeModal() {
+        pubOverlay.classList.remove("open");
+        document.body.classList.remove("modal-open");
+      }
+
+      document.querySelectorAll(".pub-item").forEach(function(item) {
+        item.addEventListener("click", function(event) {
+          if (event.target.closest(".pub-link")) {
+            return;
+          }
+
+          var imgEl = item.querySelector(".pub-image img");
+          var titleEl = item.querySelector(".pub-title");
+          var authorsEl = item.querySelector(".pub-authors");
+          var venueEl = item.querySelector(".pub-venue");
+          var pdfLink = item.querySelector(".pub-link");
+
+          pubModalImg.src = imgEl ? imgEl.src : "";
+          pubModalImg.alt = imgEl ? imgEl.alt : "";
+          pubModalTitle.textContent = titleEl ? titleEl.textContent : "";
+          pubModalAuthors.innerHTML = authorsEl ? authorsEl.innerHTML : "";
+          pubModalVenue.textContent = venueEl ? venueEl.textContent : "";
+          pubModalPdfBtn.href = pdfLink ? pdfLink.href : "#";
+
+          pubOverlay.classList.add("open");
+          document.body.classList.add("modal-open");
+        });
+      });
+
+      pubModalClose.addEventListener("click", closeModal);
+
+      pubOverlay.addEventListener("click", function(event) {
+        if (event.target === pubOverlay) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape" && pubOverlay.classList.contains("open")) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
