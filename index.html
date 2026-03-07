@@ -7,7 +7,7 @@
   <meta name="description" content="Ahmed Qazi - Senior AI Engineer. Building and deploying production-ready AI systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -16,39 +16,46 @@
     }
 
     :root {
-      --bg: #f3f5f8;
-      --bg-elevated: rgba(255, 255, 255, 0.72);
-      --surface: #ffffff;
-      --surface-strong: #f8fafc;
-      --surface-muted: #eef2f7;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --text-soft: #64748b;
-      --line: rgba(15, 23, 42, 0.1);
-      --line-strong: rgba(15, 23, 42, 0.18);
-      --accent: #153a66;
-      --accent-soft: rgba(21, 58, 102, 0.08);
-      --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
-      --section-space: clamp(4.5rem, 8vw, 8rem);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --nav-height: 78px;
-      --container: 1180px;
+      --bg: #09111f;
+      --bg-soft: #0f1a2d;
+      --panel: rgba(9, 17, 31, 0.82);
+      --panel-strong: #0c1728;
+      --panel-soft: rgba(18, 30, 51, 0.7);
+      --card: rgba(255, 255, 255, 0.03);
+      --card-strong: rgba(255, 255, 255, 0.05);
+      --text: #edf2f7;
+      --text-muted: #b7c4d8;
+      --text-soft: #8192aa;
+      --line: rgba(183, 196, 216, 0.14);
+      --line-strong: rgba(183, 196, 216, 0.24);
+      --accent: #8fb7ff;
+      --accent-strong: #c5d8ff;
+      --accent-wash: rgba(143, 183, 255, 0.12);
+      --success: #9de0c0;
+      --shadow: 0 32px 80px rgba(0, 0, 0, 0.34);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --container: 1160px;
+      --section-space: clamp(4.5rem, 9vw, 8rem);
+      --nav-height: 84px;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--nav-height) + 20px);
+      scroll-padding-top: calc(var(--nav-height) + 18px);
     }
 
     body {
       min-height: 100vh;
-      font-family: "Manrope", sans-serif;
+      font-family: "Sora", sans-serif;
+      line-height: 1.6;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(21, 58, 102, 0.08), transparent 30%),
-        linear-gradient(180deg, #f8fafc 0%, var(--bg) 48%, #edf2f7 100%);
-      line-height: 1.6;
+        radial-gradient(circle at top left, rgba(143, 183, 255, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(157, 224, 192, 0.1), transparent 18%),
+        linear-gradient(180deg, #07101c 0%, #0a1322 45%, #09111f 100%);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -59,8 +66,8 @@
     }
 
     ::selection {
+      color: #08111e;
       background: var(--accent);
-      color: #ffffff;
     }
 
     a {
@@ -73,15 +80,39 @@
       max-width: 100%;
     }
 
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
     .page-shell {
-      width: min(calc(100% - 2rem), 1320px);
+      width: min(calc(100% - 2rem), 1360px);
       margin: 1rem auto;
-      background: rgba(255, 255, 255, 0.48);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+        rgba(6, 12, 22, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 36px;
       box-shadow: var(--shadow);
       overflow: clip;
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 140px 140px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.24), transparent 85%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .container {
@@ -90,19 +121,23 @@
     }
 
     .eyebrow,
-    .meta-label,
     .section-index,
+    .meta-label,
     .skill-tag,
     .pub-link,
-    .project-meta span,
     .nav-link,
     .stat-label,
-    .contact-kicker,
     .footer-note,
+    .timeline-date,
+    .contact-kicker,
     .snake-controls button,
-    .timeline-date {
+    .snake-mobile-dpad button,
+    .publication-index,
+    .hero-badge,
+    .rail-label {
       font-family: "IBM Plex Mono", monospace;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .site-nav {
@@ -112,9 +147,9 @@
       height: var(--nav-height);
       display: flex;
       align-items: center;
-      background: rgba(243, 245, 248, 0.82);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid transparent;
+      background: rgba(7, 14, 26, 0.74);
+      backdrop-filter: blur(20px);
     }
 
     .nav-inner {
@@ -123,74 +158,81 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
     .brand {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.15rem;
       min-width: 0;
     }
 
     .brand-name {
-      font-size: 0.98rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .brand-role {
       color: var(--text-soft);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
     }
 
     .nav-links {
+      list-style: none;
       display: flex;
       align-items: center;
       gap: 0.35rem;
-      list-style: none;
     }
 
     .nav-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      padding: 0.72rem 0.95rem;
+      gap: 0.55rem;
+      padding: 0.8rem 0.95rem;
       border-radius: 999px;
-      color: var(--text-muted);
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      transition: background 0.25s ease, color 0.25s ease;
+      color: var(--text-soft);
+      font-size: 0.73rem;
+      transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-link .num {
+      color: rgba(143, 183, 255, 0.72);
     }
 
     .nav-link:hover,
     .nav-link.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    .nav-link .num {
-      color: var(--text-soft);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
     }
 
     .nav-toggle {
       display: none;
-      border: 1px solid var(--line-strong);
-      background: rgba(255, 255, 255, 0.7);
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--text);
-      border-radius: 12px;
-      padding: 0.6rem;
       cursor: pointer;
+    }
+
+    main {
+      padding-bottom: 1rem;
     }
 
     section {
       padding: var(--section-space) 0;
+      position: relative;
     }
 
     .section-header {
       display: grid;
-      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      grid-template-columns: 210px minmax(0, 1fr);
       gap: 2rem;
       align-items: start;
       margin-bottom: 2.5rem;
@@ -198,46 +240,61 @@
 
     .section-index {
       color: var(--accent);
-      font-size: 0.8rem;
-      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding-top: 0.4rem;
     }
 
     .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      max-width: 12ch;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      margin-bottom: 0.9rem;
     }
 
     .section-intro {
+      max-width: 700px;
       color: var(--text-muted);
       font-size: 1.02rem;
-      max-width: 720px;
     }
 
     .hero {
-      padding-top: clamp(3rem, 6vw, 5rem);
-      padding-bottom: clamp(4rem, 8vw, 7rem);
+      padding-top: clamp(3.75rem, 7vw, 6rem);
+      padding-bottom: clamp(4.5rem, 8vw, 7rem);
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
-      gap: 3rem;
-      align-items: end;
+      grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+      gap: 2rem;
+      align-items: stretch;
     }
 
     .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: clamp(1.8rem, 4vw, 2.6rem);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+        rgba(8, 15, 27, 0.62);
+      min-height: 100%;
+    }
+
+    .hero-top {
       max-width: 760px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.8rem;
       color: var(--accent);
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      margin-bottom: 1.4rem;
     }
 
     .eyebrow::before {
@@ -249,34 +306,32 @@
     }
 
     .hero-title {
-      font-size: clamp(3.2rem, 8vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      margin-bottom: 1rem;
       max-width: 10ch;
+      font-size: clamp(3.5rem, 10vw, 6.9rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      margin-bottom: 1rem;
     }
 
     .hero-subtitle {
-      font-size: clamp(1.3rem, 2.6vw, 2.1rem);
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
+      font-size: clamp(1.25rem, 2.8vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      color: var(--accent-strong);
+      margin-bottom: 1.2rem;
     }
 
     .hero-desc {
-      color: var(--text-muted);
-      font-size: 1.08rem;
       max-width: 620px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
       margin-bottom: 2rem;
     }
 
     .hero-actions {
       display: flex;
-      align-items: center;
-      gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+      gap: 0.9rem;
     }
 
     .button {
@@ -284,11 +339,11 @@
       align-items: center;
       justify-content: center;
       min-height: 50px;
-      padding: 0.9rem 1.3rem;
+      padding: 0.9rem 1.25rem;
       border-radius: 999px;
+      font-weight: 600;
       border: 1px solid transparent;
-      font-weight: 700;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
 
     .button:hover {
@@ -296,69 +351,111 @@
     }
 
     .button-primary {
-      background: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 18px 36px rgba(21, 58, 102, 0.18);
+      background: linear-gradient(135deg, #d8e6ff, #8fb7ff);
+      color: #08111e;
+      box-shadow: 0 18px 40px rgba(143, 183, 255, 0.22);
     }
 
     .button-secondary {
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text);
-      border-color: var(--line-strong);
+      border-color: var(--line);
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 1.2rem;
+      align-items: end;
     }
 
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
-      max-width: 680px;
     }
 
     .stat-card {
-      padding: 1.1rem 1.15rem;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 18px;
+      padding: 1.2rem;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      min-height: 100%;
     }
 
     .stat-value {
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.25rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.4rem;
     }
 
     .stat-label {
       color: var(--text-soft);
-      font-size: 0.72rem;
-      text-transform: uppercase;
+      font-size: 0.68rem;
+    }
+
+    .hero-rail {
+      display: grid;
+      gap: 0.8rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .rail-label {
+      color: var(--text-soft);
+      font-size: 0.68rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 0.55rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(157, 224, 192, 0.08);
+      color: var(--success);
+      font-size: 0.7rem;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 6px rgba(157, 224, 192, 0.12);
+    }
+
+    .hero-rail p:last-child {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
     }
 
     .hero-panel {
-      position: relative;
-      padding: 1.4rem;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.92));
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 28px;
-      overflow: hidden;
-    }
-
-    .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: auto -15% -30% 15%;
-      height: 220px;
-      background: radial-gradient(circle, rgba(21, 58, 102, 0.14), transparent 70%);
-      pointer-events: none;
+      display: grid;
+      gap: 1.1rem;
+      padding: 1.2rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(10, 18, 31, 0.74);
+      min-height: 100%;
     }
 
     .hero-portrait {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4 / 4.8;
       width: 100%;
-      border-radius: 22px;
+      border-radius: 24px;
       overflow: hidden;
-      margin-bottom: 1.25rem;
-      background: var(--surface-muted);
+      background: #101e33;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .hero-portrait img {
@@ -368,49 +465,100 @@
     }
 
     .hero-panel-meta {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-panel-top {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 1rem;
     }
 
-    .hero-panel-meta strong {
+    .hero-panel-top strong {
       display: block;
-      font-size: 1.05rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
     }
 
-    .hero-panel-meta p {
+    .hero-panel-top p {
       color: var(--text-muted);
       font-size: 0.95rem;
     }
 
     .meta-label {
       display: inline-flex;
-      padding: 0.45rem 0.7rem;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0.4rem 0.7rem;
       border-radius: 999px;
-      background: var(--accent-soft);
+      background: var(--accent-wash);
       color: var(--accent);
-      font-size: 0.74rem;
-      text-transform: uppercase;
+      font-size: 0.7rem;
       white-space: nowrap;
+    }
+
+    .profile-metrics {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .profile-metric {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .profile-metric strong {
+      font-size: 0.96rem;
+      letter-spacing: -0.03em;
+    }
+
+    .profile-metric span {
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      text-align: right;
     }
 
     .about-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 1.4rem;
       align-items: start;
     }
 
-    .copy-stack {
+    .copy-stack,
+    .stack-column {
       display: grid;
       gap: 1rem;
     }
 
+    .narrative-card,
+    .identity-card,
+    .skills-card,
+    .projects-card,
+    .contact-card,
+    .publication-card,
+    .timeline-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        rgba(8, 14, 25, 0.66);
+    }
+
+    .narrative-card {
+      padding: clamp(1.4rem, 3vw, 2rem);
+    }
+
     .copy-stack p {
       color: var(--text-muted);
-      font-size: 1.02rem;
+      font-size: 1.01rem;
       max-width: 720px;
     }
 
@@ -419,21 +567,13 @@
     }
 
     .identity-card,
-    .skills-card,
-    .projects-card,
-    .contact-card,
-    .publication-card,
-    .timeline-card {
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: var(--radius);
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+    .skills-card {
+      padding: 1.35rem;
     }
 
     .identity-card {
       display: grid;
-      gap: 1.25rem;
-      padding: 1.4rem;
+      gap: 1rem;
     }
 
     .identity-head {
@@ -443,21 +583,22 @@
     }
 
     .identity-avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 20px;
+      width: 86px;
+      height: 86px;
+      border-radius: 22px;
       object-fit: cover;
       flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .identity-head h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.2rem;
+      font-size: 1.12rem;
+      margin-bottom: 0.25rem;
     }
 
     .identity-head p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .personal-links {
@@ -469,52 +610,55 @@
     .personal-link {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.7rem;
       padding: 0.9rem 0.95rem;
-      border: 1px solid var(--line);
       border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text-muted);
-      background: rgba(248, 250, 252, 0.8);
-      transition: border-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
 
     .personal-link:hover {
       transform: translateY(-2px);
-      color: var(--accent);
-      border-color: rgba(21, 58, 102, 0.25);
+      color: var(--text);
+      border-color: rgba(143, 183, 255, 0.32);
     }
 
     .skills-card {
-      padding: 1.4rem;
       display: grid;
-      gap: 1.25rem;
+      gap: 1.15rem;
     }
 
     .skill-group h3 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
       color: var(--text-soft);
+      text-transform: uppercase;
       margin-bottom: 0.8rem;
     }
 
-    .skills-list {
+    .skills-list,
+    .tech-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.55rem;
+    }
+
+    .skill-tag,
+    .tech-list span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
     }
 
     .skill-tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      background: var(--surface-strong);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
-      font-size: 0.74rem;
-      text-transform: uppercase;
     }
 
     .timeline {
@@ -526,12 +670,15 @@
       padding: 1.5rem;
       display: grid;
       gap: 1rem;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
     .timeline-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(21, 58, 102, 0.22);
+      border-color: rgba(143, 183, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        rgba(8, 14, 25, 0.74);
     }
 
     .timeline-top {
@@ -543,8 +690,8 @@
 
     .timeline-title {
       font-size: 1.12rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-weight: 700;
+      letter-spacing: -0.03em;
     }
 
     .timeline-title .company {
@@ -553,27 +700,26 @@
 
     .timeline-date {
       color: var(--text-soft);
-      font-size: 0.76rem;
-      text-transform: uppercase;
+      font-size: 0.73rem;
       white-space: nowrap;
     }
 
     .timeline-list {
       list-style: none;
       display: grid;
-      gap: 0.55rem;
+      gap: 0.6rem;
     }
 
     .timeline-list li {
       position: relative;
-      padding-left: 1.15rem;
+      padding-left: 1.2rem;
       color: var(--text-muted);
     }
 
     .timeline-list li::before {
       content: "";
       position: absolute;
-      top: 0.65rem;
+      top: 0.72rem;
       left: 0;
       width: 6px;
       height: 6px;
@@ -581,108 +727,112 @@
       background: var(--accent);
     }
 
-    .tech-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-    }
-
     .tech-list span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 700;
+      background: rgba(143, 183, 255, 0.08);
+      color: var(--accent-strong);
+      border: 1px solid rgba(143, 183, 255, 0.12);
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: normal;
+      font-family: inherit;
     }
 
     .projects-card {
-      padding: clamp(1.25rem, 3vw, 2rem);
+      padding: clamp(1.3rem, 3vw, 2rem);
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
-      gap: 2rem;
-      align-items: start;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.9fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .project-copy {
+      display: grid;
+      align-content: start;
+      gap: 0.8rem;
     }
 
     .project-copy h3 {
-      font-size: clamp(1.7rem, 3vw, 2.35rem);
-      letter-spacing: -0.04em;
-      margin-bottom: 0.8rem;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
     }
 
     .project-copy p {
       color: var(--text-muted);
-      max-width: 620px;
-      margin-bottom: 1rem;
+      max-width: 580px;
     }
 
     .project-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 0.7rem;
-      margin-top: 1.25rem;
+      margin-top: 0.35rem;
     }
 
     .project-meta span {
       color: var(--text-soft);
-      font-size: 0.74rem;
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
     }
 
     .snake-shell {
       padding: 1rem;
-      background: linear-gradient(180deg, #e2e8f0, #cbd5e1);
-      border-radius: 20px;
-      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .snake-frame {
       padding: 1rem;
-      background: rgba(15, 23, 42, 0.94);
-      border-radius: 16px;
+      border-radius: 18px;
+      background: rgba(3, 9, 18, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .snake-score {
-      color: rgba(255, 255, 255, 0.88);
-      margin-bottom: 0.75rem;
-      font-size: 0.8rem;
+      color: rgba(237, 242, 247, 0.82);
+      margin-bottom: 0.8rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
     }
 
     .snake-game-wrapper canvas {
       width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: #0f172a;
     }
 
     .snake-controls {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 0.85rem;
-      flex-wrap: wrap;
     }
 
     .snake-controls button,
     .snake-mobile-dpad button {
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(255, 255, 255, 0.08);
-      color: #f8fafc;
       border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
       padding: 0.72rem 0.95rem;
       cursor: pointer;
-      transition: background 0.2s ease;
-      font-size: 0.76rem;
-      text-transform: uppercase;
+      font-size: 0.74rem;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .snake-controls button:hover,
     .snake-mobile-dpad button:hover {
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(143, 183, 255, 0.24);
     }
 
     .snake-mobile-dpad {
@@ -708,25 +858,35 @@
 
     .publication-card {
       display: grid;
-      grid-template-columns: 112px minmax(0, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: 48px 108px minmax(0, 1fr);
+      gap: 1.2rem;
       padding: 1.2rem;
       cursor: pointer;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      align-items: start;
     }
 
     .publication-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(21, 58, 102, 0.22);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+      border-color: rgba(143, 183, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        rgba(8, 14, 25, 0.74);
+    }
+
+    .publication-index {
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      padding-top: 0.2rem;
     }
 
     .publication-thumb {
-      width: 112px;
-      height: 112px;
+      width: 108px;
+      height: 108px;
       border-radius: 18px;
       overflow: hidden;
-      background: var(--surface-muted);
+      background: var(--panel-soft);
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .publication-thumb img {
@@ -743,44 +903,44 @@
 
     .publication-authors {
       color: var(--text-muted);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.32rem;
     }
 
     .publication-authors strong {
-      color: var(--accent);
+      color: var(--accent-strong);
     }
 
     .publication-venue {
       color: var(--text-soft);
-      font-size: 0.94rem;
-      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.95rem;
     }
 
     .publication-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.65rem;
+      gap: 0.6rem;
     }
 
     .pub-link {
       display: inline-flex;
       align-items: center;
       min-height: 34px;
-      padding: 0.45rem 0.7rem;
+      padding: 0.45rem 0.72rem;
       border-radius: 999px;
-      border: 1px solid rgba(21, 58, 102, 0.18);
+      border: 1px solid rgba(143, 183, 255, 0.22);
       color: var(--accent);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      transition: background 0.25s ease;
+      font-size: 0.72rem;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
     .pub-link:hover {
-      background: var(--accent-soft);
+      background: rgba(143, 183, 255, 0.12);
+      color: var(--accent-strong);
     }
 
     .contact-card {
-      padding: clamp(1.5rem, 4vw, 2.5rem);
+      padding: clamp(1.5rem, 4vw, 2.3rem);
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 1.5rem;
@@ -790,40 +950,34 @@
     .contact-kicker {
       display: inline-block;
       color: var(--accent);
-      font-size: 0.78rem;
-      text-transform: uppercase;
+      font-size: 0.75rem;
       margin-bottom: 0.8rem;
     }
 
     .contact-card h2 {
-      font-size: clamp(2rem, 5vw, 3.6rem);
-      line-height: 1;
-      letter-spacing: -0.05em;
-      margin-bottom: 0.75rem;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 0.8rem;
     }
 
     .contact-card p {
       max-width: 620px;
       color: var(--text-muted);
-      font-size: 1.02rem;
+      font-size: 1rem;
     }
 
     footer {
-      padding: 2rem 0 2.5rem;
-      border-top: 1px solid var(--line);
+      padding: 1.4rem 0 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .footer-row {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      align-items: center;
       color: var(--text-soft);
-    }
-
-    .footer-note {
-      font-size: 0.76rem;
-      text-transform: uppercase;
     }
 
     .footer-links {
@@ -833,13 +987,17 @@
     }
 
     .footer-links a:hover {
-      color: var(--accent);
+      color: var(--text);
+    }
+
+    .footer-note {
+      font-size: 0.72rem;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .reveal.visible {
@@ -855,8 +1013,8 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(12px);
+      background: rgba(3, 8, 16, 0.72);
+      backdrop-filter: blur(14px);
     }
 
     .pub-modal-overlay.open {
@@ -865,26 +1023,29 @@
 
     .pub-modal {
       width: min(720px, 100%);
-      background: #ffffff;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.2);
       position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        #0a1322;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
     }
 
     .pub-modal-img {
       width: 100%;
       height: min(38vh, 260px);
       object-fit: cover;
-      background: var(--surface-muted);
+      background: var(--panel-soft);
     }
 
     .pub-modal-body {
-      padding: 1.5rem 1.5rem 1.75rem;
+      padding: 1.5rem 1.5rem 1.7rem;
     }
 
     .pub-modal-title {
-      font-size: 1.3rem;
+      font-size: 1.28rem;
       line-height: 1.4;
       margin-bottom: 0.65rem;
     }
@@ -895,22 +1056,22 @@
     }
 
     .pub-modal-authors strong {
-      color: var(--accent);
+      color: var(--accent-strong);
     }
 
     .pub-modal-venue {
       color: var(--text-soft);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.15rem;
     }
 
     .pub-modal-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1rem;
-      background: var(--accent);
-      color: #ffffff;
+      gap: 0.45rem;
+      padding: 0.82rem 1rem;
       border-radius: 999px;
+      background: linear-gradient(135deg, #d8e6ff, #8fb7ff);
+      color: #08111e;
       font-weight: 700;
     }
 
@@ -922,27 +1083,27 @@
       height: 40px;
       display: grid;
       place-items: center;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.7);
-      color: #ffffff;
+      background: rgba(3, 8, 16, 0.6);
+      color: var(--text);
       cursor: pointer;
     }
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1120px) {
       .hero-grid,
-      .about-layout,
       .projects-card,
       .contact-card,
-      .section-header {
+      .section-header,
+      .about-layout {
         grid-template-columns: 1fr;
       }
 
-      .section-header {
-        gap: 0.7rem;
+      .hero-bottom {
+        grid-template-columns: 1fr;
       }
 
-      .hero-stats {
+      .section-title {
         max-width: none;
       }
 
@@ -959,21 +1120,23 @@
       }
 
       .nav-toggle {
-        display: inline-flex;
+        display: inline-grid;
+        place-items: center;
       }
 
       .nav-links {
         position: fixed;
         top: calc(var(--nav-height) + 0.5rem);
-        right: 1rem;
         left: 1rem;
+        right: 1rem;
         display: none;
         flex-direction: column;
         align-items: stretch;
+        gap: 0.4rem;
         padding: 1rem;
-        background: rgba(255, 255, 255, 0.96);
-        border: 1px solid var(--line);
-        border-radius: 20px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(7, 14, 26, 0.96);
         box-shadow: var(--shadow);
       }
 
@@ -983,15 +1146,25 @@
 
       .nav-link {
         justify-content: space-between;
+        padding: 0.95rem 1rem;
         border-radius: 14px;
       }
 
+      .hero-title {
+        max-width: none;
+      }
+
+      .hero-stats,
       .personal-links {
         grid-template-columns: 1fr;
       }
 
-      .hero-stats {
+      .publication-card {
         grid-template-columns: 1fr;
+      }
+
+      .publication-index {
+        display: none;
       }
     }
 
@@ -1001,8 +1174,17 @@
         width: min(calc(100% - 1.5rem), var(--container));
       }
 
-      .publication-card {
-        grid-template-columns: 1fr;
+      .hero-copy,
+      .hero-panel,
+      .narrative-card,
+      .projects-card,
+      .contact-card,
+      .timeline-card,
+      .publication-card,
+      .identity-card,
+      .skills-card {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
       }
 
       .publication-thumb {
@@ -1014,10 +1196,6 @@
       .footer-row {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .hero-title {
-        max-width: none;
       }
 
       .snake-mobile-dpad {
@@ -1056,42 +1234,70 @@
         <div class="container">
           <div class="hero-grid">
             <div class="hero-copy">
-              <p class="eyebrow reveal">Senior AI Engineer</p>
-              <h1 class="hero-title reveal">I build AI systems that ship to production.</h1>
-              <p class="hero-subtitle reveal">Engineering end-to-end.</p>
-              <p class="hero-desc reveal">
-                I'm Ahmed Qazi. I design, build, and deploy AI products - from model training
-                and infrastructure to scalable APIs and real-world applications.
-              </p>
-              <div class="hero-actions reveal">
-                <a class="button button-primary" href="#experience">See My Work</a>
-                <a class="button button-secondary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
+              <div class="hero-top">
+                <p class="eyebrow reveal">Senior AI Engineer</p>
+                <h1 class="hero-title reveal">I build AI systems that ship to production.</h1>
+                <p class="hero-subtitle reveal">Engineering end-to-end.</p>
+                <p class="hero-desc reveal">
+                  I'm Ahmed Qazi. I design, build, and deploy AI products - from model training
+                  and infrastructure to scalable APIs and real-world applications.
+                </p>
+                <div class="hero-actions reveal">
+                  <a class="button button-primary" href="#experience">See My Work</a>
+                  <a class="button button-secondary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
+                </div>
               </div>
-              <div class="hero-stats reveal" aria-label="Highlights">
-                <div class="stat-card">
-                  <div class="stat-value">AI Products</div>
-                  <div class="stat-label">Prototype to production deployment</div>
+
+              <div class="hero-bottom">
+                <div class="hero-stats reveal" aria-label="Highlights">
+                  <div class="stat-card">
+                    <div class="stat-value">AI Products</div>
+                    <div class="stat-label">Prototype to production deployment</div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-value">CVPR / NeurIPS</div>
+                    <div class="stat-label">Published research and workshop papers</div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-value">Multimodal Systems</div>
+                    <div class="stat-label">Healthcare, vision, and applied ML</div>
+                  </div>
                 </div>
-                <div class="stat-card">
-                  <div class="stat-value">CVPR / NeurIPS</div>
-                  <div class="stat-label">Published research and workshop papers</div>
-                </div>
-                <div class="stat-card">
-                  <div class="stat-value">Multimodal Systems</div>
-                  <div class="stat-label">Healthcare, vision, and applied ML</div>
+
+                <div class="hero-rail reveal" aria-label="Availability">
+                  <div class="rail-label">Current Focus</div>
+                  <div class="hero-badge">Available</div>
+                  <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
                 </div>
               </div>
             </div>
+
             <aside class="hero-panel reveal" aria-label="Profile summary">
               <div class="hero-portrait">
                 <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
               </div>
               <div class="hero-panel-meta">
-                <div>
-                  <strong>Ahmed Rashid Qazi</strong>
-                  <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
+                <div class="hero-panel-top">
+                  <div>
+                    <strong>Ahmed Rashid Qazi</strong>
+                    <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
+                  </div>
+                  <span class="meta-label">Available</span>
                 </div>
-                <span class="meta-label">Available</span>
+                <div class="profile-metrics">
+                  <div class="profile-metric">
+                    <strong>Production AI</strong>
+                    <span>Training, infra, deployment</span>
+                  </div>
+                  <div class="profile-metric">
+                    <strong>Research Depth</strong>
+                    <span>CVPR / NeurIPS / Neuron</span>
+                  </div>
+                  <div class="profile-metric">
+                    <strong>Applied Scope</strong>
+                    <span>Healthcare, vision, multimodal systems</span>
+                  </div>
+                </div>
               </div>
             </aside>
           </div>
@@ -1107,25 +1313,31 @@
               <p class="section-intro">The emphasis here is practical execution: training, infrastructure, deployment, and enough research fluency to build better systems.</p>
             </div>
           </div>
+
           <div class="about-layout">
             <div class="copy-stack reveal">
-              <p>
-                I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
-                to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
-                that work at scale.
-              </p>
-              <p>
-                I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
-                systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
-                solving real problems with practical engineering.
-              </p>
-              <p>
-                I graduated with a B.S. in Computer Science from
-                <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
-                Stanford University as a Pre-Collegiate Scholar.
-              </p>
+              <div class="narrative-card">
+                <div class="copy-stack">
+                  <p>
+                    I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
+                    to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
+                    that work at scale.
+                  </p>
+                  <p>
+                    I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
+                    systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
+                    solving real problems with practical engineering.
+                  </p>
+                  <p>
+                    I graduated with a B.S. in Computer Science from
+                    <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
+                    Stanford University as a Pre-Collegiate Scholar.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="reveal" style="display:grid; gap:1rem;">
+
+            <div class="stack-column reveal">
               <div class="identity-card">
                 <div class="identity-head">
                   <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="identity-avatar">
@@ -1157,6 +1369,7 @@
                   </a>
                 </div>
               </div>
+
               <div class="skills-card">
                 <div class="skill-group">
                   <h3>Languages</h3>
@@ -1207,6 +1420,7 @@
               <p class="section-intro">The throughline across these roles is building systems that operate under real constraints: infrastructure, scale, product needs, and research translation.</p>
             </div>
           </div>
+
           <div class="timeline">
             <article class="timeline-card reveal">
               <div class="timeline-top">
@@ -1290,9 +1504,10 @@
               <p class="section-intro">The existing project content is preserved, but the presentation now treats it as an intentionally quiet placeholder instead of a novelty centerpiece.</p>
             </div>
           </div>
+
           <div class="projects-card reveal">
             <div class="project-copy">
-              <div class="meta-label" style="margin-bottom:1rem;">Project</div>
+              <div class="meta-label">Project</div>
               <h3>Snake Game</h3>
               <p>Something amazing is coming soon here, in the meanwhile, play the Snake game.</p>
               <p>The interaction stays available, but the surrounding page now keeps the focus on engineering work, publications, and production experience.</p>
@@ -1302,6 +1517,7 @@
                 <span>Game</span>
               </div>
             </div>
+
             <div class="snake-shell">
               <div class="snake-frame snake-game-wrapper">
                 <div class="snake-score" id="snakeScore">Score: 0</div>
@@ -1331,8 +1547,10 @@
               <p class="section-intro">All existing publications are retained and organized in a cleaner reading flow so the research record supports, rather than competes with, the engineering profile.</p>
             </div>
           </div>
+
           <div class="publications-grid">
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">01</div>
               <div class="publication-thumb pub-image"><img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</h3>
@@ -1346,6 +1564,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">02</div>
               <div class="publication-thumb pub-image"><img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">Segment AnyNeuron</h3>
@@ -1358,6 +1577,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">03</div>
               <div class="publication-thumb pub-image"><img src="assets/m2m.png" alt="Mice to Machines" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</h3>
@@ -1370,6 +1590,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">04</div>
               <div class="publication-thumb pub-image"><img src="assets/viT_paper.png" alt="Neural Attention Maps" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</h3>
@@ -1382,6 +1603,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">05</div>
               <div class="publication-thumb pub-image"><img src="assets/exeraide.png" alt="ExerAIde" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</h3>
@@ -1394,6 +1616,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">06</div>
               <div class="publication-thumb pub-image"><img src="assets/animalformer.png" alt="AnimalFormer" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</h3>
@@ -1406,6 +1629,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">07</div>
               <div class="publication-thumb pub-image"><img src="assets/neurn.png" alt="NeuRN" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</h3>
@@ -1418,6 +1642,7 @@
             </article>
 
             <article class="publication-card reveal pub-item">
+              <div class="publication-index">08</div>
               <div class="publication-thumb pub-image"><img src="assets/neugen.png" alt="NeuGen" loading="lazy"></div>
               <div>
                 <h3 class="publication-title pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</h3>
@@ -1540,7 +1765,7 @@
       });
 
       window.addEventListener("scroll", function() {
-        navbar.style.borderBottomColor = window.scrollY > 20 ? "rgba(15, 23, 42, 0.14)" : "rgba(15, 23, 42, 0.10)";
+        navbar.style.borderBottomColor = window.scrollY > 20 ? "rgba(255, 255, 255, 0.08)" : "transparent";
       }, { passive: true });
 
       var canvas = document.getElementById("snakeCanvas");
@@ -1588,7 +1813,7 @@
       }
 
       function drawGame() {
-        ctx.fillStyle = "#0f172a";
+        ctx.fillStyle = "#08111e";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
@@ -1605,9 +1830,9 @@
           ctx.stroke();
         }
 
-        ctx.fillStyle = "#93c5fd";
-        ctx.shadowColor = "#93c5fd";
-        ctx.shadowBlur = 10;
+        ctx.fillStyle = "#8fb7ff";
+        ctx.shadowColor = "#8fb7ff";
+        ctx.shadowBlur = 12;
         ctx.beginPath();
         ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
         ctx.fill();
@@ -1615,12 +1840,12 @@
 
         for (var j = 0; j < snake.length; j += 1) {
           var alpha = 1 - (j / snake.length) * 0.45;
-          ctx.fillStyle = j === 0 ? "#e2e8f0" : "rgba(226, 232, 240, " + alpha + ")";
+          ctx.fillStyle = j === 0 ? "#edf2f7" : "rgba(237, 242, 247, " + alpha + ")";
           ctx.fillRect(snake[j].x * gridSize + 1, snake[j].y * gridSize + 1, gridSize - 2, gridSize - 2);
         }
 
         if (!gameRunning && dx === 0 && dy === 0) {
-          ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+          ctx.fillStyle = "rgba(237, 242, 247, 0.82)";
           ctx.font = '14px "IBM Plex Mono", monospace';
           ctx.textAlign = "center";
           ctx.fillText("Press Start or Arrow Keys", canvas.width / 2, canvas.height / 2 + 40);
@@ -1639,9 +1864,9 @@
           if (snake[i].x === head.x && snake[i].y === head.y) {
             gameRunning = false;
             clearInterval(gameLoop);
-            ctx.fillStyle = "rgba(15, 23, 42, 0.7)";
+            ctx.fillStyle = "rgba(8, 17, 30, 0.78)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#edf2f7";
             ctx.font = 'bold 20px "IBM Plex Mono", monospace';
             ctx.textAlign = "center";
             ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 10);
