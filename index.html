@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ahmed Qazi - Senior AI Engineer</title>
-  <meta name="description" content="Ahmed Qazi - Senior AI Engineer. Building and deploying production-ready AI systems.">
+  <title>Ahmed Qazi — AI Researcher & Engineer</title>
+  <meta name="description" content="Ahmed Qazi — Senior AI Engineer and researcher working at the intersection of neuroscience and machine learning.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -16,70 +16,35 @@
     }
 
     :root {
-      --bg: #f3f0e9;
-      --surface: #fbf9f3;
-      --surface-soft: #f6f1e8;
-      --text: #171510;
-      --muted: #706a5f;
-      --line: #ddd5c8;
-      --line-strong: #c5bcad;
-      --accent: #232018;
-      --glow: rgba(183, 154, 112, 0.26);
-      --shadow-xs: 0 1px 2px rgba(19, 17, 13, 0.05);
-      --shadow-sm: 0 8px 24px rgba(19, 17, 13, 0.07), 0 1px 2px rgba(19, 17, 13, 0.03);
-      --shadow: 0 18px 48px rgba(19, 17, 13, 0.11), 0 2px 4px rgba(19, 17, 13, 0.04);
-      --max-width: 980px;
-      --nav-height: 78px;
-      --section-space: clamp(4.2rem, 8vw, 7rem);
-      --radius: 20px;
+      --bg: #fafafa;
+      --text: #111111;
+      --muted: #555555;
+      --border: #e0e0e0;
+      --max-w: 760px;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--nav-height) + 1rem);
     }
 
     body {
-      min-height: 100vh;
-      position: relative;
-      isolation: isolate;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at -8% -12%, var(--glow) 0%, transparent 44%),
-        radial-gradient(circle at 108% 14%, rgba(61, 73, 87, 0.09) 0%, transparent 42%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      font-feature-settings: "ss01";
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, transparent 24%, transparent 74%, rgba(255, 255, 255, 0.36) 100%);
-    }
-
-    body.menu-open,
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    ::selection {
-      background: #dcd2c0;
-      color: var(--text);
     }
 
     a {
-      color: inherit;
-      text-decoration: none;
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-color: var(--text);
     }
 
     img {
@@ -87,1574 +52,750 @@
       max-width: 100%;
     }
 
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    .page-shell {
-      width: min(calc(100% - 2.25rem), 1120px);
+    /* Layout */
+    .wrap {
+      max-width: var(--max-w);
       margin: 0 auto;
-      padding-bottom: 3.5rem;
+      padding: 0 1.5rem;
     }
 
-    .container,
-    .nav-inner {
-      width: min(100%, var(--max-width));
-      margin: 0 auto;
-    }
-
-    .eyebrow,
-    .section-index,
-    .meta-label,
-    .skill-tag,
-    .pub-link,
-    .nav-link,
-    .stat-label,
-    .footer-note,
-    .timeline-date,
-    .contact-kicker,
-    .snake-controls button,
-    .snake-mobile-dpad button,
-    .publication-index,
-    .hero-badge,
-    .rail-label,
-    .project-meta span,
-    .skill-group h3 {
-      font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
-      font-size: 0.74rem;
-      letter-spacing: 0.065em;
-      text-transform: uppercase;
-    }
-
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      min-height: var(--nav-height);
-      background: color-mix(in srgb, var(--bg) 88%, rgba(255, 255, 255, 0.3) 12%);
-      backdrop-filter: blur(18px) saturate(1.3);
-      -webkit-backdrop-filter: blur(18px) saturate(1.3);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.25s ease;
+    /* Nav */
+    nav {
+      padding: 2rem 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
     }
 
     .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      gap: 1.2rem;
-      padding: 1.1rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .brand {
-      display: grid;
-      gap: 0.1rem;
-    }
-
-    .brand-name {
-      font-size: 1.02rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-role {
-      color: var(--muted);
-      font-size: 0.86rem;
+    .nav-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      align-items: center;
-      gap: 1.4rem;
-    }
-
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--muted);
-      padding: 0.12rem 0;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .nav-link .num {
-      color: #978f82;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--text);
-      border-color: color-mix(in srgb, var(--text) 80%, transparent);
-    }
-
-    .nav-toggle {
-      display: none;
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--surface) 90%, transparent 10%);
-      color: var(--text);
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      cursor: pointer;
-    }
-
-    main {
-      display: grid;
-      gap: 0;
-    }
-
-    section {
-      padding: var(--section-space) 0;
-      border-top: 1px solid color-mix(in srgb, var(--line) 76%, transparent 24%);
-    }
-
-    section:first-child {
-      border-top: 0;
-    }
-
-    .hero {
-      padding-top: clamp(3.2rem, 8vw, 6.2rem);
-    }
-
-    .hero-grid,
-    .about-layout,
-    .projects-card,
-    .contact-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(290px, 340px);
-      gap: clamp(1.6rem, 3vw, 2.5rem);
-      align-items: start;
-    }
-
-    .hero-copy,
-    .hero-panel,
-    .narrative-card,
-    .identity-card,
-    .skills-card,
-    .projects-card,
-    .publication-card,
-    .timeline-card,
-    .contact-card,
-    .snake-shell,
-    .pub-modal {
-      background: color-mix(in srgb, var(--surface) 96%, transparent);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-xs);
-    }
-
-    .hero-copy,
-    .hero-panel,
-    .narrative-card,
-    .identity-card,
-    .skills-card,
-    .timeline-card,
-    .publication-card,
-    .snake-shell,
-    .contact-card {
-      padding: 1.6rem;
-    }
-
-    .hero-copy,
-    .narrative-card,
-    .projects-card {
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      padding: 0;
-    }
-
-    .hero-copy,
-    .hero-panel,
-    .copy-stack,
-    .stack-column,
-    .profile-metrics,
-    .timeline,
-    .publications-grid,
-    .hero-panel-meta {
-      display: grid;
-      gap: 1.3rem;
-    }
-
-    .hero-top,
-    .project-copy {
-      display: grid;
-      gap: 1.05rem;
-    }
-
-    .eyebrow,
-    .section-index,
-    .contact-kicker,
-    .rail-label,
-    .publication-index,
-    .meta-label,
-    .hero-badge,
-    .stat-label,
-    .footer-note,
-    .timeline-date,
-    .project-meta span,
-    .skill-group h3 {
-      color: var(--muted);
-    }
-
-    .hero-title,
-    .section-title,
-    .contact-card h2,
-    .project-copy h3 {
-      font-family: "Fraunces", "Iowan Old Style", "Times New Roman", serif;
-      font-weight: 600;
-      line-height: 0.98;
-      letter-spacing: -0.028em;
-    }
-
-    .hero-title {
-      max-width: 11ch;
-      font-size: clamp(3.1rem, 8.8vw, 6.1rem);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.08rem, 1.8vw, 1.42rem);
-      color: color-mix(in srgb, var(--muted) 86%, #4b463f 14%);
-      letter-spacing: 0.004em;
-    }
-
-    .hero-desc,
-    .section-intro,
-    .copy-stack p,
-    .project-copy p,
-    .contact-card p,
-    .publication-authors,
-    .publication-venue,
-    .hero-panel-top p,
-    .profile-metric span,
-    .timeline-list li,
-    .footer-row,
-    .personal-link,
-    .hero-rail p:last-child {
-      color: var(--muted);
-    }
-
-    .hero-desc,
-    .section-intro,
-    .copy-stack p,
-    .project-copy p,
-    .contact-card p,
-    .hero-rail p:last-child {
-      font-size: 1rem;
-      max-width: 66ch;
-    }
-
-    .hero-actions,
-    .publication-actions,
-    .skills-list,
-    .tech-list,
-    .project-meta,
-    .snake-controls,
-    .footer-links {
-      display: flex;
+      gap: 1.5rem;
       flex-wrap: wrap;
-      gap: 0.75rem;
     }
 
-    .button,
-    .pub-link,
-    .meta-label,
-    .hero-badge,
-    .skill-tag,
-    .tech-list span,
-    .snake-controls button,
-    .snake-mobile-dpad button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0.62rem 0.95rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--surface) 90%, transparent 10%);
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
       color: var(--text);
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
-    .button:hover,
-    .pub-link:hover,
-    .personal-link:hover,
-    .snake-controls button:hover,
-    .snake-mobile-dpad button:hover,
-    .button:focus-visible,
-    .pub-link:focus-visible,
-    .nav-link:focus-visible,
-    .personal-link:focus-visible {
-      background: var(--surface-soft);
-      border-color: var(--line-strong);
-      outline: none;
+    /* Hero */
+    .hero {
+      margin-bottom: 4rem;
     }
 
-    .button:hover,
-    .pub-link:hover {
-      box-shadow: 0 6px 18px rgba(20, 18, 14, 0.08);
-      transform: translateY(-0.5px);
+    .hero-inner {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
     }
 
-    .button-primary {
-      background: linear-gradient(145deg, #18150f 0%, #2a251d 100%);
-      border-color: #1f1a14;
-      color: #f4efe6;
-    }
-
-    .button-primary:hover,
-    .button-primary:focus-visible {
-      background: linear-gradient(145deg, #211d16 0%, #322c22 100%);
-      border-color: #262016;
-    }
-
-    .button-secondary {
-      background: transparent;
-    }
-
-    .hero-bottom {
-      display: grid;
-      gap: 1.1rem;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
-    }
-
-    .stat-card,
-    .hero-rail,
-    .snake-frame {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 1.05rem;
-      background: color-mix(in srgb, var(--surface-soft) 95%, white 5%);
-    }
-
-    .stat-value,
-    .publication-title,
-    .timeline-title,
-    .hero-panel-top strong,
-    .identity-head h3 {
-      font-size: 1.01rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .hero-portrait {
+    .hero-photo {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       overflow: hidden;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: var(--surface-soft);
-      aspect-ratio: 4 / 4.8;
+      border: 1px solid var(--border);
     }
 
-    .hero-portrait img,
-    .publication-thumb img,
-    .identity-avatar {
+    .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .profile-metric,
-    .timeline-top,
-    .footer-row,
-    .hero-panel-top {
+    .hero-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-title {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-bio {
+      font-size: 0.9375rem;
+      margin-bottom: 1rem;
+      max-width: 520px;
+    }
+
+    .hero-links {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .section-header {
-      display: grid;
-      grid-template-columns: 138px minmax(0, 1fr);
-      gap: 1.2rem;
-      align-items: start;
-      margin-bottom: 2.15rem;
+    .hero-links a {
+      font-size: 0.825rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
     }
 
-    .section-title,
-    .contact-card h2 {
-      font-size: clamp(2.15rem, 5vw, 3.5rem);
-      max-width: 12ch;
-      margin-bottom: 0.82rem;
+    .hero-links a:hover {
+      color: var(--text);
+      border-color: var(--text);
     }
 
-    .narrative-card .copy-stack {
-      gap: 1.2rem;
+    /* Sections */
+    section {
+      margin-bottom: 3.5rem;
     }
 
-    .copy-stack a {
-      text-decoration: underline;
-      text-underline-offset: 0.15em;
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .identity-card,
-    .skills-card {
-      gap: 1.05rem;
+    /* About */
+    .about-text p {
+      margin-bottom: 0.75rem;
+      color: #222;
     }
 
-    .identity-head {
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Education */
+    .edu-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .edu-item {
       display: flex;
       align-items: center;
       gap: 1rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
     }
 
-    .identity-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
+    .edu-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
-    .personal-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.7rem;
+    .edu-info strong {
+      display: block;
+      font-size: 0.9rem;
     }
 
-    .personal-link {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.85rem 0.9rem;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: var(--surface-soft);
-    }
-
-    .skill-group {
-      display: grid;
-      gap: 0.62rem;
-    }
-
-    .skills-list,
-    .tech-list {
-      gap: 0.5rem;
-    }
-
-    .skill-tag,
-    .tech-list span {
-      min-height: 34px;
-      padding: 0.42rem 0.72rem;
-      font-size: 0.7rem;
-    }
-
-    .timeline-list {
-      list-style: none;
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .timeline-list li {
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .timeline-list li::before {
-      content: "·";
-      position: absolute;
-      left: 0;
-      color: color-mix(in srgb, var(--text) 75%, transparent);
-    }
-
-    .timeline-title .company {
+    .edu-info span {
+      font-size: 0.825rem;
       color: var(--muted);
     }
 
-    .projects-card {
-      gap: 1.5rem;
+    /* Experience */
+    .exp-item {
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
     }
 
-    .snake-shell,
-    .snake-frame,
-    .snake-game-wrapper,
-    .snake-mobile-dpad {
-      display: grid;
+    .exp-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.35rem;
+    }
+
+    .exp-role {
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .exp-company {
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .exp-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-desc li {
+      margin-left: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-tech {
+      font-size: 0.775rem;
+      color: var(--muted);
+    }
+
+    /* Publications */
+    .pub-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .pub-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-thumb {
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .pub-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pub-num {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      width: 1.5rem;
+      padding-top: 0.1rem;
+    }
+
+    .pub-body h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.25rem;
+    }
+
+    .pub-authors {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-venue {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      font-style: italic;
+    }
+
+    .pub-links {
+      display: flex;
       gap: 0.75rem;
     }
 
-    .snake-score {
+    .pub-links a {
+      font-size: 0.775rem;
       color: var(--muted);
-      font-family: "DM Mono", ui-monospace, monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .snake-game-wrapper canvas {
-      width: 100%;
-      height: auto;
-      display: block;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #0b0b0b;
-    }
-
-    .snake-mobile-dpad {
-      display: none;
-      grid-template-areas:
-        ". up ."
-        "left . right"
-        ". down .";
-      justify-content: center;
-    }
-
-    .dpad-up { grid-area: up; }
-    .dpad-left { grid-area: left; }
-    .dpad-right { grid-area: right; }
-    .dpad-down { grid-area: down; }
-
-    .publications-grid {
-      gap: 0.92rem;
-    }
-
-    .publication-card {
-      display: grid;
-      grid-template-columns: 40px 88px minmax(0, 1fr);
-      gap: 1.1rem;
-      align-items: start;
-      cursor: pointer;
-      transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
-    }
-
-    .publication-card:hover {
-      box-shadow: var(--shadow-sm);
-      border-color: var(--line-strong);
-      transform: translateY(-1px);
-    }
-
-    .publication-thumb {
-      width: 88px;
-      height: 88px;
-      overflow: hidden;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: var(--surface-soft);
-    }
-
-    .pub-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(19, 17, 14, 0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      z-index: 40;
-    }
-
-    .pub-modal-overlay.open {
+    /* Skills */
+    .skills-grid {
       display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
     }
 
-    .pub-modal {
-      width: min(100%, 680px);
-      padding: 1.35rem;
-      position: relative;
+    .skill-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .skill-group-label {
+      font-size: 0.775rem;
+      color: var(--muted);
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .skill-tags {
+      font-size: 0.825rem;
+      color: #333;
+    }
+
+    /* Beyond */
+    .photos-grid {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .photo-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-caption {
+      padding: 0.4rem 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Contact */
+    .contact-block p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
       gap: 1rem;
     }
 
-    .pub-modal-close {
-      position: absolute;
-      top: 0.9rem;
-      right: 0.9rem;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface-soft);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .pub-modal-img {
-      width: 100%;
-      max-height: 320px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-    }
-
-    .pub-modal-body {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .pub-modal-title {
-      font-size: 1.2rem;
-      line-height: 1.35;
-    }
-
-    .pub-modal-authors,
-    .pub-modal-venue {
-      color: var(--muted);
-    }
-
-    .pub-modal-btn {
-      width: fit-content;
-    }
-
-    footer {
-      padding: 2.4rem 0 0;
-      border-top: 1px solid color-mix(in srgb, var(--line) 76%, transparent 24%);
-    }
-
-    .footer-row {
-      color: var(--muted);
-    }
-
     .footer-links a {
-      text-decoration: underline;
-      text-underline-offset: 0.18em;
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
-    .timeline-card {
-      transition: box-shadow 0.22s ease, border-color 0.22s ease;
-    }
-
-    .timeline-card:hover {
-      box-shadow: 0 7px 18px rgba(20, 18, 14, 0.07);
-      border-color: var(--line-strong);
-    }
-
-    .stat-card {
-      transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
-    }
-
-    .stat-card:hover {
-      box-shadow: 0 8px 18px rgba(20, 18, 14, 0.07);
-      border-color: var(--line-strong);
-      transform: translateY(-0.5px);
-    }
-
-    .personal-link {
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .personal-link:hover {
-      background: var(--surface);
-      border-color: var(--line-strong);
-      box-shadow: 0 8px 16px rgba(20, 18, 14, 0.06);
-      transform: translateY(-0.5px);
-    }
-
-    .brand-name {
-      letter-spacing: -0.02em;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 860px) {
-      .page-shell {
-        width: min(calc(100% - 1.25rem), 1100px);
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero-inner {
+        flex-direction: column;
+        gap: 1.25rem;
       }
 
-      .nav-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+      .hero-photo {
+        width: 80px;
+        height: 80px;
       }
 
-      .nav-links {
-        position: fixed;
-        top: calc(var(--nav-height) + 0.5rem);
-        left: 0.625rem;
-        right: 0.625rem;
+      .photos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pub-thumb {
         display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 1rem;
-        background: color-mix(in srgb, var(--surface) 96%, transparent);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        box-shadow: var(--shadow-sm);
       }
 
-      .nav-links.open {
-        display: flex;
-      }
-
-      .hero-grid,
-      .about-layout,
-      .projects-card,
-      .contact-card,
-      .section-header,
-      .footer-row,
-      .timeline-top,
-      .hero-panel-top,
-      .profile-metric {
-        grid-template-columns: 1fr;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero-stats,
-      .personal-links,
-      .publication-card {
-        grid-template-columns: 1fr;
-      }
-
-      .publication-thumb {
+      .skill-group-label {
         width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-      }
-
-      .snake-mobile-dpad {
-        display: grid;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page-shell {
-        width: min(calc(100% - 1rem), 1100px);
-      }
-
-      .hero-copy,
-      .hero-panel,
-      .narrative-card,
-      .identity-card,
-      .skills-card,
-      .timeline-card,
-      .publication-card,
-      .snake-shell,
-      .contact-card,
-      .projects-card,
-      .pub-modal {
-        padding: 1.1rem;
-      }
-
-      .hero-title {
-        font-size: clamp(2.45rem, 13.2vw, 4.2rem);
-      }
-
-      .section-title,
-      .contact-card h2,
-      .project-copy h3 {
-        max-width: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <nav class="site-nav" id="navbar">
-      <div class="nav-inner">
-        <a class="brand" href="#hero" aria-label="Ahmed Qazi home">
-          <span class="brand-name">Ahmed Qazi</span>
-          <span class="brand-role">Senior AI Engineer</span>
-        </a>
-        <ul class="nav-links" id="navLinks">
-          <li><a class="nav-link" href="#about"><span class="num">01</span><span>About</span></a></li>
-          <li><a class="nav-link" href="#experience"><span class="num">02</span><span>Experience</span></a></li>
-          <li><a class="nav-link" href="#projects"><span class="num">03</span><span>Projects</span></a></li>
-          <li><a class="nav-link" href="#publications"><span class="num">04</span><span>Publications</span></a></li>
-          <li><a class="nav-link" href="#contact"><span class="num">05</span><span>Contact</span></a></li>
-        </ul>
-        <button class="nav-toggle" id="mobileToggle" aria-label="Toggle menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M4 7h16"></path>
-            <path d="M4 12h16"></path>
-            <path d="M4 17h16"></path>
-          </svg>
-        </button>
-      </div>
-    </nav>
 
-    <main>
-      <section class="hero" id="hero">
-        <div class="container">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <div class="hero-top">
-                <p class="eyebrow reveal">Senior AI Engineer</p>
-                <h1 class="hero-title reveal">I build AI systems that ship to production.</h1>
-                <p class="hero-subtitle reveal">Engineering end-to-end.</p>
-                <p class="hero-desc reveal">
-                  I'm Ahmed Qazi. I design, build, and deploy AI products - from model training
-                  and infrastructure to scalable APIs and real-world applications.
-                </p>
-                <div class="hero-actions reveal">
-                  <a class="button button-primary" href="#experience">See My Work</a>
-                  <a class="button button-secondary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
-                </div>
-              </div>
-
-              <div class="hero-bottom">
-                <div class="hero-stats reveal" aria-label="Highlights">
-                  <div class="stat-card">
-                    <div class="stat-value">AI Products</div>
-                    <div class="stat-label">Prototype to production deployment</div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-value">CVPR / NeurIPS</div>
-                    <div class="stat-label">Published research and workshop papers</div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-value">Multimodal Systems</div>
-                    <div class="stat-label">Healthcare, vision, and applied ML</div>
-                  </div>
-                </div>
-
-                <div class="hero-rail reveal" aria-label="Availability">
-                  <div class="rail-label">Current Focus</div>
-                  <div class="hero-badge">Available</div>
-                  <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
-                </div>
-              </div>
-            </div>
-
-            <aside class="hero-panel reveal" aria-label="Profile summary">
-              <div class="hero-portrait">
-                <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
-              </div>
-              <div class="hero-panel-meta">
-                <div class="hero-panel-top">
-                  <div>
-                    <strong>Ahmed Rashid Qazi</strong>
-                    <p>Production AI engineering, applied research, and systems that hold up outside the lab.</p>
-                  </div>
-                  <span class="meta-label">Available</span>
-                </div>
-                <div class="profile-metrics">
-                  <div class="profile-metric">
-                    <strong>Production AI</strong>
-                    <span>Training, infra, deployment</span>
-                  </div>
-                  <div class="profile-metric">
-                    <strong>Research Depth</strong>
-                    <span>CVPR / NeurIPS / Neuron</span>
-                  </div>
-                  <div class="profile-metric">
-                    <strong>Applied Scope</strong>
-                    <span>Healthcare, vision, multimodal systems</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="about">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-index">01 / About</div>
-            <div>
-              <h2 class="section-title">Hands-on engineering with research depth.</h2>
-              <p class="section-intro">The emphasis here is practical execution: training, infrastructure, deployment, and enough research fluency to build better systems.</p>
-            </div>
-          </div>
-
-          <div class="about-layout">
-            <div class="copy-stack reveal">
-              <div class="narrative-card">
-                <div class="copy-stack">
-                  <p>
-                    I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
-                    to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
-                    that work at scale.
-                  </p>
-                  <p>
-                    I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
-                    systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
-                    solving real problems with practical engineering.
-                  </p>
-                  <p>
-                    I graduated with a B.S. in Computer Science from
-                    <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
-                    Stanford University as a Pre-Collegiate Scholar.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="stack-column reveal">
-              <div class="identity-card">
-                <div class="identity-head">
-                  <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi" class="identity-avatar">
-                  <div>
-                    <h3>Ahmed Qazi</h3>
-                    <p>AI engineer focused on shipping reliable systems, not just promising demos.</p>
-                  </div>
-                </div>
-                <div class="personal-links">
-                  <a class="personal-link" href="mailto:ahmedrashidqazi@gmail.com" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span>Email</span>
-                  </a>
-                  <a class="personal-link" href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
-                    <span>GitHub</span>
-                  </a>
-                  <a class="personal-link" href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    <span>LinkedIn</span>
-                  </a>
-                  <a class="personal-link" href="https://www.upwork.com/freelancers/~0123456789abcdef" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    <span>Upwork</span>
-                  </a>
-                  <a class="personal-link" href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-3a4 4 0 100-8 4 4 0 000 8zM1 0h10l2 2H1z"></path><path d="M12 2L1 9.5l4.5 3L12 8l6.5 4.5L23 9.5z"></path></svg>
-                    <span>Scholar</span>
-                  </a>
-                </div>
-              </div>
-
-              <div class="skills-card">
-                <div class="skill-group">
-                  <h3>Languages</h3>
-                  <div class="skills-list">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">TypeScript</span>
-                  </div>
-                </div>
-                <div class="skill-group">
-                  <h3>Frameworks &amp; Libraries</h3>
-                  <div class="skills-list">
-                    <span class="skill-tag">PyTorch</span>
-                    <span class="skill-tag">TensorFlow</span>
-                    <span class="skill-tag">Scikit-learn</span>
-                    <span class="skill-tag">FastAPI</span>
-                    <span class="skill-tag">Django</span>
-                    <span class="skill-tag">HuggingFace</span>
-                    <span class="skill-tag">OpenCV</span>
-                  </div>
-                </div>
-                <div class="skill-group">
-                  <h3>Tools &amp; Platforms</h3>
-                  <div class="skills-list">
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Kubernetes</span>
-                    <span class="skill-tag">GCP</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">MLflow</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-index">02 / Experience</div>
-            <div>
-              <h2 class="section-title">Engineering roles centered on delivery.</h2>
-              <p class="section-intro">The throughline across these roles is building systems that operate under real constraints: infrastructure, scale, product needs, and research translation.</p>
-            </div>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-card reveal">
-              <div class="timeline-top">
-                <div class="timeline-title">Senior AI Engineer <span class="company">@ Osmium Labs</span></div>
-                <div class="timeline-date">Oct 2025 - Present</div>
-              </div>
-              <ul class="timeline-list">
-                <li>Architected and shipped end-to-end AI products from prototype to production deployment.</li>
-                <li>Led technical design of ML pipelines and model serving infrastructure at scale.</li>
-              </ul>
-              <div class="tech-list">
-                <span>Python</span><span>PyTorch</span><span>Kubernetes</span><span>GCP</span>
-              </div>
-            </article>
-
-            <article class="timeline-card reveal">
-              <div class="timeline-top">
-                <div class="timeline-title">Member of Technical Staff <span class="company">@ Tibbling Technologies</span></div>
-                <div class="timeline-date">Feb 2024 - Oct 2025</div>
-              </div>
-              <ul class="timeline-list">
-                <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
-                <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
-              </ul>
-              <div class="tech-list">
-                <span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>AWS</span><span>Computer Vision</span>
-              </div>
-            </article>
-
-            <article class="timeline-card reveal">
-              <div class="timeline-top">
-                <div class="timeline-title">Research Assistant <span class="company">@ NeurAI, LUMS</span></div>
-                <div class="timeline-date">Apr 2023 - Dec 2023</div>
-              </div>
-              <ul class="timeline-list">
-                <li>Designed and trained deep learning models for computer vision, published at top ML venues.</li>
-                <li>Built novel architectures that improved domain generalization performance on benchmark tasks.</li>
-              </ul>
-              <div class="tech-list">
-                <span>PyTorch</span><span>NumPy</span><span>Deep Learning</span><span>Computer Vision</span>
-              </div>
-            </article>
-
-            <article class="timeline-card reveal">
-              <div class="timeline-top">
-                <div class="timeline-title">Research Assistant <span class="company">@ WWF x WIT, LUMS</span></div>
-                <div class="timeline-date">Sep 2022 - Mar 2023</div>
-              </div>
-              <ul class="timeline-list">
-                <li>Developed mathematical and ML models to predict forest fire spread across Pakistani landscapes.</li>
-                <li>Collaborated with domain experts at WWF to validate model outputs against satellite data.</li>
-              </ul>
-              <div class="tech-list">
-                <span>Python</span><span>Scikit-learn</span><span>GIS</span><span>Remote Sensing</span>
-              </div>
-            </article>
-
-            <article class="timeline-card reveal">
-              <div class="timeline-top">
-                <div class="timeline-title">Machine Learning Engineer <span class="company">@ Wizlabs AI</span></div>
-                <div class="timeline-date">Jan 2021 - Dec 2022</div>
-              </div>
-              <ul class="timeline-list">
-                <li>Built a virtual try-on MVP for South Asian fashion using generative models.</li>
-                <li>Designed the model pipeline from data collection to deployment for real-time garment transfer.</li>
-              </ul>
-              <div class="tech-list">
-                <span>Python</span><span>PyTorch</span><span>GANs</span><span>OpenCV</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-index">03 / Projects</div>
-            <div>
-              <h2 class="section-title">Engineering: Something amazing is coming soon.</h2>
-              <p class="section-intro">While we're building, enjoy the current projects and publications below.</p>
-            </div>
-          </div>
-
-          <div class="projects-card reveal">
-            <div class="project-copy">
-              <div class="meta-label">Project</div>
-              <h3>Snake Game</h3>
-              <p>Something amazing is coming soon here, in the meanwhile, play the Snake game.</p>
-              <p>The interaction stays available, but the surrounding page now keeps the focus on engineering work, publications, and production experience.</p>
-              <div class="project-meta">
-                <span>JavaScript</span>
-                <span>HTML5 Canvas</span>
-                <span>Game</span>
-              </div>
-            </div>
-
-            <div class="snake-shell">
-              <div class="snake-frame snake-game-wrapper">
-                <div class="snake-score" id="snakeScore">Score: 0</div>
-                <canvas id="snakeCanvas" width="400" height="400"></canvas>
-                <div class="snake-controls">
-                  <button id="snakeStartBtn" type="button">Start Game</button>
-                  <button id="snakeResetBtn" type="button">Reset</button>
-                </div>
-                <div class="snake-mobile-dpad">
-                  <button class="dpad-up" id="dpadUp" type="button">&#9650;</button>
-                  <button class="dpad-left" id="dpadLeft" type="button">&#9664;</button>
-                  <button class="dpad-right" id="dpadRight" type="button">&#9654;</button>
-                  <button class="dpad-down" id="dpadDown" type="button">&#9660;</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="publications">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-index">04 / Publications</div>
-            <div>
-              <h2 class="section-title">Research presented as a first-class body of work.</h2>
-              <p class="section-intro">All existing publications are retained and organized in a cleaner reading flow so the research record supports, rather than competes with, the engineering profile.</p>
-            </div>
-          </div>
-
-          <div class="publications-grid">
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">01</div>
-              <div class="publication-thumb pub-image"><img src="assets/neuron.jpg" alt="Neuron Journal Cover" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</h3>
-                <p class="publication-authors pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></p>
-                <p class="publication-venue pub-venue">Published in Neuron (Cell Press), 113(10), 1525-1547 · Journal Cover</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
-                  <a class="pub-link" href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">02</div>
-              <div class="publication-thumb pub-image"><img src="assets/seganyneuron.png" alt="Segment AnyNeuron" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">Segment AnyNeuron</h3>
-                <p class="publication-authors pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">03</div>
-              <div class="publication-thumb pub-image"><img src="assets/m2m.png" alt="Mice to Machines" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</h3>
-                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">UniReps @ Neural Information Processing Systems (NeurIPS), 2025</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">04</div>
-              <div class="publication-thumb pub-image"><img src="assets/viT_paper.png" alt="Neural Attention Maps" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</h3>
-                <p class="publication-authors pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">Neuro for AI &amp; AI for Neuro @ Association for the Advancement of Artificial Intelligence (AAAI), 2026</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">05</div>
-              <div class="publication-thumb pub-image"><img src="assets/exeraide.png" alt="ExerAIde" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</h3>
-                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">06</div>
-              <div class="publication-thumb pub-image"><img src="assets/animalformer.png" alt="AnimalFormer" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</h3>
-                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">07</div>
-              <div class="publication-thumb pub-image"><img src="assets/neurn.png" alt="NeuRN" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">NeuRN: Neuro-inspired Domain Generalization for Image Classification</h3>
-                <p class="publication-authors pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">arXiv Preprint</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="publication-card reveal pub-item">
-              <div class="publication-index">08</div>
-              <div class="publication-thumb pub-image"><img src="assets/neugen.png" alt="NeuGen" loading="lazy"></div>
-              <div>
-                <h3 class="publication-title pub-title">NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</h3>
-                <p class="publication-authors pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</p>
-                <p class="publication-venue pub-venue">arXiv Preprint</p>
-                <div class="publication-actions pub-links">
-                  <a class="pub-link" href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="container">
-          <div class="contact-card reveal">
-            <div>
-              <span class="contact-kicker">05 / What's Next?</span>
-              <h2>Get In Touch</h2>
-              <p>
-                I'm always open to discussing new projects, engineering challenges, or interesting opportunities.
-                Feel free to reach out.
-              </p>
-            </div>
-            <a class="button button-primary" href="mailto:ahmedrashidqazi@gmail.com">Say Hello</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container footer-row">
-        <p>Designed &amp; Built by Ahmed Qazi</p>
-        <div class="footer-links">
-          <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/ahmed-rashid-qazi" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
-        </div>
-        <p class="footer-note">Senior AI Engineer</p>
-      </div>
-    </footer>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">Ahmed Qazi</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
+</nav>
 
-  <div class="pub-modal-overlay" id="pubModalOverlay">
-    <div class="pub-modal" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
-      <button class="pub-modal-close" id="pubModalClose" aria-label="Close publication details">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-      <img class="pub-modal-img" id="pubModalImg" src="" alt="">
-      <div class="pub-modal-body">
-        <h3 class="pub-modal-title" id="pubModalTitle"></h3>
-        <p class="pub-modal-authors" id="pubModalAuthors"></p>
-        <p class="pub-modal-venue" id="pubModalVenue"></p>
-        <a class="pub-modal-btn" id="pubModalPdfBtn" href="#" target="_blank" rel="noopener">View PDF</a>
+<div class="wrap" id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-photo">
+        <img src="assets/profile_pic.jpeg" alt="Ahmed Qazi">
+      </div>
+      <div class="hero-text">
+        <h1>Ahmed Rashid Qazi</h1>
+        <p class="hero-title">Senior AI Engineer &mdash; Neuroscience &amp; Machine Learning</p>
+        <p class="hero-bio">
+          I work at the intersection of neuroscience and AI. My research focuses on understanding how biological
+          vision systems can inform machine learning, and how AI methods can advance neuroscience.
+          I also build production systems &mdash; AI platforms and tools that solve practical problems.
+        </p>
+        <div class="hero-links">
+          <a href="mailto:ahmedrashidqazi@gmail.com">Email</a>
+          <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://www.upwork.com/freelancers/~018c7f4296364a33dc" target="_blank" rel="noopener">Upwork</a>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="about-text">
+      <p>
+        I'm a hands-on AI engineer who builds and ships production systems. From training and fine-tuning models
+        to designing scalable ML pipelines and serving infrastructure, I focus on turning ideas into deployed products
+        that work at scale.
+      </p>
+      <p>
+        I've built multimodal AI for healthcare, generative models for e-commerce, real-time computer vision
+        systems, and end-to-end ML platforms. I care about clean architecture, reliable deployments, and
+        solving real problems with practical engineering.
+      </p>
+      <p>
+        I graduated with a B.S. in Computer Science from
+        <a href="https://lums.edu.pk" target="_blank" rel="noopener">LUMS</a> and attended
+        Stanford University as a Pre-Collegiate Scholar.
+      </p>
+    </div>
+
+    <ul class="edu-list">
+      <li class="edu-item">
+        <img src="assets/lums.png" alt="LUMS" class="edu-logo">
+        <div class="edu-info">
+          <strong>B.S. Computer Science</strong>
+          <span>Lahore University of Management Sciences (LUMS) &middot; 2018&ndash;2022</span>
+        </div>
+      </li>
+      <li class="edu-item">
+        <img src="assets/stanford.png" alt="Stanford" class="edu-logo">
+        <div class="edu-info">
+          <strong>Pre-Collegiate Scholar</strong>
+          <span>Stanford University &middot; Summer 2017</span>
+        </div>
+      </li>
+    </ul>
+
+    <div style="margin-top: 2rem;">
+      <div class="section-label">Skills</div>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <span class="skill-group-label">Languages</span>
+          <span class="skill-tags">Python, C++, SQL, JavaScript, TypeScript</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-group-label">Frameworks</span>
+          <span class="skill-tags">PyTorch, TensorFlow, Scikit-learn, FastAPI, Django, HuggingFace, OpenCV</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-group-label">Platforms</span>
+          <span class="skill-tags">Docker, Kubernetes, GCP, AWS, MLflow, Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Senior AI Engineer <span class="exp-company">@ Osmium Labs</span></div>
+        <span class="exp-date">Oct 2025 &ndash; Present</span>
+      </div>
+      <ul class="exp-desc">
+        <li>Architected and shipped end-to-end AI products from prototype to production deployment.</li>
+        <li>Led technical design of ML pipelines and model serving infrastructure at scale.</li>
+      </ul>
+      <div class="exp-tech">Python &middot; PyTorch &middot; Kubernetes &middot; GCP</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Member of Technical Staff <span class="exp-company">@ Tibbling Technologies</span></div>
+        <span class="exp-date">Feb 2024 &ndash; Oct 2025</span>
+      </div>
+      <ul class="exp-desc">
+        <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
+        <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
+      </ul>
+      <div class="exp-tech">PyTorch &middot; FastAPI &middot; Docker &middot; AWS &middot; Computer Vision</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Research Assistant <span class="exp-company">@ NeurAI, LUMS</span></div>
+        <span class="exp-date">Apr 2023 &ndash; Dec 2023</span>
+      </div>
+      <ul class="exp-desc">
+        <li>Designed and trained deep learning models for computer vision, published at top ML venues.</li>
+        <li>Built novel architectures that improved domain generalization performance on benchmark tasks.</li>
+      </ul>
+      <div class="exp-tech">PyTorch &middot; NumPy &middot; Deep Learning &middot; Computer Vision</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Research Assistant <span class="exp-company">@ WWF &times; WIT, LUMS</span></div>
+        <span class="exp-date">Sep 2022 &ndash; Mar 2023</span>
+      </div>
+      <ul class="exp-desc">
+        <li>Developed mathematical and ML models to predict forest fire spread across Pakistani landscapes.</li>
+        <li>Collaborated with domain experts at WWF to validate model outputs against satellite data.</li>
+      </ul>
+      <div class="exp-tech">Python &middot; Scikit-learn &middot; GIS &middot; Remote Sensing</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-role">Machine Learning Engineer <span class="exp-company">@ Wizlabs AI</span></div>
+        <span class="exp-date">Jan 2021 &ndash; Dec 2022</span>
+      </div>
+      <ul class="exp-desc">
+        <li>Built a virtual try-on MVP for South Asian fashion using generative models.</li>
+        <li>Designed the model pipeline from data collection to deployment for real-time garment transfer.</li>
+      </ul>
+      <div class="exp-tech">Python &middot; PyTorch &middot; GANs &middot; OpenCV</div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <div class="section-label">Publications</div>
+
+    <div class="pub-item">
+      <div class="pub-num">01</div>
+      <div class="pub-thumb">
+        <img src="assets/neuron.jpg" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>An enhancer-AAV toolbox to target and manipulate distinct interneuron subtypes</h3>
+        <p class="pub-authors">Elisabetta Furlanis et al., <strong>Ahmed Qazi</strong></p>
+        <p class="pub-venue">Neuron (Cell Press) 113(10), 1525&ndash;1547 &middot; Journal Cover</p>
+        <div class="pub-links">
+          <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">PDF</a>
+          <a href="https://www.cell.com/neuron/abstract/S0896-6273(25)00349-6" target="_blank" rel="noopener">DOI</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">02</div>
+      <div class="pub-thumb">
+        <img src="assets/seganyneuron.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>Segment AnyNeuron</h3>
+        <p class="pub-authors">Taha Razzaq, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+        <p class="pub-venue">CVPR Workshops, 2025</p>
+        <div class="pub-links">
+          <a href="https://openaccess.thecvf.com/content/CVPR2025W/CVDD/html/Razzaq_Segment_AnyNeuron_CVPRW_2025_paper.html" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">03</div>
+      <div class="pub-thumb">
+        <img src="assets/m2m.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>Mice to Machines: Neural Representations from Visual Cortex for Domain Generalization</h3>
+        <p class="pub-authors"><strong>Ahmed Qazi</strong>, Hamd Jalil, Asim Iqbal</p>
+        <p class="pub-venue">UniReps @ NeurIPS, 2025</p>
+        <div class="pub-links">
+          <a href="https://arxiv.org/pdf/2505.06886" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">04</div>
+      <div class="pub-thumb">
+        <img src="assets/viT_paper.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</h3>
+        <p class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+        <p class="pub-venue">Neuro for AI &amp; AI for Neuro @ AAAI, 2026</p>
+        <div class="pub-links">
+          <a href="#" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">05</div>
+      <div class="pub-thumb">
+        <img src="assets/exeraide.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>ExerAIde: AI-assisted multimodal diagnosis for enhanced sports performance</h3>
+        <p class="pub-authors"><strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+        <p class="pub-venue">CVPR Workshops, 2024</p>
+        <div class="pub-links">
+          <a href="#" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">06</div>
+      <div class="pub-thumb">
+        <img src="assets/animalformer.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>AnimalFormer: Multimodal Vision Framework for Precision Livestock Farming</h3>
+        <p class="pub-authors"><strong>Ahmed Qazi</strong>, Taha Razzaq, Asim Iqbal</p>
+        <p class="pub-venue">CVPR Workshops, 2024</p>
+        <div class="pub-links">
+          <a href="#" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">07</div>
+      <div class="pub-thumb">
+        <img src="assets/neurn.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>NeuRN: Neuro-inspired Domain Generalization for Image Classification</h3>
+        <p class="pub-authors">Hamd Jalil, <strong>Ahmed Qazi</strong>, Asim Iqbal</p>
+        <p class="pub-venue">arXiv Preprint</p>
+        <div class="pub-links">
+          <a href="https://arxiv.org/pdf/2505.06881" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">08</div>
+      <div class="pub-thumb">
+        <img src="assets/neugen.png" alt="" loading="lazy">
+      </div>
+      <div class="pub-body">
+        <h3>NeuGen: Amplifying the 'Neural' in Neural Radiance Fields</h3>
+        <p class="pub-authors"><strong>Ahmed Qazi</strong>, Abdul Basit, Asim Iqbal</p>
+        <p class="pub-venue">arXiv Preprint</p>
+        <div class="pub-links">
+          <a href="https://arxiv.org/pdf/2505.06894" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond -->
+  <section id="beyond">
+    <div class="section-label">Beyond the Lab</div>
+    <p style="font-size:0.875rem; color:#444; margin-bottom:1.25rem;">
+      I'm a bit of an alpine nerd at heart &mdash; chasing summits, quiet lakes, and the occasional trip that
+      reminds me how small (and big) the world can feel.
+    </p>
+    <div class="photos-grid">
+      <div class="photo-item">
+        <img src="assets/kutwal-lake-haramosh.png" alt="Kutwal Lake, Haramosh">
+        <div class="photo-caption">Kutwal Lake, Haramosh &middot; 3200m</div>
+      </div>
+      <div class="photo-item">
+        <img src="assets/gondogoro-peak.jpeg" alt="Gondogoro Peak Summit">
+        <div class="photo-caption">Gondogoro Peak Summit &middot; 6008m</div>
+      </div>
+      <div class="photo-item">
+        <img src="assets/lupke-la.jpg" alt="Lupke La">
+        <div class="photo-caption">Lupke La, Karakoram &middot; 5710m</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div class="contact-block">
+      <p>
+        I'm always open to discussing new projects, engineering challenges, or research collaborations.
+        The best way to reach me is by email.
+      </p>
+      <p style="margin-top:0.75rem;">
+        <a href="mailto:ahmedrashidqazi@gmail.com">ahmedrashidqazi@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+</div><!-- .wrap -->
+
+<footer>
+  <div class="footer-inner">
+    <p>Ahmed Qazi</p>
+    <div class="footer-links">
+      <a href="https://github.com/ahmedrashidqazi" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/ahmed-qazi-9099" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=USsbryYAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+    </div>
   </div>
+</footer>
 
-  <script>
-    (function() {
-      "use strict";
-
-      var navbar = document.getElementById("navbar");
-      var navLinks = document.getElementById("navLinks");
-      var mobileToggle = document.getElementById("mobileToggle");
-      var navAnchors = document.querySelectorAll(".nav-link");
-      var sections = document.querySelectorAll("main section[id]");
-
-      var revealObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
-
-      document.querySelectorAll(".reveal").forEach(function(element) {
-        revealObserver.observe(element);
-      });
-
-      var activeObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          var id = entry.target.getAttribute("id");
-          navAnchors.forEach(function(anchor) {
-            anchor.classList.toggle("active", anchor.getAttribute("href") === "#" + id);
-          });
-        });
-      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.1 });
-
-      sections.forEach(function(section) {
-        activeObserver.observe(section);
-      });
-
-      mobileToggle.addEventListener("click", function() {
-        var isOpen = navLinks.classList.toggle("open");
-        document.body.classList.toggle("menu-open", isOpen);
-      });
-
-      navAnchors.forEach(function(anchor) {
-        anchor.addEventListener("click", function() {
-          navLinks.classList.remove("open");
-          document.body.classList.remove("menu-open");
-        });
-      });
-
-      window.addEventListener("resize", function() {
-        if (window.innerWidth > 860) {
-          navLinks.classList.remove("open");
-          document.body.classList.remove("menu-open");
-        }
-      });
-
-      window.addEventListener("scroll", function() {
-        navbar.style.borderBottomColor = window.scrollY > 20 ? "rgba(123, 113, 96, 0.28)" : "transparent";
-      }, { passive: true });
-
-      var canvas = document.getElementById("snakeCanvas");
-      var ctx = canvas.getContext("2d");
-      var scoreEl = document.getElementById("snakeScore");
-      var startBtn = document.getElementById("snakeStartBtn");
-      var resetBtn = document.getElementById("snakeResetBtn");
-
-      var gridSize = 20;
-      var tileCount = canvas.width / gridSize;
-      var snake;
-      var food;
-      var dx;
-      var dy;
-      var score;
-      var gameRunning;
-      var gameLoop;
-
-      function initSnake() {
-        snake = [{ x: 10, y: 10 }];
-        food = { x: 15, y: 15 };
-        dx = 0;
-        dy = 0;
-        score = 0;
-        gameRunning = false;
-        scoreEl.textContent = "Score: 0";
-
-        if (gameLoop) {
-          clearInterval(gameLoop);
-        }
-
-        drawGame();
-      }
-
-      function spawnFood() {
-        food.x = Math.floor(Math.random() * tileCount);
-        food.y = Math.floor(Math.random() * tileCount);
-
-        for (var i = 0; i < snake.length; i += 1) {
-          if (snake[i].x === food.x && snake[i].y === food.y) {
-            spawnFood();
-            return;
-          }
-        }
-      }
-
-      function drawGame() {
-        ctx.fillStyle = "#08111e";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
-        ctx.lineWidth = 0.5;
-
-        for (var i = 0; i < tileCount; i += 1) {
-          ctx.beginPath();
-          ctx.moveTo(i * gridSize, 0);
-          ctx.lineTo(i * gridSize, canvas.height);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(0, i * gridSize);
-          ctx.lineTo(canvas.width, i * gridSize);
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = "#8fb7ff";
-        ctx.shadowColor = "#8fb7ff";
-        ctx.shadowBlur = 12;
-        ctx.beginPath();
-        ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        for (var j = 0; j < snake.length; j += 1) {
-          var alpha = 1 - (j / snake.length) * 0.45;
-          ctx.fillStyle = j === 0 ? "#edf2f7" : "rgba(237, 242, 247, " + alpha + ")";
-          ctx.fillRect(snake[j].x * gridSize + 1, snake[j].y * gridSize + 1, gridSize - 2, gridSize - 2);
-        }
-
-        if (!gameRunning && dx === 0 && dy === 0) {
-          ctx.fillStyle = "rgba(237, 242, 247, 0.82)";
-          ctx.font = '14px "DM Mono", monospace';
-          ctx.textAlign = "center";
-          ctx.fillText("Press Start or Arrow Keys", canvas.width / 2, canvas.height / 2 + 40);
-        }
-      }
-
-      function updateGame() {
-        var head = { x: snake[0].x + dx, y: snake[0].y + dy };
-
-        if (head.x < 0) head.x = tileCount - 1;
-        if (head.x >= tileCount) head.x = 0;
-        if (head.y < 0) head.y = tileCount - 1;
-        if (head.y >= tileCount) head.y = 0;
-
-        for (var i = 0; i < snake.length; i += 1) {
-          if (snake[i].x === head.x && snake[i].y === head.y) {
-            gameRunning = false;
-            clearInterval(gameLoop);
-            ctx.fillStyle = "rgba(8, 17, 30, 0.78)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#edf2f7";
-            ctx.font = 'bold 20px "DM Mono", monospace';
-            ctx.textAlign = "center";
-            ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 10);
-            ctx.font = '14px "DM Mono", monospace';
-            ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 20);
-            ctx.fillText("Press Reset to try again", canvas.width / 2, canvas.height / 2 + 45);
-            startBtn.textContent = "Start Game";
-            return;
-          }
-        }
-
-        snake.unshift(head);
-
-        if (head.x === food.x && head.y === food.y) {
-          score += 1;
-          scoreEl.textContent = "Score: " + score;
-          spawnFood();
-        } else {
-          snake.pop();
-        }
-
-        drawGame();
-      }
-
-      function startGame() {
-        if (gameRunning) {
-          gameRunning = false;
-          clearInterval(gameLoop);
-          startBtn.textContent = "Resume";
-          return;
-        }
-
-        if (dx === 0 && dy === 0) {
-          dx = 1;
-          dy = 0;
-        }
-
-        gameRunning = true;
-        startBtn.textContent = "Pause";
-        gameLoop = setInterval(updateGame, 120);
-      }
-
-      function changeDirection(newDx, newDy) {
-        if (newDx === -dx && newDy === -dy) {
-          return;
-        }
-
-        dx = newDx;
-        dy = newDy;
-
-        if (!gameRunning) {
-          startGame();
-        }
-      }
-
-      document.addEventListener("keydown", function(event) {
-        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(event.key) === -1) {
-          return;
-        }
-
-        var rect = canvas.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          event.preventDefault();
-        }
-
-        if (event.key === "ArrowUp") changeDirection(0, -1);
-        if (event.key === "ArrowDown") changeDirection(0, 1);
-        if (event.key === "ArrowLeft") changeDirection(-1, 0);
-        if (event.key === "ArrowRight") changeDirection(1, 0);
-      });
-
-      startBtn.addEventListener("click", startGame);
-      resetBtn.addEventListener("click", function() {
-        initSnake();
-        startBtn.textContent = "Start Game";
-      });
-
-      document.getElementById("dpadUp").addEventListener("click", function() { changeDirection(0, -1); });
-      document.getElementById("dpadDown").addEventListener("click", function() { changeDirection(0, 1); });
-      document.getElementById("dpadLeft").addEventListener("click", function() { changeDirection(-1, 0); });
-      document.getElementById("dpadRight").addEventListener("click", function() { changeDirection(1, 0); });
-
-      initSnake();
-
-      var pubOverlay = document.getElementById("pubModalOverlay");
-      var pubModalImg = document.getElementById("pubModalImg");
-      var pubModalTitle = document.getElementById("pubModalTitle");
-      var pubModalAuthors = document.getElementById("pubModalAuthors");
-      var pubModalVenue = document.getElementById("pubModalVenue");
-      var pubModalPdfBtn = document.getElementById("pubModalPdfBtn");
-      var pubModalClose = document.getElementById("pubModalClose");
-
-      function closeModal() {
-        pubOverlay.classList.remove("open");
-        document.body.classList.remove("modal-open");
-      }
-
-      document.querySelectorAll(".pub-item").forEach(function(item) {
-        item.addEventListener("click", function(event) {
-          if (event.target.closest(".pub-link")) {
-            return;
-          }
-
-          var imgEl = item.querySelector(".pub-image img");
-          var titleEl = item.querySelector(".pub-title");
-          var authorsEl = item.querySelector(".pub-authors");
-          var venueEl = item.querySelector(".pub-venue");
-          var pdfLink = item.querySelector(".pub-link");
-
-          pubModalImg.src = imgEl ? imgEl.src : "";
-          pubModalImg.alt = imgEl ? imgEl.alt : "";
-          pubModalTitle.textContent = titleEl ? titleEl.textContent : "";
-          pubModalAuthors.innerHTML = authorsEl ? authorsEl.innerHTML : "";
-          pubModalVenue.textContent = venueEl ? venueEl.textContent : "";
-          pubModalPdfBtn.href = pdfLink ? pdfLink.href : "#";
-
-          pubOverlay.classList.add("open");
-          document.body.classList.add("modal-open");
-        });
-      });
-
-      pubModalClose.addEventListener("click", closeModal);
-
-      pubOverlay.addEventListener("click", function(event) {
-        if (event.target === pubOverlay) {
-          closeModal();
-        }
-      });
-
-      document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape" && pubOverlay.classList.contains("open")) {
-          closeModal();
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
