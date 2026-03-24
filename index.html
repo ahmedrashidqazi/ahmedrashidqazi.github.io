@@ -302,6 +302,83 @@
       object-fit: cover;
     }
 
+    .pub-thumb {
+      cursor: pointer;
+    }
+
+    /* Publication Modal */
+    .pub-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .pub-modal-overlay.active {
+      display: flex;
+    }
+
+    .pub-modal {
+      background: #fff;
+      border-radius: 8px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .pub-modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+      line-height: 1;
+      z-index: 1;
+    }
+
+    .pub-modal-close:hover {
+      color: var(--text);
+    }
+
+    .pub-modal-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .pub-modal-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .pub-modal-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-modal-body .pub-authors {
+      margin-bottom: 0.25rem;
+    }
+
+    .pub-modal-body .pub-venue {
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-modal-body .pub-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
     .pub-num {
       flex-shrink: 0;
       font-size: 0.75rem;
@@ -798,6 +875,48 @@
     </div>
   </div>
 </footer>
+
+<!-- Publication Modal -->
+<div class="pub-modal-overlay" id="pubModal">
+  <div class="pub-modal">
+    <button class="pub-modal-close" id="pubModalClose">&times;</button>
+    <img class="pub-modal-img" id="pubModalImg" src="" alt="">
+    <div class="pub-modal-body" id="pubModalBody"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var overlay = document.getElementById('pubModal');
+  var modalImg = document.getElementById('pubModalImg');
+  var modalBody = document.getElementById('pubModalBody');
+  var closeBtn = document.getElementById('pubModalClose');
+
+  document.querySelectorAll('.pub-item').forEach(function(item) {
+    var thumb = item.querySelector('.pub-thumb');
+    if (!thumb) return;
+    thumb.addEventListener('click', function() {
+      var img = thumb.querySelector('img');
+      var body = item.querySelector('.pub-body');
+      modalImg.src = img.src;
+      modalBody.innerHTML = body.innerHTML;
+      overlay.classList.add('active');
+    });
+  });
+
+  closeBtn.addEventListener('click', function() {
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) overlay.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') overlay.classList.remove('active');
+  });
+})();
+</script>
 
 </body>
 </html>
