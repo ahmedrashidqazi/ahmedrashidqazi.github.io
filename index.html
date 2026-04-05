@@ -460,6 +460,7 @@
     .photo-item {
       overflow: hidden;
       border: 1px solid var(--border);
+      cursor: pointer;
     }
 
     .photo-item img {
@@ -467,6 +468,54 @@
       height: 160px;
       object-fit: cover;
       display: block;
+    }
+
+    .photo-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .photo-modal-overlay.active {
+      display: flex;
+    }
+
+    .photo-modal {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      text-align: center;
+    }
+
+    .photo-modal img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .photo-modal-caption {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+    }
+
+    .photo-modal-close {
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+      line-height: 1;
+      z-index: 1;
     }
 
     .photo-caption {
@@ -646,8 +695,9 @@
         <span class="exp-date">Apr 2023 &ndash; Oct 2025</span>
       </div>
       <ul class="exp-desc">
-        <li>Built multimodal AI solutions for healthcare, integrating vision and language models for clinical use.</li>
+        <li>Led health-tech AI research, building multimodal neuroAI systems for research applications.</li>
         <li>Developed scalable data pipelines and model training infrastructure for medical imaging.</li>
+        <li>Published research at CVPR, NeurIPS, AAAI, and Neuron (Cell Press).</li>
       </ul>
       <div class="exp-tech">Python &middot; PyTorch &middot; AWS &middot; R&amp;D &middot; Product Development &middot; Publications</div>
     </div>
@@ -840,6 +890,15 @@
   </div>
 </footer>
 
+<!-- Photo Modal -->
+<div class="photo-modal-overlay" id="photoModal">
+  <div class="photo-modal">
+    <button class="photo-modal-close" id="photoModalClose">&times;</button>
+    <img id="photoModalImg" src="" alt="">
+    <div class="photo-modal-caption" id="photoModalCaption"></div>
+  </div>
+</div>
+
 <!-- Publication Modal -->
 <div class="pub-modal-overlay" id="pubModal">
   <div class="pub-modal">
@@ -877,7 +936,33 @@
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') overlay.classList.remove('active');
+    if (e.key === 'Escape') {
+      overlay.classList.remove('active');
+      document.getElementById('photoModal').classList.remove('active');
+    }
+  });
+
+  // Photo modal
+  var photoOverlay = document.getElementById('photoModal');
+  var photoImg = document.getElementById('photoModalImg');
+  var photoCaption = document.getElementById('photoModalCaption');
+
+  document.querySelectorAll('.photo-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var img = item.querySelector('img');
+      var cap = item.querySelector('.photo-caption');
+      photoImg.src = img.src;
+      photoCaption.textContent = cap ? cap.textContent : '';
+      photoOverlay.classList.add('active');
+    });
+  });
+
+  document.getElementById('photoModalClose').addEventListener('click', function() {
+    photoOverlay.classList.remove('active');
+  });
+
+  photoOverlay.addEventListener('click', function(e) {
+    if (e.target === photoOverlay) photoOverlay.classList.remove('active');
   });
 })();
 </script>
